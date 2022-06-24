@@ -1,0 +1,116 @@
+.navbar-nav {
+  justify-content: flex-end;
+  z-index: 1000 !important;
+
+  li {
+    margin-left: 20px;
+    padding: 1px 20px;
+
+    a {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 19px;
+      text-transform: uppercase;
+      color: #505353;
+    }
+
+    &:hover {
+      background-color: #b2d235 !important;
+      border-radius: 17px;
+    }
+
+    &:hover a {
+      color: #fff !important;
+    }
+  }
+}
+
+.example {
+  display: flex;
+  align-items: center;
+  min-height: 54vh;
+}
+
+.main-header {
+  height: 120px !important;
+  position: fixed;
+  width: 100% !important;
+  z-index: 1000 !important;
+  top: 0;
+}
+
+.header-content {
+  display: flex !important;
+  justify-content: space-between !important;
+  width: 95%;
+  margin: 0 auto;
+}
+
+//tablet
+
+@media (min-width: 375px) and (max-width: 800px) {
+  .nav-show {
+    position: absolute !important;
+    background: #fff !important;
+    margin-top: 100px;
+    width: 100% !important;
+    margin-left: -28px !important;
+
+    .nav-item {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      li {
+        
+        &:hover {
+          color: #b2d235 !important;
+          border-radius: 0 !important ;
+        }
+      }
+    }
+  }
+  
+  .navbar-nav li:hover {
+    color: #b2d235 !important;
+    background-color: #fff !important;
+    border-radius: 0 !important;
+  }
+
+  .navbar-nav li:hover a {
+    color: #b2d235 !important;
+  }
+}
+
+//mobie 
+
+@media (max-width: 375px){
+  .nav-show {
+    position: absolute !important;
+    background: #fff !important;
+    margin-top: 100px;
+    width: 100% !important;
+    margin-left: -28px !important;
+
+    .nav-item {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      li {
+        
+        &:hover {
+          color: #b2d235 !important;
+          border-radius: 0 !important ;
+        }
+      }
+    }
+  }
+  
+  .navbar-nav li:hover {
+    color: #b2d235 !important;
+    background-color: #fff !important;
+    border-radius: 0 !important;
+  }
+
+  .navbar-nav li:hover a {
+    color: #b2d235 !important;
+  }
+}

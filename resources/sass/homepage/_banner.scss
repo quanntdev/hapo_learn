@@ -1,0 +1,142 @@
+@font-face {
+  font-family: UTM BryantLG;
+  src: url("/fonts/UTM_BryantLG.ttf");
+}
+  
+body {
+  font-family: UTM BryantLG;
+  background-color: #e5e5e5;
+}
+
+.banner {
+  margin-top: 120px;
+  height: 655px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+  
+.banner-content {
+  width: 34%;
+  align-items: center;
+  margin-left: 70px;
+}
+
+.banner-content-title {
+  font-weight: 100;
+  font-size: 49px;
+  line-height: 61px;
+  letter-spacing: -0.05em;
+  color: #11114e;
+
+  span {
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 61px;
+    color: #11114e;
+  }
+}
+
+.banner-content-slogan {
+  width: 50%;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  letter-spacing: -0.05em;
+  color: #505353;
+  margin-bottom: 26px;
+}
+  
+.link-learn {
+  padding: 13px 67px;
+  margin-top: 26px;
+  background: #b2d235;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 37px;
+  letter-spacing: -0.05em;
+  color: #ffffff;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 35px;
+}
+  
+.first-layout {
+  margin-top: 120px;
+  height: 820px;
+  background-color: #e5e5e5;
+}
+
+//tablet 
+
+@media (min-width: 375px) and (max-width: 800px){
+  .banner {
+    height: 380px !important;
+  }
+
+  .banner-content-title {
+    font-size: 30px;
+    line-height: 10px;
+
+    span {
+      font-size: 30px !important;
+    }
+  }
+
+  .banner-content {
+    width: 40%;
+    margin-left: 25px !important;
+  }
+
+  .banner-content-slogan {
+    width: 100%;
+  }
+
+  .link-learn {
+    padding: 13px 36px;
+    font-size: 16px;
+  }
+  
+  .first-layout {
+    height: 500px;
+  }
+}
+
+//mobie
+
+@media (max-width: 375px){
+  .banner-content-title{
+    font-size: 26px !important;
+  }
+
+  .h-100 {
+    height: 60px !important;
+  }
+
+  .banner {
+    height: 200px !important;
+    display: flex;
+    justify-content: center;
+    width: 100% !important;
+    margin-top: 60px !important;
+  }
+
+  .banner-content {
+    position: absolute;
+    margin-top: 500px;
+    width: 80% !important;
+    margin-left: 20% !important;
+    
+    .link-learn {
+      font-size: 20px;
+      padding: 12px 52px;
+    }
+  }
+
+  .first-layout {
+    background-color: #fff;
+    margin-top: 60px !important;
+    height: 600px !important;
+  }
+}
