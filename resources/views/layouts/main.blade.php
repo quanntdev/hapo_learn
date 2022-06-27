@@ -88,4 +88,5 @@
     </div>
     @include('layouts.why_hapo')
     @include('layouts.feedback')
+    @include('layouts.course')
  </div>

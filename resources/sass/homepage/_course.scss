@@ -1,0 +1,60 @@
+.banner-startlearn {
+  height: 500px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .banner-startlearn-title {
+    width: 75%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 50px;
+    font-weight: 500;
+    color: #fff;
+    align-items: center;
+  }
+
+  .banner-startlearn-link {
+    text-align: center;
+    padding: 20px 67px;
+    background-color: #fff;
+    border-radius: 35px;
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 30px;
+
+    a {
+      font-size: 30px;
+      color: #90ab26;
+    }
+  }
+}
+
+@media (max-width:800px ) {
+
+}
+
+@media (max-width:376px ) {
+   .banner-startlearn {
+    height: 182px ;
+
+    .banner-startlearn-content {
+
+      .banner-startlearn-title {
+        font-size: 23px;
+      }
+
+      .banner-startlearn-link{
+        padding:10px 20px;
+        width: 200px ;
+        a {
+          font-size: 18px;
+          width: auto ;
+        }
+      }
+    }
+  }
+}
