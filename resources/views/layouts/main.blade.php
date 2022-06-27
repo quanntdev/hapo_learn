@@ -86,4 +86,5 @@
           <a href="">View All Our Courses <i class="fa-solid fa-arrow-right"></i></a> 
        </div>
     </div>
+    @include('layouts.why_hapo')
  </div>
