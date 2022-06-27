@@ -1,1 +1,65 @@
 
+.footer-logo {
+    width: 291.6px !important;
+    height: 60px !important;
+    img {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+  
+  footer {
+    background-color: #505353 !important;
+  }
+  .footer-content {
+    width: 90%;
+    margin: 0 auto;
+    height: 200px !important;
+    display: flex;
+  }
+  
+  .slogan-company {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: -0.05em;
+    color: #ffffff;
+    text-align: left;
+    margin-left: 60px;
+  }
+  
+  .list-icon {
+    display: flex;
+  }
+  
+  .icon-item {
+    font-size: 30px;
+    a {
+      margin: 20px;
+      i {
+        color: #fff !important;
+      }
+    }
+  }
+  .list-address {
+    text-align: left;
+    p {
+      a {
+        color: #fff;
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+.copyright {
+  padding: 10px;
+  width: 100%;
+  background: #454545;
+}
+
+.footer-mobie{
+  display:none ;
+}
