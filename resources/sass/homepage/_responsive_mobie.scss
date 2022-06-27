@@ -1,29 +1,29 @@
 @media (max-width:376px) {
   .logo-image {
-    width: 150px !important;
+    width: 150px ;
   }
     
   .banner-content-title{
-    font-size: 26px !important;
+    font-size: 26px ;
   }
 
   .h-100 {
-    height: 60px !important;
+    height: 60px ;
   }
 
   .banner {
-    height: 200px !important;
+    height: 200px ;
     display: flex;
     justify-content: center;
-    width: 100% !important;
-    margin-top: 60px !important;
+    width: 100% ;
+    margin-top: 60px ;
   }
 
   .banner-content {
     position: absolute;
     margin-top: 500px;
-    width: 80% !important;
-    margin-left: 20% !important;
+    width: 80% ;
+    margin-left: 20%;
 
     .link-learn {
       font-size: 20px;
@@ -33,13 +33,13 @@
 
   .first-layout {
     background-color: #fff;
-    margin-top: 60px !important;
-    height: 600px !important;
+    margin-top: 60px;
+    height: 600px;
   }
 
   .items {
-    display: block !important;
-    height: 390px !important;
+    display: block ;
+    height: 390px ;
 
     .img-items {
       height: 220px !important;
@@ -50,12 +50,12 @@
       text-align: center;
 
       .content {
-        width: 90% !important;
-        margin: 0 auto !important;
+        width: 90% ;
+        margin: 0 auto ;
       }
 
       .title {
-        margin-left: 0 !important;
+        margin-left: 0 ;
       }
 
       .btn-link {
@@ -71,11 +71,11 @@
   }
 
   .nav-show {
-    position: absolute !important;
-    background: #fff !important;
+    position: absolute ;
+    background: #fff ;
     margin-top: 50px;
-    width: 100% !important;
-    margin-left: -28px !important;
+    width: 100% ;
+    margin-left: -28px ;
 
     .nav-item {
       padding: 10px;
@@ -83,33 +83,33 @@
 
       li {
         &:hover {
-          color: #b2d235 !important;
-          border-radius: 0 !important ;
+          color: #b2d235 ;
+          border-radius: 0 ;
         }
       }
     }
   }
 
   .navbar-nav li:hover {
-    color: #b2d235 !important;
-    background-color: #fff !important;
-    border-radius: 0 !important;
+    color: #b2d235 ;
+    background-color: #fff;
+    border-radius: 0 ;
   }
   
   .navbar-nav li:hover a {
-    color: #b2d235 !important;
+    color: #b2d235;
   }
 
   .main-content {
 
     .view-more-title a{
-      font-size: 22px !important;
+      font-size: 22px ;
     }
   }
 
   .line-border{
-    width: 70% !important;
-    margin: 0 auto !important;
+    width: 70%  !important;
+    margin: 0 auto;
   }
 
   .big-tittle {
@@ -118,7 +118,7 @@
 
   .banner-connect {
     height: 570px;
-    display: block !important;
+    display: block ;
 
     .banner-connect-content {
       margin-left: 15px;
@@ -147,10 +147,10 @@
     }
 
     .list-feedback {
-      width: 90% !important;
-      margin: 0 auto !important;
-      margin-top: 20px !important;
-      margin-bottom: 20px !important;
+      width: 90% ;
+      margin: 0 auto ;
+      margin-top: 20px ;
+      margin-bottom: 20px ;
 
       .owl-dots {
         display: none;
@@ -161,13 +161,13 @@
       padding:40px 5px  28px 28px ;
 
       .line-d {
-        margin-top: 0 !important;
+        margin-top: 0 ;
       }
     }
   }
 
   .banner-startlearn {
-    height: 182px !important;
+    height: 182px ;
 
     .banner-startlearn-content {
 
@@ -176,22 +176,22 @@
       }
 
       .banner-startlearn-link{
-        padding:10px 20px !important;
-        width: 200px !important;
+        padding:10px 20px;
+        width: 200px ;
         a {
           font-size: 18px;
-          width: auto !important;
+          width: auto ;
         }
       }
     }
   }
 
   .list-statistic {
-    display: block !important;
-    padding-bottom: 50px !important;
+    display: block ;
+    padding-bottom: 50px ;
 
     .list-item{
-      margin-top: 30px !important;
+      margin-top: 30px ;
     }
   }
 
@@ -199,7 +199,7 @@
     display: block;
 
     .footer-mobie-content {
-      width: 95% !important;
+      width: 95% ;
       margin: 0 auto;
 
       .w-50 {
@@ -211,17 +211,17 @@
   }
 
   .list-icon {
-    padding-left: 20px !important;
+    padding-left: 20px ;
 
     .icon-item {
       a {
-        margin: 10px !important;
+        margin: 10px ;
       }
     }
   }
 
   .footer {
-    display: none !important;
+    display: none ;
   }
   
   .list-address {
