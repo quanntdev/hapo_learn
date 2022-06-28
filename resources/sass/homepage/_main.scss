@@ -1,11 +1,11 @@
 .main {
-  background-color: #fff;
+  background-color: white;
 }
 
 .main-content,
 .stactistic,
 .feed-back {
-  background-color: #fff;
+  background-color: white;
 
   .big-tittle {
     font-size: 60px;
@@ -17,7 +17,7 @@
     margin-top: 15px;
     width: 380px;
     height: 5px;
-    background-color: #b2d235;
+    background-color: $main-color;
     border-radius: 3px;
     margin: 0 auto;
   }
@@ -68,7 +68,7 @@
       font-size: 30px;
       line-height: 37px;
       letter-spacing: -0.05em;
-      color: #b2d235;
+      color: $main-color;
       margin-top: 25px;
     }
 
@@ -85,8 +85,8 @@
 
       a {
         padding: 9px 37px;
-        background-color: #b2d235;
-        color: #fff;
+        background-color: $main-color;
+        color: white;
         font-size: 18px;
         border-radius: 22px;
       }
@@ -104,7 +104,7 @@
   margin-bottom: 80px;
 
   a {
-    color: #90ab26;
+    color: $text-color;
     font-size: 40px;
     font-weight: 500;
   }
@@ -115,6 +115,7 @@
     display: block !important;
     transform: translateY(-10%);
   }
+  
   .items {
     width: 100%;
     display: flex ;
@@ -124,7 +125,7 @@
     border-radius: 20px;
 
     .content-items {
-      background-color: #fff;
+      background-color: white;
       text-align: left;
       border-radius: 0 10px 10px 0;
 
@@ -168,6 +169,7 @@
   .main{
     margin-top: 40px;
   }
+
   .logo-image {
     width: 150px !important;
   }
@@ -196,6 +198,7 @@
       .btn-link {
         text-align: center;
         margin-top: 15px;
+        
         a {
           font-size: 14px;
           padding: 7px 14px;
@@ -205,4 +208,3 @@
     }
   }
 }
-

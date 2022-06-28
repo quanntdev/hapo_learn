@@ -16,12 +16,12 @@
     }
 
     &:hover {
-      background-color: #b2d235 ;
+      background-color: $main-color ;
       border-radius: 17px;
     }
 
     &:hover a {
-      color: #fff ;
+      color: white ;
     }
   }
 }
@@ -48,7 +48,7 @@
 @media (min-width: 376px) and (max-width: 800px) {
   .nav-show {
     position: absolute ;
-    background: #fff ;
+    background: white ;
     margin-top: 100px;
     width: 100% ;
     margin-left: -28px ;
@@ -59,7 +59,7 @@
 
       li {
         &:hover {
-          color: #b2d235;
+          color: $main-color;
           border-radius: 0 ;
         }
       }
@@ -67,20 +67,20 @@
   }
 
   .navbar-nav li:hover {
-    color: #b2d235 ;
-    background-color: #fff;
+    color: $main-color ;
+    background-color: white;
     border-radius: 0;
   }
 
   .navbar-nav li:hover a {
-    color: #b2d235 !important;
+    color: $main-color !important;
   }
 }
 
 @media (max-width: 376px){
   .nav-show {
     position: absolute;
-    background: #fff ;
+    background: white ;
     margin-top: 50px;
     width: 100% ;
     margin-left: -28px ;
@@ -91,7 +91,7 @@
 
       li {
         &:hover {
-          color: #b2d235 ;
+          color: $main-color ;
           border-radius: 0  ;
         }
       }
@@ -99,17 +99,17 @@
   }
 
   .height-nav {
-    height: 60px  ;
+    height: 60px;
   }
 
   .navbar-nav li:hover {
-    color: #b2d235 ;
-    background-color: #fff ;
+    color: main-color ;
+    background-color: white ;
     border-radius: 0 ;
   }
 
   .navbar-nav li:hover a {
-    color: #b2d235 !important;
+    color: main-color !important;
   }
 
   .navbar-brand {
