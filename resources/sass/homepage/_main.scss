@@ -92,18 +92,6 @@
       }
     }
   }
-
-  .bg-3F6185 {
-    background-color: #3f6185;
-  }
-
-  .bg-DC594C {
-    background-color: #dc594c;
-  }
-
-  .bg-556598 {
-    background-color: #556598;
-  }
 }
 
 .mt-45 {
@@ -134,7 +122,7 @@
     margin-bottom: 30px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
-    
+
     .content-items {
       background-color: #fff;
       text-align: left;
@@ -175,3 +163,46 @@
     }
   }
 }
+
+@media (max-width: 376px) {
+  .main{
+    margin-top: 40px;
+  }
+  .logo-image {
+    width: 150px !important;
+  }
+
+  .items {
+    display: block !important;
+    height: 390px;
+
+    .img-items {
+      height: 220px !important;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .content-items {
+      text-align: center;
+
+      .content {
+        width: 90% ;
+        margin: 0 auto ;
+      }
+
+      .title {
+        margin-left: 0 ;
+      }
+
+      .btn-link {
+        text-align: center;
+        margin-top: 15px;
+        a {
+          font-size: 14px;
+          padding: 7px 14px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+

@@ -22,7 +22,6 @@
                     <p>
                         <a href="#!" class="text-reset">List lesson</a>
                     </p>
-                   
                 </div>
                 <div class="col-md-1 col-lg-1 col-xl-1 mx-auto p-0">
                     <p>
@@ -35,9 +34,6 @@
                         <a href="#!" class="text-reset">Profile</a>
                     </p>
                 </div>
-
-                
-
                 <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 ">
                    <div class="list-icon">
                      <p class="icon-item">
@@ -48,13 +44,13 @@
                     </p>
                     <p class="icon-item">
                         <a href=""><i class="fa-solid fa-phone"></i></a>
-                    </p>   
+                    </p>
                    </div>
                    <div class="list-address">
                     <p>
                         <a href="">
                             facebook.com/tuyen.dung.haposoft
-                        </a> 
+                        </a>
                     </p>
                     <p>
                         <a href="">
@@ -74,7 +70,7 @@
 </div>
 <div class="footer-mobie">
     <div class="footer-mobie-content">
-        <div class="w-50">
+        <div class="w-footer">
             <p>
                 <a href="#!" class="text-reset">Home</a>
             </p>
@@ -85,8 +81,7 @@
                 <a href="#!" class="text-reset">List lesson</a>
             </p>
         </div>
-        
-        <div class="w-50">
+        <div class="w-footer">
             <p>
                 <a href="#!" class="text-reset">Lesson detail</a>
             </p>
@@ -97,7 +92,7 @@
                 <a href="#!" class="text-reset">Profile</a>
             </p>
         </div>
-        <div class="w-50">
+        <div class="w-footer">
             <div class="footer-logo " href="#">
                 <img  src="{{ asset('images/hapo_white.png') }}" alt="HapoLearn Logo">
             </div>
@@ -105,7 +100,7 @@
                 Interactive lessons, "on-the-go" practice, peer support
             </p>
         </div>
-        <div class="w-50">
+        <div class="w-footer">
             <div class="list-icon">
                 <p class="icon-item">
                    <a href=""><i class="fa-brands fa-facebook"></i></a>
@@ -115,7 +110,7 @@
                </p>
                <p class="icon-item">
                    <a href=""><i class="fa-solid fa-phone"></i></a>
-               </p>   
+               </p>
             </div>
         </div>
     </div>

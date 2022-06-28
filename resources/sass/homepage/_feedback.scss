@@ -40,6 +40,7 @@
   .avatar {
     width: 60px;
     height: 60px;
+    
     img {
       width: 100%;
       height: 100%;
@@ -71,9 +72,8 @@
   }
 }
 
-@media (max-width: 376px){
+@media (max-width: 376px) {
   .feed-back {
-
     .feed-back-slogan {
       font-size: 16px;
     }
@@ -102,8 +102,7 @@
     width: 80% !important;
   }
 
-  .view-more-title{
-
+  .view-more-title {
     a {
         font-size: 28px;
     }

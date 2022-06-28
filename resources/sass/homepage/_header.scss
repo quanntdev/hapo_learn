@@ -26,6 +26,10 @@
   }
 }
 
+.height-nav {
+  height: 120px ;
+}
+
 .main-header {
   height: 120px ;
   position: fixed;
@@ -52,8 +56,8 @@
     .nav-item {
       padding: 10px;
       border-bottom: 1px solid #ccc;
+
       li {
-        
         &:hover {
           color: #b2d235;
           border-radius: 0 ;
@@ -61,7 +65,7 @@
       }
     }
   }
-  
+
   .navbar-nav li:hover {
     color: #b2d235 ;
     background-color: #fff;
@@ -84,8 +88,8 @@
     .nav-item {
       padding: 10px;
       border-bottom: 1px solid #ccc;
+
       li {
-        
         &:hover {
           color: #b2d235 ;
           border-radius: 0  ;
@@ -94,8 +98,8 @@
     }
   }
 
-  .h-100 {
-    height: 60px !important ;
+  .height-nav {
+    height: 60px  ;
   }
 
   .navbar-nav li:hover {
@@ -111,13 +115,11 @@
   .navbar-brand {
     width: 150px;
     height: 27px;
-    
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
-
 }
-
