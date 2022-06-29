@@ -1,13 +1,7 @@
-@font-face {
-  font-family: UTM BryantLG;
-  src: url("/fonts/UTM_BryantLG.ttf");
-}
-  
 body {
-  font-family: UTM BryantLG;
-  background-color: #e5e5e5;
+  font-family: 'UTM BryantLG';
+  background-color: $background-color;
 }
-
 .banner {
   margin-top: 120px;
   height: 655px;
@@ -17,7 +11,7 @@ body {
   justify-content: flex-start;
   align-items: center;
 }
-  
+
 .banner-content {
   width: 34%;
   align-items: center;
@@ -45,23 +39,23 @@ body {
   font-size: 20px;
   line-height: 25px;
   letter-spacing: -0.05em;
-  color: #505353;
+  color: $layout-color;
   margin-bottom: 26px;
 }
-  
+
 .link-learn {
   padding: 13px 67px;
   margin-top: 26px;
-  background: #b2d235;
+  background: $main-color;
   font-weight: 700;
   font-size: 30px;
   line-height: 37px;
   letter-spacing: -0.05em;
-  color: #ffffff;
+  color: white;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 35px;
 }
-  
+
 .first-layout {
   margin-top: 120px;
   height: 820px;
@@ -100,7 +94,7 @@ body {
     padding: 13px 36px;
     font-size: 16px;
   }
-  
+
   .first-layout {
     height: 500px;
   }
@@ -116,7 +110,7 @@ body {
 
     img {
       width: 25px;
-      height: 23px;
+      height: 35px;
     }
   }
 
@@ -137,7 +131,7 @@ body {
     margin-top: 500px;
     width: 80% ;
     margin-left: 20%;
-    
+
     .link-learn {
       font-size: 20px;
       padding: 12px 52px;
@@ -145,7 +139,7 @@ body {
   }
 
   .first-layout {
-    background-color: #fff;
+    background-color: white;
     margin-top: 60px;
     height: 600px;
   }
