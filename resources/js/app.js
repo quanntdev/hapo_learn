@@ -6,6 +6,8 @@
 
 require('./bootstrap');
 
+require('./home_script');
+
 window.Vue = require('vue').default;
 
 /**

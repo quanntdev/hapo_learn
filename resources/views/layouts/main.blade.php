@@ -1,3 +1,22 @@
+<div class="messenger-box" id="mes-box">
+   <div class="logo-mes">
+      <img src="{{ asset('images/avatar-mes.png')}}" alt="">
+   </div>
+   <div class="close-mes" id="close">
+      <i class="fa-solid fa-xmark"></i>
+   </div>
+   <div class="mes-box-content">
+      <div class="name">HapoLearn</div>
+      <div class="chat">HapoLearn xin chào bạn. Bạn có cần chúng tôi hỗ trợ gì không? </div>
+      <div class="login-mes"><a href=""><i class="fa-brands fa-facebook-messenger"></i> Đăng Nhập vào HapoLearn</a></div>
+      <div class="text-under">Chat với HapoLearn trong Messenger</div>
+   </div>
+</div>
+<div class="messenger">
+   <div class="messenger-btn">
+      <img src="{{ asset('images/messenger.png')}}" alt="">
+   </div>
+</div>
 <div class="main">
    <div class="main-content">
       <div class="list-items">
@@ -8,7 +27,7 @@
             <div class="content-items">
                <p class="title">HTML/CSS/js turtorial</p>
                <p class="content">I knew hardly anything about HTML, JS, and CSS before entering New Media. I had coded quite a bit, but never touched anything in regards to web development.</p>
-               <p class="btn-link"> 
+               <p class="btn-link">
                   <a href="#" >Take This Course</a>
                </p>
              </div>
@@ -20,7 +39,7 @@
             <div class="content-items">
                <p class="title">Laravel tutorial</p>
                <p class="content">I knew hardly anything about HTML, JS, and CSS before entering New Media. I had coded quite a bit, but never touched anything in regards to web development.</p>
-                p class="btn-link"> 
+               <p class="btn-link">
                   <a href="#" >Take This Course</a>
                </p>
             </div>
