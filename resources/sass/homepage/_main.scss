@@ -110,6 +110,111 @@
   }
 }
 
+.messenger {
+  position: fixed;
+  right: 60px;
+  z-index: 10000;
+  top: 600px;
+
+  .messenger-btn {
+    width: 80px;
+    height: 80px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+}
+
+.messenger-box {
+  width: 400px;
+  position: fixed;
+  top:350px;
+  right:30px;
+  display: none;
+  background-color: white;
+  padding: 20px;
+  z-index: 100;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 23px;
+
+  .logo-mes {
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    left: 20px;
+    top:10px;
+
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .close-mes {
+    width: 28px;
+    height: 28px;
+    background-color: $mess-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    i {
+      font-size: 18px;
+    }
+  }
+
+  .mes-box-content {
+    width: 80%;
+    margin: 0 auto;
+
+    .name {
+      font-size: 14px;
+      color:$text-color-2;
+    }
+
+    .chat {
+      padding: 10px;
+      background-color: $mess-color;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 15px;
+      margin-top: 10px;
+    }
+
+    .login-mes {
+      background-color: $blue;
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 15px;
+      text-align: center;
+
+      a{
+        color: white;
+        font-size: 16px;
+      }
+    }
+
+    .text-under {
+      font-size: 14px;
+      color: $text-color-2;
+      text-align: center;
+      margin-top: 5px;
+    }
+  }
+}
+
+.active {
+  display: block;
+}
+
 @media (max-width: 800px)  {
   .list-items {
     display: block !important;
