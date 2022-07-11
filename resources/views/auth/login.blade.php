@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-body-title">Sign in to HapoLearn</div>
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('loginhapo.store') }}">
                         @csrf
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label @error('email') is-invalid @enderror">Username</label>
