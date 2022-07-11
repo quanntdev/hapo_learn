@@ -24,26 +24,26 @@ class course extends Model
 
     public function course_tag()
     {
-        return $this->hasMany('App\Models\course_tag', 'course_id');
+        return $this->belongsToMany(course_tag::class, 'course_id');
     }
 
     public function lesson()
     {
-        return $this->hasMany('App\Models\lesson', 'course_id');
+        return $this->hasMany(lesson::class, 'course_id');
     }
 
     public function user_course()
     {
-        return $this->hasMany('App\Models\user_course', 'course_id');
+        return $this->belongsToMany(user_course::class, 'course_id');
     }
 
     public function course_teacher()
     {
-        return $this->hasMany('App\Models\course_teacher', 'course_id');
+        return $this->belongsToMany(course_teacher::class, 'course_id');
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Models\comment', 'course_id');
+        return $this->hasMany(comment::class, 'course_id');
     }
 }

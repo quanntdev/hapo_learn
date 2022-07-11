@@ -53,21 +53,21 @@ class User extends Authenticatable
 
     public function course_teacher()
     {
-        return $this->belongsTo('App\Models\course_teacher', 'user_id');
+        return $this->belongsToMany(course_teacher::class, 'user_id');
     }
 
     public function user_course()
     {
-        return $this->belongsTo('App\Models\user_course', 'user_id');
+        return $this->belongsTo(user_course::class, 'user_id');
     }
 
     public function user_lesson()
     {
-        return $this->belongsTo('App\Models\user_lesson', 'user_id');
+        return $this->belongsTo(user_lesson::class, 'user_id');
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Models\comment', 'user_id');
+        return $this->hasMany(comment::class, 'user_id');
     }
 }

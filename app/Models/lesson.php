@@ -26,16 +26,16 @@ class lesson extends Model
 
     public function course()
     {
-        return $this->belongsTo('App\Models\course', 'course_id');
+        return $this->belongsTo(course::class, 'course_id');
     }
 
     public function user_lesson()
     {
-        return $this->hasMany('App\Models\user_lesson', 'lesson_id');
+        return $this->hasMany(user_lesson::class, 'lesson_id');
     }
 
     public function program()
     {
-        return $this->hasMany('App\Models\program', 'lesson_id');
+        return $this->hasMany(course::class, 'lesson_id');
     }
 }
