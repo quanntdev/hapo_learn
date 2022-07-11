@@ -22,6 +22,6 @@ class programs extends Model
 
     public function lesson()
     {
-        return $this->belongsTo('App\Models\lesson', 'lesson_id');
+        return $this->belongsTo(lesson::class, 'lesson_id');
     }
 }

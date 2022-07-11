@@ -21,11 +21,11 @@ class user_lesson extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\user', 'user_id');
+        return $this->belongsToMany(User::class, 'user_id');
     }
 
     public function lesson()
     {
-        return $this->belongsTo('App\Models\lesson', 'lesson_id');
+        return $this->belongsToMany(lesson::class, 'lesson_id');
     }
 }

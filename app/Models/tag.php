@@ -21,6 +21,6 @@ class tag extends Model
 
     public function course_tag()
     {
-        return $this->hasMany('App\Models\course_tag', 'tag_id');
+        return $this->belongsToMany(course_tag::class, 'tag_id');
     }
 }

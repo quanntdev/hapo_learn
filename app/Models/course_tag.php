@@ -21,11 +21,11 @@ class course_tag extends Model
 
     public function course()
     {
-        return $this->belongsTo('App\Models\course', 'course_id');
+        return $this->belongsTo(course::class, 'course_id');
     }
 
     public function tag()
     {
-        return $this->belongsTo('App\Models\tag', 'tag_id');
+        return $this->belongsTo(tag::class, 'tag_id');
     }
 }

@@ -22,7 +22,7 @@ class user_course extends Model
 
     public function course()
     {
-        return $this->belongsTo('App\Models\course', 'course_id');
+        return $this->belongsTo(course::class, 'course_id');
     }
 
     public function user()
