@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\LoginHapoController;
+
+use App\Http\Controllers\LoginUserController;
+use App\Http\Controllers\LogoutUserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +19,10 @@ use App\Http\Controllers\LoginHapoController;
 |
 */
 Auth::routes();
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::resource('/loginhapo', LoginHapoController::class);
+Route::POST('/loginhapo', [LoginUserController::class, 'index']);
+
+Route::get('/logout', [LogoutUserController::class, 'index']);
+

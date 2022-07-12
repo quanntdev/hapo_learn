@@ -12,7 +12,6 @@
       font-size: 14px;
       line-height: 19px;
       text-transform: uppercase;
-      color: #505353;
     }
 
     &:hover {
@@ -21,7 +20,7 @@
     }
 
     &:hover a {
-      color: white ;
+      color: white !important;
     }
   }
 }
@@ -43,6 +42,27 @@
   justify-content: space-between ;
   width: 95%;
   margin: 0 auto;
+}
+
+.on-active {
+  background-color: $main-color ;
+  border-radius: 17px;
+
+  a {
+    color: white !important;
+  }
+}
+
+.btn-logout {
+  background-color: white;
+  border-radius: 17px;
+  border: 1px solid red;
+
+  &:hover {
+    background-color: red !important;
+    border-radius: 17px;
+    border: 1px solid red;
+  }
 }
 
 @media (min-width: 376px) and (max-width: 800px) {
