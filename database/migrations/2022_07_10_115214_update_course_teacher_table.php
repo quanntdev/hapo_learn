@@ -25,7 +25,7 @@ class UpdateCourseTeacherTable extends Migration
      */
     public function down()
     {
-        Schema::table('course_teachers', function(Blueprint $table) {
+        Schema::table('course_teachers', function (Blueprint $table) {
             $table->dropColumn('user_id');
         });
     }

@@ -14,6 +14,6 @@ class LoginHapoController extends Controller
             'password' => $request->password,
         ];
 
-       dd($data);
+        dd($data);
     }
 }

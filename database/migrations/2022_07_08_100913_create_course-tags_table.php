@@ -18,7 +18,6 @@ class CreateCourseTagsTable extends Migration
             $table->integer('course_id');
             $table->integer('tag_id');
             $table->integer('status');
-            
         });
     }
 
