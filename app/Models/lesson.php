@@ -23,7 +23,7 @@ class Lesson extends Model
         'status',
     ];
 
-    public function courses()
+    public function course()
     {
         return $this->belongsTo(Course::class, 'course_id');
     }

@@ -19,7 +19,7 @@ class Programs extends Model
         'status',
     ];
 
-    public function lessons()
+    public function lesson()
     {
         return $this->belongsTo(lesson::class, 'lesson_id', 'id');
     }

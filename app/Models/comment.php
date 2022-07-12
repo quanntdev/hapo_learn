@@ -20,12 +20,12 @@ class Comment extends Model
         'parent_id',
     ];
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function courses()
+    public function course()
     {
         return $this->belongsTo(course::class, 'course_id');
     }
