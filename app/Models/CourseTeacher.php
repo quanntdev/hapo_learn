@@ -5,22 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class CourseTeacher extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'tag_name',
-        'slug_tag',
+        'course_id',
+        'user_id',
         'status',
     ];
 
     protected $primaryKey = 'id';
 
-    protected $table = 'tags';
-
-    public function courses()
-    {
-        return $this->belongsToMany(Course::class, 'course_tags', 'tag_id', 'course_id');
-    }
+    protected $table = 'course_teachers';
 }

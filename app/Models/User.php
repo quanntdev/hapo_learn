@@ -51,19 +51,19 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    public function course_teacher()
+    public function courseUsers()
     {
-        return $this->belongsToMany(course_teacher::class, 'user_id');
+        return $this->belongsToMany(Course::class, 'user_id', 'user_id', 'course_id');
     }
 
-    public function user_course()
+    public function courseTeacher()
     {
-        return $this->belongsTo(user_course::class, 'user_id');
+        return $this->belongsToMany(User::class, 'course_teacher', 'course_id', 'user_id');
     }
 
-    public function user_lesson()
+    public function lessons()
     {
-        return $this->belongsTo(user_lesson::class, 'user_id');
+        return $this->belongsToMany(Lesson::class, 'user_lessons', 'user_id', 'lesson_id');
     }
 
     public function comments()

@@ -14,13 +14,8 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        course::create([
-            'course_name' => 'Cơ bản về HTML',
-            'slug_course' => 'co-ban-ve-html',
-            'image' => 'cobanvehtml.jpg',
-            'description' => 'repellendus animi alias cupiditate fugit',
-            'price' => '100000',
-            'status' => '1',
-        ]);
+        Course::factory()
+        ->count(5)
+        ->create();
     }
 }

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class course extends Model
+class Course extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'course_name',
@@ -22,27 +23,27 @@ class course extends Model
 
     protected $table = 'courses';
 
-    public function course_tag()
+    public function tags()
     {
-        return $this->belongsToMany(course_tag::class, 'course_id');
+        return $this->belongsToMany(Tag::class,'course_tags','course_id','tag_id');
     }
 
-    public function lesson()
+    public function lessons()
     {
-        return $this->hasMany(lesson::class, 'course_id');
+        return $this->hasMany(Lesson::class, 'course_id');
     }
 
-    public function user_course()
+    public function userCourse()
     {
-        return $this->belongsToMany(user_course::class, 'course_id');
+        return $this->belongsToMany(User::class, 'user_courses', 'course_id', 'user_id');
     }
 
-    public function course_teacher()
+    public function courseTeacher()
     {
-        return $this->belongsToMany(course_teacher::class, 'course_id');
+        return $this->belongsToMany(User::class, 'course_teacher', 'course_id', 'user_id');
     }
 
-    public function comments()
+    public function Comment()
     {
         return $this->hasMany(comment::class, 'course_id');
     }

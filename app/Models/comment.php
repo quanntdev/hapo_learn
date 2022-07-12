@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class comment extends Model
+class Comment extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -21,12 +22,12 @@ class comment extends Model
 
     protected $table = 'comments';
 
-    public function user()
+    public function users()
     {
-        return $this->belongsToMany(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function course()
+    public function courses()
     {
         return $this->belongsTo(course::class, 'course_id');
     }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class lesson extends Model
+class Lesson extends Model
 {
     use HasFactory;
 
@@ -24,18 +24,18 @@ class lesson extends Model
 
     protected $table = 'lessons';
 
-    public function course()
+    public function courses()
     {
-        return $this->belongsTo(course::class, 'course_id');
+        return $this->belongsTo(Course::class, 'course_id');
     }
 
-    public function user_lesson()
+    public function users()
     {
-        return $this->hasMany(user_lesson::class, 'lesson_id');
+        return $this->belongsToMany(User::class,'user_lessons', 'lesson_id','user_id');
     }
 
-    public function program()
+    public function programs()
     {
         return $this->hasMany(course::class, 'lesson_id');
-    }
+    }   
 }
