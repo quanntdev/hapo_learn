@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->integer('course_id');
             $table->float('star')->nullable();
             $table->text('comment');
-            $table->integer('parent_id');
+            $table->integer('parent_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

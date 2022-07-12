@@ -18,6 +18,7 @@ class CreateUserLessonsTable extends Migration
             $table->integer('lesson_id');
             $table->integer('user_id');
             $table->integer('status');
+            $table->timestamps();
         });
     }
 

@@ -20,8 +20,7 @@ class CreateLessonsTable extends Migration
             $table->string('slug_lesson')->unique();
             $table->string('video');
             $table->text('content');
-            $table->dateTime('time_lesson');
-            $table->dateTime('time_up');
+            $table->time('time_lesson');
             $table->integer('status');
             $table->timestamps();
             $table->softDeletes();

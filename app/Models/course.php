@@ -43,7 +43,7 @@ class Course extends Model
         return $this->belongsToMany(User::class, 'course_teacher', 'course_id', 'user_id');
     }
 
-    public function Comment()
+    public function comment()
     {
         return $this->hasMany(comment::class, 'course_id');
     }
