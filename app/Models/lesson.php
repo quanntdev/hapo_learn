@@ -31,11 +31,11 @@ class Lesson extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class,'user_lessons', 'lesson_id','user_id');
+        return $this->belongsToMany(User::class, 'user_lessons', 'lesson_id', 'user_id');
     }
 
     public function programs()
     {
         return $this->hasMany(course::class, 'lesson_id');
-    }   
+    }
 }
