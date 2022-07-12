@@ -10,6 +10,8 @@ class Lesson extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'lessons';
+
     protected $fillable = [
         'course_id',
         'name_lesson',
@@ -20,10 +22,6 @@ class Lesson extends Model
         'time_up',
         'status',
     ];
-
-    protected $primaryKey = 'id';
-
-    protected $table = 'lessons';
 
     public function courses()
     {

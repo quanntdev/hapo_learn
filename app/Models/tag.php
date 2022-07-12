@@ -10,15 +10,13 @@ class Tag extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'tags';
+
     protected $fillable = [
         'tag_name',
         'slug_tag',
         'status',
     ];
-
-    protected $primaryKey = 'id';
-
-    protected $table = 'tags';
 
     public function courses()
     {

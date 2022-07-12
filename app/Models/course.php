@@ -10,6 +10,8 @@ class Course extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'courses';
+
     protected $fillable = [
         'course_name',
         'slug_course',
@@ -18,8 +20,6 @@ class Course extends Model
         'price',
         'status',
     ];
-
-    protected $table = 'courses';
 
     public function tags()
     {

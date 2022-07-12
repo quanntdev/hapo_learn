@@ -15,6 +15,7 @@ class UpdateCourseTagTable extends Migration
     {
         Schema::table('course_tag', function (Blueprint $table) {
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

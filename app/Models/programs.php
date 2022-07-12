@@ -10,16 +10,14 @@ class Programs extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'programs';
+
     protected $fillable = [
         'lesson_id',
         'type',
         'file',
         'status',
     ];
-
-    protected $primaryKey = 'id';
-
-    protected $table = 'programs';
 
     public function lessons()
     {

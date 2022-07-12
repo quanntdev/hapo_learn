@@ -10,6 +10,8 @@ class Comment extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'comments';
+
     protected $fillable = [
         'user_id',
         'course_id',
@@ -17,10 +19,6 @@ class Comment extends Model
         'comment',
         'parent_id',
     ];
-
-    protected $primaryKey = 'id';
-
-    protected $table = 'comments';
 
     public function users()
     {
