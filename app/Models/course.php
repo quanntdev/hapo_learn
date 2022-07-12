@@ -19,13 +19,11 @@ class Course extends Model
         'status',
     ];
 
-    protected $primaryKey = 'id';
-
     protected $table = 'courses';
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'course_tags', 'course_id', 'tag_id');
+        return $this->belongsToMany(Tag::class, 'course_tag', 'course_id', 'tag_id');
     }
 
     public function lessons()
@@ -35,7 +33,7 @@ class Course extends Model
 
     public function userCourse()
     {
-        return $this->belongsToMany(User::class, 'user_courses', 'course_id', 'user_id');
+        return $this->belongsToMany(User::class, 'user_course', 'course_id', 'user_id');
     }
 
     public function courseTeacher()

@@ -14,8 +14,8 @@ class UpdateUser extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->date('d_o_b')->after('password')->nullable();
-            $table->string('phone')->after('d_o_b')->nullable();
+            $table->date('date_of_birth')->after('password')->nullable();
+            $table->string('phone')->after('date_of_birth')->nullable();
             $table->string('address')->after('phone')->nullable();
             $table->string('avatar')->after('address')->nullable();
             $table->text('about_me')->after('avatar')->nullable();
@@ -31,7 +31,7 @@ class UpdateUser extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('d_o_b');
+            $table->dropColumn('date_of_birth');
             $table->dropColumn('phone');
             $table->dropColumn('address');
             $table->dropColumn('avatar');

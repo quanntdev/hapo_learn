@@ -13,12 +13,13 @@ class CreateUserCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_courses', function (Blueprint $table) {
+        Schema::create('user_course', function (Blueprint $table) {
             $table->id();
             $table->integer('course_id');
             $table->integer('user_id');
             $table->integer('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

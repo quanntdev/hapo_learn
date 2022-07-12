@@ -13,7 +13,7 @@ class CreateCourseTeachersTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_teachers', function (Blueprint $table) {
+        Schema::create('course_teacher', function (Blueprint $table) {
             $table->id();
             $table->integer('lesson_id');
             $table->integer('status');

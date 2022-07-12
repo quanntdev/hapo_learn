@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'password' => $this->faker->md5(12345678),
             'role' => $this->faker->randomDigit(),
             'avatar' => $this->faker->imageUrl($width = 50, $height = 50),
-            'd_o_b' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
+            'date_of_birth' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
             'address' => $this->faker->streetAddress(),
             'phone' => $this->faker->e164PhoneNumber(),
             'about_me' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),

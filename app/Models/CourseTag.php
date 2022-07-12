@@ -17,5 +17,5 @@ class CourseTag extends Model
 
     protected $primaryKey = 'id';
 
-    protected $table = 'course_tags';
+    protected $table = 'course_tag';
 }

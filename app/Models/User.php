@@ -21,7 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'd_o_b',
+        'date_of_birth',
         'phone',
         'address',
         'avatar',
@@ -58,12 +58,12 @@ class User extends Authenticatable
 
     public function courseTeacher()
     {
-        return $this->belongsToMany(User::class, 'course_teacher', 'course_id', 'user_id');
+        return $this->belongsToMany(Course::class, 'course_teacher', 'course_id', 'user_id');
     }
 
     public function lessons()
     {
-        return $this->belongsToMany(Lesson::class, 'user_lessons', 'user_id', 'lesson_id');
+        return $this->belongsToMany(Lesson::class, 'user_lesson', 'user_id', 'lesson_id');
     }
 
     public function comments()

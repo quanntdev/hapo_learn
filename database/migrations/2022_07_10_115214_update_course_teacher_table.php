@@ -13,7 +13,7 @@ class UpdateCourseTeacherTable extends Migration
      */
     public function up()
     {
-        Schema::table('course_teachers', function (Blueprint $table) {
+        Schema::table('course_teacher', function (Blueprint $table) {
             $table->integer('user_id')->after('lesson_id');
         });
     }
@@ -25,7 +25,7 @@ class UpdateCourseTeacherTable extends Migration
      */
     public function down()
     {
-        Schema::table('course_teachers', function (Blueprint $table) {
+        Schema::table('course_teacher', function (Blueprint $table) {
             $table->dropColumn('user_id');
         });
     }

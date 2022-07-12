@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tag extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'tag_name',
@@ -21,6 +22,6 @@ class Tag extends Model
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class, 'course_tags', 'tag_id', 'course_id');
+        return $this->belongsToMany(Course::class, 'course_tag', 'tag_id', 'course_id');
     }
 }

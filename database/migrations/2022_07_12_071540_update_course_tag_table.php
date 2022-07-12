@@ -13,7 +13,7 @@ class UpdateCourseTagTable extends Migration
      */
     public function up()
     {
-        Schema::table('course_tags', function (Blueprint $table) {
+        Schema::table('course_tag', function (Blueprint $table) {
             $table->timestamps();
         });
     }

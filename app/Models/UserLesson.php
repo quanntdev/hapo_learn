@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserLesson extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -17,5 +18,5 @@ class UserLesson extends Model
 
     protected $primaryKey = 'id';
 
-    protected $table = 'user_lessons';
+    protected $table = 'user_lesson';
 }
