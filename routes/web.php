@@ -17,5 +17,3 @@ use App\Http\Controllers\LoginHapoController;
 */
 Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::resource('/loginhapo', LoginHapoController::class);
