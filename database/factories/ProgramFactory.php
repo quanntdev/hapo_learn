@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Programs;
 use App\Models\Lesson;
 
-class ProgramsFactory extends Factory
+class ProgramFactory extends Factory
 {
     /**
      * Define the model's default state.

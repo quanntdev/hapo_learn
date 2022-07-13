@@ -10,8 +10,6 @@ class Course extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'courses';
-
     protected $fillable = [
         'course_name',
         'slug_course',

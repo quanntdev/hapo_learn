@@ -20,6 +20,7 @@ class UpdateUser extends Migration
             $table->string('avatar')->after('address')->nullable();
             $table->text('about_me')->after('avatar')->nullable();
             $table->integer('status')->after('about_me')->nullable();
+            $table->softDeletes();
         });
     }
 
