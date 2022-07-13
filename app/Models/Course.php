@@ -29,18 +29,13 @@ class Course extends Model
         return $this->hasMany(Lesson::class, 'course_id');
     }
 
-    public function userCourse()
+    public function users()
     {
         return $this->belongsToMany(User::class, 'user_course', 'course_id', 'user_id');
     }
 
-    public function teacherCourse()
+    public function comments()
     {
-        return $this->belongsToMany(User::class, 'course_teacher', 'course_id', 'user_id');
-    }
-
-    public function comment()
-    {
-        return $this->hasMany(comment::class, 'course_id');
+        return $this->hasMany(Comment::class, 'course_id');
     }
 }
