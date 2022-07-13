@@ -4,15 +4,20 @@
 <div class="container login-form ">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card card-login">
                 <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-danger text-center" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                     <div class="card-body-title">Sign in to HapoLearn</div>
-                    <form method="POST" action="{{ route('loginhapo.store') }}">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label @error('email') is-invalid @enderror">Username</label>
-                            <input  id="email" type="email" class="form-control login-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                            @error('email')
+                            <label for="exampleInputEmail1" class="form-label @error('username') is-invalid @enderror text-input">Username</label>
+                            <input  id="text" type="text" class="form-control login-input @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}"  autocomplete="username" autofocus>
+                            @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -20,20 +25,18 @@
                           </div>
 
                           <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input  id="password" type="password" class="form-control login-input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <label for="password" class="form-label text-input">Password</label>
+                            <input  id="password" type="password" class="form-control login-input @error('password') is-invalid @enderror" name="password"  autocomplete="current-password">
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                           </div>
-                        
-
                         <div class="form-group row mb-0 mt-4">
                             <div class="d-flex justify-content-between w-100">
                                 <div>
-                                    <button type="submit" class="btn btn-primary btn-login">
+                                    <button type="submit" class="btn btn-login">
                                         {{ __('Sign in') }}
                                     </button>
                                 </div>
@@ -59,7 +62,7 @@
                             <div class="aline"></div>
                         </div>
                         <div class="create-account">
-                            <a href="{{route('login')}}">Create new Account</a>
+                            <a href="{{route('register')}}">Create new Account</a>
                         </div>
                     </form>
                 </div>

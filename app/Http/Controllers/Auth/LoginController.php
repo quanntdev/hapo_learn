@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\LoginFormRequest;
+
+use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
 
 class LoginController extends Controller
 {
@@ -36,5 +41,23 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(LoginFormRequest $request)
+    {
+        $username = $request->input('username');
+        $password = $request->input('password');
+
+        if (Auth::attempt(['username' => $username, 'password' => $password])) {
+            return redirect('test');
+        } else {
+            return redirect()->back()->with('status', 'Username hoặc mật khẩu không đúng');
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }
