@@ -33,6 +33,6 @@ class Lesson extends Model
 
     public function programs()
     {
-        return $this->hasMany(course::class, 'lesson_id');
+        return $this->hasMany(Program::class, 'lesson_id');
     }
 }
