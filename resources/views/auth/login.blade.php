@@ -6,9 +6,9 @@
         <div class="col-md-6">
             <div class="card card-login">
                 <div class="card-body">
-                    @if (session('status'))
+                    @if (session('error'))
                         <div class="alert alert-danger text-center" role="alert">
-                            {{ session('status') }}
+                            {{ session('error') }}
                         </div>
                     @endif
                     <div class="card-body-title">Sign in to HapoLearn</div>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginFormRequest;
 
+
 use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
 
 class LoginController extends Controller
@@ -45,14 +46,11 @@ class LoginController extends Controller
 
     public function login(LoginFormRequest $request)
     {
-        $username = $request->input('username');
-        $password = $request->input('password');
-
-        if (Auth::attempt(['username' => $username, 'password' => $password])) {
-            return redirect('test');
-        } else {
-            return redirect()->back()->with('status', 'Username hoặc mật khẩu không đúng');
+        $credentials = $request->only(['username', 'password']);
+        if (Auth::attempt($credentials)) {
+            return redirect('/test');
         }
+        return redirect()->back()->with('error', trans('message.LoginError'));
     }
 
     public function logout()

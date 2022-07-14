@@ -32,10 +32,10 @@ class LoginFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.required' => 'Vui lòng nhập username',
-            'username.min' => 'Vui lòng nhập ít nhất :min kí tự',
-            'password.required' => 'Vui lòng nhập password',
-            'password.min' => 'Vui lòng nhập ít nhất :min kí tự',
+            'username.required' => trans('message.UsernameRequired'),
+            'username.min' => trans('message.UsernameMin'),
+            'password.required' => trans('message.PasswordRequired'),
+            'password.min' => trans('message.PasswordMin'),
         ];
     }
 }
