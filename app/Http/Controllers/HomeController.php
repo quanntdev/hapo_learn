@@ -23,4 +23,9 @@ class HomeController extends Controller
     {
         return view('test');
     }
+
+    public function profile()
+    {
+        return view('layouts.profile');
+    }
 }
