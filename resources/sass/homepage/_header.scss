@@ -12,7 +12,6 @@
       font-size: 14px;
       line-height: 19px;
       text-transform: uppercase;
-      color: #505353;
     }
 
     &:hover {
@@ -21,7 +20,7 @@
     }
 
     &:hover a {
-      color: white ;
+      color: white !important;
     }
   }
 }
@@ -43,6 +42,48 @@
   justify-content: space-between ;
   width: 95%;
   margin: 0 auto;
+}
+
+.on-active {
+  background-color: $main-color ;
+  border-radius: 17px;
+
+  a {
+    color: white !important;
+  }
+}
+
+.btn-logout {
+  background-color: white;
+  border-radius: 17px;
+  border: 1px solid red;
+
+  &:hover {
+    background-color: red !important;
+    border-radius: 17px;
+    border: 1px solid red;
+  }
+}
+
+.button-logout {
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 25px;
+  border: 1px solid red;
+
+  button {
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+  }
+
+  &:hover {
+    background-color: red !important;
+  }
+
+  &:hover button {
+    color: white;
+  }
 }
 
 @media (min-width: 376px) and (max-width: 800px) {
@@ -103,13 +144,13 @@
   }
 
   .navbar-nav li:hover {
-    color: main-color ;
+    color: $main-color ;
     background-color: white ;
     border-radius: 0 ;
   }
 
   .navbar-nav li:hover a {
-    color: main-color !important;
+    color: $main-color !important;
   }
 
   .navbar-brand {

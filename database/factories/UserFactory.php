@@ -3,8 +3,8 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use Faker\Generator as faker;
+use Illuminate\Support\Facades\Hash;
 
 class UserFactory extends Factory
 {
@@ -23,8 +23,9 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name($gender = null),
+            'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => $this->faker->md5(12345678),
+            'password' => Hash::make(12345678),
             'role' => $this->faker->randomDigit(),
             'avatar' => $this->faker->imageUrl($width = 50, $height = 50),
             'date_of_birth' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
