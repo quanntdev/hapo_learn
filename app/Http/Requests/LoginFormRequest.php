@@ -32,10 +32,10 @@ class LoginFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.required' => trans('message.UsernameRequired'),
-            'username.min' => trans('message.UsernameMin'),
-            'password.required' => trans('message.PasswordRequired'),
-            'password.min' => trans('message.PasswordMin'),
+            'username.required' => __('message.username_required'),
+            'username.min' => __('message.username_min'),
+            'password.required' => __('message.password_required'),
+            'password.min' => __('message.password_min'),
         ];
     }
 }

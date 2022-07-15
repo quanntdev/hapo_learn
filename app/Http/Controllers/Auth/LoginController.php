@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginFormRequest;
 
-
-use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
-
 class LoginController extends Controller
 {
     /*
@@ -50,7 +47,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect('/test');
         }
-        return redirect()->back()->with('error', trans('message.LoginError'));
+        return redirect()->back()->with('error', __('message.login_error'));
     }
 
     public function logout()
