@@ -54,7 +54,7 @@
                             <p>Sign in with</p>
                             <div class="aline"></div>
                         </div>
-                        <div class="GG-signin">
+                        <div class="Google-signin">
                             <button><i class="fa-brands fa-google-plus-g"></i> Google</button>
                         </div>
                         <div class="other-sign">
