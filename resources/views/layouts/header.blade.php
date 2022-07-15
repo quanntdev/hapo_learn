@@ -9,18 +9,28 @@
             </button>
             <div class="collapse nav-show navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav bg-white nav-mobie mr-auto w-100">
-                    <li class="nav-item active">
+                    <li class="nav-item active on-active">
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="#">All courses <span class="sr-only">(current)</span></a>
                     </li>
+                    @if (!Auth::user())
                     <li class="nav-item active">
                         <a class="nav-link" href="{{route('login')}}">Login/Register <span class="sr-only">(current)</span></a>
                     </li>
+                    @endif
                     <li class="nav-item active">
                         <a class="nav-link" href="#">profile <span class="sr-only">(current)</span></a>
                     </li>
+                    @if (Auth::user())
+                    <li class="nav-item button-logout">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                                <button type="submit" class="btn btn-link">Logout</button>
+                        </form>
+                    </li>
+                    @endif
                 </ul>
             </div>
         </div>
