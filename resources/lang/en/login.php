@@ -6,4 +6,5 @@ return [
     'password_required' => 'Password cannot be blank',
     'username_min' => 'Username must be at least :min characters',
     'password_min' => 'Password must be at least :min characters',
+    'login_success' => 'Login success! , welcome ',
 ];
