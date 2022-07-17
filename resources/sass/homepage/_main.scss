@@ -215,6 +215,14 @@
   display: block;
 }
 
+.succes-login {
+  position: fixed;
+  max-width:400px;
+  left:70px;
+  top:640px;
+  z-index: 100000;
+}
+
 @media (max-width: 800px)  {
   .list-items {
     display: block !important;
@@ -303,7 +311,7 @@
       .btn-link {
         text-align: center;
         margin-top: 15px;
-        
+
         a {
           font-size: 14px;
           padding: 7px 14px;
