@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Course;
+use App\Models\Comment;
+use App\Models\Lesson;
+
 class HomeController extends Controller
 {
     /**
@@ -11,7 +17,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $courses = Course::orderBy('id','DESC')->take(3)->get();
+
+
+        $courses_other = Course::inRandomOrder()->take(3)->get();
+
+        $user = User::all();
+
+        $course = Course::all();
+
+        $lesson = Lesson::all();
+
+        $comments = Comment::with('user', 'course')->orderBy('id','desc')->get();
+
+        return view('home')->with(compact('courses','courses_other','comments','user','course','lesson'));
     }
 
     public function test()

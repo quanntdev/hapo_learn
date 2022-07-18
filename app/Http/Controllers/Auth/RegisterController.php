@@ -41,7 +41,7 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-
+    
     public function create(array $data)
     {
         return User::create([
@@ -59,4 +59,5 @@ class RegisterController extends Controller
         Auth::login($user);
         return redirect('home')->with('success', __('register.register_success').$user->name);
     }
+
 }
