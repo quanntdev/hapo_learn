@@ -2,31 +2,39 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Domain\Core\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
-use App\Models\User;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LoginTest extends TestCase
 {
-    use RefreshDatabase;
-
-    public function setUp() : void
-    {
-        parent::setUp();
-        $this->artisan('passport:install');
-        User::factory()->create(100);
-    }
+    use DatabaseMigrations;
     /**
-     * A basic unit test example.
+     * A basic test example.
      *
      * @return void
      */
-    public function testApiClientLoginPassed()
+    public function testLoginTrue()
     {
-        $data = ['username' => $this->user->username, 'password' => '12345678'];
-        $response = $this->json('POST', '/login', $data);
-        $response->assertStatus(Response::HTTP_ACCEPTED)->assertJsonStructure(['data']);
+        $credential = [
+            'email' => 'user@ad.com',
+            'password' => 'user'
+        ];
+        $response = $this->post('login', $credential);
+        $response->assertSessionMissing('errors');
+    }
+
+    public function testLoginFalse()
+    {
+        $credential = [
+            'email' => 'user@ad.com',
+            'password' => 'incorrectpass'
+        ];
+
+        $response = $this->post('login', $credential);
+        $response->assertSessionHasErrors();
     }
 }
