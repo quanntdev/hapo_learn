@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\LoginHapoController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +22,5 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/test', [HomeController::class, 'test'])->middleware('auth');
+
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');

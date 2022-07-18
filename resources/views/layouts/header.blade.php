@@ -21,7 +21,7 @@
                     </li>
                     @endif
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">profile <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{url('profile')}}">profile <span class="sr-only">(current)</span></a>
                     </li>
                     @if (Auth::user())
                     <li class="nav-item button-logout">
