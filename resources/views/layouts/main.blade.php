@@ -1,3 +1,9 @@
+@if (session('success'))
+<div class="alert alert-success alert-dismissible in succes-login">
+   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+   <strong>{{ session('success') }}</strong>
+</div>
+@endif
 <div class="messenger-box" id="mes-box">
    <div class="logo-mes">
       <img src="{{ asset('images/avatar-mes.png')}}" alt="">

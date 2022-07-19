@@ -6,4 +6,5 @@ return [
     'password_required' => 'Mật khẩu không được để trống',
     'username_min' => 'Tên đăng nhập phải có ít nhất :min kí tự',
     'password_min' => 'Mật khẩu phải có ít nhất :min kí tự',
+    'login_success' => 'Đăng nhập thành công! , chào mừng ',
 ];
