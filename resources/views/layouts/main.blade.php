@@ -56,6 +56,7 @@
                <div class="content-items">
                   <p class="title">{{ $courseOther->course_name }}</p>
                   <p class="content">{{ $courseOther->description }}</p>
+
                   <p class="btn-link">
                      <a href="#" >Take This Course</a>
                   </p>
