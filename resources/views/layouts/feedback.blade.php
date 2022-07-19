@@ -25,11 +25,11 @@
                   {{$comment->course->course_name}}
                </div>
                <div class="star">
-                  <?php
+                 @for
 
                   $star = $comment->star;
 
-                  ?>
+                  @endfor
                   @for ($i = 0; $i < $star; $i++)
                   <span class="fa fa-star checked"></span>
                   @endfor

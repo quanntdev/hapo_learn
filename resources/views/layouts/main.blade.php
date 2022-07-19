@@ -48,14 +48,14 @@
       </p>
       <div class="line-border"></div>
       <div class="list-items no-tranfer mt-45">
-         @foreach ($courses_other as $course_other)
+         @foreach ($coursesOther as $courseOther)
             <div class="items">
                <div class="img-items">
-                  <a href=""><img src="{{$course_other->image}}" alt=""></a>
+                  <a href=""><img src="{{$courseOther->image}}" alt=""></a>
                </div>
                <div class="content-items">
-                  <p class="title">{{$course_other->course_name}}</p>
-                  <p class="content">{{$course_other->description}}</p>
+                  <p class="title">{{$courseOther->course_name}}</p>
+                  <p class="content">{{$courseOther->description}}</p>
                   <p class="btn-link">
                      <a href="#" >Take This Course</a>
                   </p>
@@ -64,7 +64,7 @@
          @endforeach
       </div>
       <div class="view-more-title">
-         <a href="">View All Our Courses <i class="fa-solid fa-arrow-right"></i></a> 
+         <a href="">View All Our Courses <i class="fa-solid fa-arrow-right"></i></a>
       </div>
    </div>
    @include('layouts.why_hapo')
