@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Comment;
 use App\Models\Lesson;
+use App\Models\UserCourse;
 
 class HomeController extends Controller
 {
@@ -17,13 +18,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $courses = Course::orderBy('id', 'DESC')->take(3)->get();
+        $courses = Course::showCourse(3, 'desc')->get();
 
-        $coursesOther = Course::inRandomOrder()->take(3)->get();
+        $coursesOther = Course::showCourseRandom(3)->get();
 
-        $comments = Comment::with('user', 'course')->orderBy('id', 'desc')->get();
+        $Countlesson = Lesson::count();
 
-        return view('home')->with(compact('courses', 'coursesOther', 'comments', 'lesson'));
+        $CountCourse = Course::count();
+
+        $countUserLearn = UserCourse::countUserLearn();
+
+        $comments = Comment::getComment(10);
+
+        return view('home')->with(compact('courses', 'coursesOther', 'Countlesson', 'CountCourse', 'countUserLearn', 'comments'));
     }
 
     public function test()

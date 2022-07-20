@@ -38,4 +38,14 @@ class Course extends Model
     {
         return $this->hasMany(Comment::class, 'course_id');
     }
+
+    public static function showCourse($take, $isDesc)
+    {
+        return self::orderBy('id', $isDesc)->take($take);
+    }
+
+    public static function showCourseRandom($take)
+    {
+        return Course::inRandomOrder()->take($take);
+    }
 }

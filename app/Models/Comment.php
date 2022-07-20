@@ -27,4 +27,10 @@ class Comment extends Model
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
+
+    public static function getComment($numberLimit)
+    {
+        $comment = Comment::limit($numberLimit)->get();
+        return $comment;
+    }
 }
