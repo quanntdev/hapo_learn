@@ -6,7 +6,7 @@
 @endif
 <div class="messenger-box" id="mes-box">
    <div class="logo-mes">
-      <img src="{{ asset('images/avatar-mes.png')}}" alt="">
+      <img src="{{ asset('images/avatar-mes.png') }}" alt="">
    </div>
    <div class="close-mes" id="close">
       <i class="fa-solid fa-xmark"></i>
@@ -29,11 +29,11 @@
          @foreach ($courses as $course)
             <div class="items">
                <div class="img-items">
-                  <a href=""><img src="{{$course->image}}" alt=""></a>
+                  <a href=""><img src="{{ $course->image }}" alt=""></a>
                </div>
                <div class="content-items">
-                  <p class="title">{{$course->course_name}}</p>
-                  <p class="content">{{$course->description}}</p>
+                  <p class="title">{{ $course->course_name }}</p>
+                  <p class="content">{{ $course->description }}</p>
                   <p class="btn-link">
                      <a href="#" >Take This Course</a>
                   </p>
@@ -51,11 +51,11 @@
          @foreach ($coursesOther as $courseOther)
             <div class="items">
                <div class="img-items">
-                  <a href=""><img src="{{$courseOther->image}}" alt=""></a>
+                  <a href=""><img src="{{ $courseOther->image }}" alt=""></a>
                </div>
                <div class="content-items">
-                  <p class="title">{{$courseOther->course_name}}</p>
-                  <p class="content">{{$courseOther->description}}</p>
+                  <p class="title">{{ $courseOther->course_name }}</p>
+                  <p class="content">{{ $courseOther->description }}</p>
                   <p class="btn-link">
                      <a href="#" >Take This Course</a>
                   </p>

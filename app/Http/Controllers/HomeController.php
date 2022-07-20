@@ -21,15 +21,9 @@ class HomeController extends Controller
 
         $coursesOther = Course::inRandomOrder()->take(3)->get();
 
-        $user = User::all();
-
-        $course = Course::all();
-
-        $lesson = Lesson::all();
-
         $comments = Comment::with('user', 'course')->orderBy('id', 'desc')->get();
 
-        return view('home')->with(compact('courses', 'coursesOther', 'comments', 'user', 'course', 'lesson'));
+        return view('home')->with(compact('courses', 'coursesOther', 'comments', 'lesson'));
     }
 
     public function test()
