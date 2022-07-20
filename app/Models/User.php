@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'user_id');
     }
+
+    public function scopeGetTeacher($query)
+    {
+        return $query->where('role', config('roles.teacher'))->orderBy('id', config('course.sort_high_to_low'))->get();
+    }
 }

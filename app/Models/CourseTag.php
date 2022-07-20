@@ -17,4 +17,9 @@ class CourseTag extends Model
         'tag_id',
         'status',
     ];
+
+    public function scopeGetCourse($query, $tagId)
+    {
+        return $query->select('course_id')->groupBy('course_id')->where('tag_id', $tagId)->get();
+    }
 }

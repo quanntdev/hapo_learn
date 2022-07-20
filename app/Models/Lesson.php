@@ -35,4 +35,10 @@ class Lesson extends Model
     {
         return $this->hasMany(Program::class, 'lesson_id');
     }
+
+    public static function timeToMinutes($time)
+    {
+        $data = explode(':', $time);
+        return round(($data[0] * 3600 + $data[1] * 60 + $data[2]) / 3600);
+    }
 }

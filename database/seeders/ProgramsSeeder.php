@@ -15,7 +15,7 @@ class ProgramsSeeder extends Seeder
     public function run()
     {
         Program::factory()
-        ->count(20)
+        ->count(50)
         ->create();
     }
 }

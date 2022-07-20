@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
+use Ramsey\Collection\Collection;
 
 class Course extends Model
 {
@@ -47,5 +49,94 @@ class Course extends Model
     public function scopeOther($query)
     {
         return $query->inRandomOrder()->take(config('course.other_course_order'));
+    }
+
+    public function scopeAddLessonTime($query, $db)
+    {
+        $db->map(function ($dbFunction) {
+            $dbFunction->timeLesson = Lesson::where('course_id', $dbFunction->id)->pluck('time_lesson')->map(function ($time) {
+                return Lesson::timeToMinutes($time);
+            })->sum();
+            return $dbFunction;
+        });
+    }
+
+    public function scopeGetAllCourse($query)
+    {
+        return $query->withCount(['users', 'lessons', 'comments', 'tags'])->withSum('lessons', 'time_lesson')->where('status', config('all-course.status'));
+    }
+
+
+    public function getCourseSerch($key)
+    {
+        $courses = Course::getAllCourse()->where('course_name', 'like', '%' . $key . '%')->get();
+        Course::addLessonTime($courses);
+        return $courses;
+    }
+
+
+    public function scopeOutputSearchData($query, $keyword)
+    {
+        $output = '';
+        $data = Course::getCourseSerch($keyword);
+        if ($data->count() == 0){
+            $output .= '<div class="no-course">
+                <div class="no-course-icon"><i class="fa-solid fa-sad-tear"></i></div>
+                <div class="no-course-text">' .__('all-course.no_course'). ' "' .$keyword. '"</div>
+                </div>';
+
+                return Response($output);
+        } else {
+        foreach ($data as $key => $value) {
+                $output .= '
+                <div class="item float-start">
+                    <div class="course-content">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src=" ' .$value->image. ' " alt="" class="img-course">
+                            </div>
+                            <div class="col-10">
+                                <div class="title">
+                                    ' .$value->course_name. '
+                                </div>
+                                <div class="content">
+                                    ' .$value->description. '
+                                </div>
+                                <div class="btn-learn">
+                                    <a href="">More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-statics">
+                        <div class="course-statics-items">
+                            <div class="title">
+                                Learners
+                            </div>
+                        <div class="statics">
+                                ' .$value->users_count. '
+                        </div>
+                        </div>
+                        <div class="course-statics-items">
+                            <div class="title">
+                                Lessons
+                            </div>
+                             <div class="statics">
+                                ' .$value->lessons_count. '
+                            </div>
+                        </div>
+                        <div class="course-statics-items">
+                            <div class="title">
+                                Times
+                            </div>
+                            <div class="statics">
+                                ' .$value->timeLesson . ' ' .__('all-course.hour'). '
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+            }
+        return Response($output);
+    }
     }
 }
