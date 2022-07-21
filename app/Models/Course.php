@@ -39,13 +39,13 @@ class Course extends Model
         return $this->hasMany(Comment::class, 'course_id');
     }
 
-    public function scopeShowCourseHome($query, $courseNumber)
+    public function scopeShowCourseAtHomeBlade($query)
     {
-        return $query->limit($courseNumber)->orderBy('id', config('course.sort_from_high_to_low'));
+        return $query->limit(config('course.home_course_number'))->orderBy('id', config('course.sort_from_high_to_low'));
     }
 
-    public function scopeShowCourseRandomHome($query, $courseNumber)
+    public function scopeShowCourseRandomAtHomeBlade($query)
     {
-        return $query->inRandomOrder()->take($courseNumber);
+        return $query->inRandomOrder()->take(config('course.home_course_number_random'));
     }
 }

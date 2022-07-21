@@ -28,8 +28,8 @@ class Comment extends Model
         return $this->belongsTo(Course::class, 'course_id');
     }
 
-    public function scopeGetComment($query, $numberLimit)
+    public function scopeGetComment($query)
     {
-       return $query->limit($numberLimit);
+       return $query->limit(config('course.home_comment_number'));
     }
 }

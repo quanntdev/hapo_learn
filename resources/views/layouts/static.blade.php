@@ -9,7 +9,7 @@
                Courses
             </div>
             <div class="list-item-number">
-                {{ $CountCourse }}
+                {{ $countCourse }}
             </div>
         </div>
         <div class="list-item">
@@ -17,7 +17,7 @@
                 Lessons
             </div>
             <div class="list-item-number">
-                {{ $Countlesson }}
+                {{ $countlesson }}
             </div>
         </div>
         <div class="list-item">
