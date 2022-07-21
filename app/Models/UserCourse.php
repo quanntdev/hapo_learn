@@ -20,7 +20,6 @@ class UserCourse extends Model
 
     public function scopeCountUserLearn($query)
     {
-        $count = $query->select('user_id')->groupBy('user_id')->get()->count();
-        return $count;
+        return $query->select('user_id')->groupBy('user_id')->get()->count();
     }
 }

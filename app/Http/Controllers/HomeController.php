@@ -18,17 +18,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $courses = Course::ShowCourse(config('course.number_course_in_home_blade'), config('course.sort_from_high_to_low'))->get();
+        $courses = Course::showCourseHome(config('course.home_course_number'))->get();
 
-        $coursesOther = Course::ShowCourseRandom(config('course.number_course_in_home_blade_random'))->get();
+        $coursesOther = Course::showCourseRandomHome(config('course.home_course_number_random'))->get();
 
         $Countlesson = Lesson::count();
 
         $CountCourse = Course::count();
 
-        $countUserLearn = UserCourse::CountUserLearn();
+        $countUserLearn = UserCourse::countUserLearn();
 
-        $comments = Comment::GetComment(config('course.number_comment_in_home_blade'))->get();
+        $comments = Comment::getComment(config('course.home_comment_number'))->get();
 
         return view('home')->with(compact('courses', 'coursesOther', 'Countlesson', 'CountCourse', 'countUserLearn', 'comments'));
     }

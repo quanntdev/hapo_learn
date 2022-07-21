@@ -30,7 +30,6 @@ class Comment extends Model
 
     public function scopeGetComment($query, $numberLimit)
     {
-        $comment = $query->limit($numberLimit);
-        return $comment;
+       return $query->limit($numberLimit);
     }
 }
