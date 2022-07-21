@@ -11,18 +11,18 @@
       <div class="item-feed">
          <div class="content-feed">
             <div class="line-d"></div>
-            {{$comment->comment}}
+            {{ $comment->comment }}
          </div>
          <div class="user-feed">
             <div class="avatar">
-               <img src="{{$comment->user->avatar}}" alt="">
+               <img src="{{ $comment->user->avatar }}" alt="">
             </div>
             <div class="info">
                <div class="name">
-                  {{$comment->user->name}}
+                  {{ $comment->user->name }}
                </div>
                <div class="skill">
-                  {{$comment->course->course_name}}
+                  {{ $comment->course->course_name }}
                </div>
                <div class="star">
                   <?php

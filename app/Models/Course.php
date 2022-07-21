@@ -39,13 +39,15 @@ class Course extends Model
         return $this->hasMany(Comment::class, 'course_id');
     }
 
-    public static function showCourse($take, $isDesc)
+    public function scopeShowCourse($query, $courseNumber, $isDesc)
     {
-        return self::orderBy('id', $isDesc)->take($take);
+        $courses = $query->limit($courseNumber)->orderBy('id', $isDesc);
+        return $courses;
     }
 
-    public static function showCourseRandom($take)
+    public function scopeShowCourseRandom($query, $courseNumber)
     {
-        return Course::inRandomOrder()->take($take);
+        $courses = $query->inRandomOrder()->take($courseNumber);
+        return $courses;
     }
 }

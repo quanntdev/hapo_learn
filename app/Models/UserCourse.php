@@ -18,8 +18,9 @@ class UserCourse extends Model
         'status',
     ];
 
-    public static function countUserLearn()
+    public function scopeCountUserLearn($query)
     {
-        return self::select('user_id')->groupBy('user_id')->get()->count();
+        $count = $query->select('user_id')->groupBy('user_id')->get()->count();
+        return $count;
     }
 }
