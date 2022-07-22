@@ -18,18 +18,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $courses = Course::ShowCourseAtHomeBlade()->get();
-        $coursesOther = Course::ShowCourseRandomAtHomeBlade()->get();
+        $courses = Course::main()->get();
+        $coursesOther = Course::other()->get();
         $countlesson = Lesson::count();
         $countCourse = Course::count();
-        $countUserLearn = UserCourse::CountUserHaveLearn();
+        $countUserLearn = UserCourse::joinNum();
         $comments = Comment::getComment()->get();
 
         return view('home')->with(compact('courses', 'coursesOther', 'countlesson', 'countCourse', 'countUserLearn', 'comments'));
-    }
-
-    public function test()
-    {
-        return view('test');
     }
 }

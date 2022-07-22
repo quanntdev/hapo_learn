@@ -39,12 +39,12 @@ class Course extends Model
         return $this->hasMany(Comment::class, 'course_id');
     }
 
-    public function scopeShowCourseAtHomeBlade($query)
+    public function scopeMain($query)
     {
         return $query->limit(config('course.home_course_number'))->orderBy('id', config('course.sort_from_high_to_low'));
     }
 
-    public function scopeShowCourseRandomAtHomeBlade($query)
+    public function scopeOther($query)
     {
         return $query->inRandomOrder()->take(config('course.home_course_number_random'));
     }
