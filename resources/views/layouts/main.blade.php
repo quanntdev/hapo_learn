@@ -48,7 +48,7 @@
       </p>
       <div class="line-border"></div>
       <div class="list-items no-tranfer mt-45">
-         @foreach ($coursesOther as $courseOther)
+         @foreach ($otherCourse as $courseOther)
             <div class="items">
                <div class="img-items">
                   <a href=""><img src="{{ $courseOther->image }}" alt=""></a>

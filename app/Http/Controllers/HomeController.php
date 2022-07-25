@@ -19,12 +19,12 @@ class HomeController extends Controller
     public function index()
     {
         $courses = Course::main()->get();
-        $coursesOther = Course::other()->get();
-        $countlesson = Lesson::count();
+        $otherCourse = Course::other()->get();
+        $totalLesson = Lesson::count();
         $countCourse = Course::count();
-        $countUserLearn = UserCourse::joinNum();
-        $comments = Comment::getComment()->get();
+        $learners = UserCourse::learner();
+        $comments = Comment::main()->get();
 
-        return view('home')->with(compact('courses', 'coursesOther', 'countlesson', 'countCourse', 'countUserLearn', 'comments'));
+        return view('home')->with(compact('courses', 'otherCourse', 'totalLesson', 'countCourse', 'learners', 'comments'));
     }
 }
