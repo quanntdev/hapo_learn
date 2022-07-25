@@ -17,4 +17,9 @@ class UserCourse extends Model
         'user_id',
         'status',
     ];
+
+    public function scopeLearner($query)
+    {
+        return $query->distinct()->count('user_id');
+    }
 }

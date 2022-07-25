@@ -10,6 +10,45 @@
   width: 80%;
   margin: 0 auto;
   margin-top: 100px;
+  margin-bottom: 200px;
+
+  .owl-dots {
+    display: none;
+  }
+
+  .owl-nav {
+    margin-top: -200px;
+
+    .owl-prev {
+      float : left;
+      position: absolute;
+      left : -50px;
+      width: 30px;
+      height: 30px;
+      background-color: white !important;
+      border-radius: 50%;
+      border:1px solid black !important;
+
+      i {
+        color : black;
+        font-size: 15px;
+      }
+    }
+
+    .owl-next {
+      margin-left: 101%;
+      width: 30px;
+      height: 30px;
+      background-color: white !important;
+      border-radius: 50%;
+      border:1px solid black !important;
+
+      i {
+        color : black;
+        font-size: 15px;
+      }
+    }
+  }
 }
 
 .checked {
@@ -21,6 +60,7 @@
   border: 0.5px solid #e2e2e2;
   border-radius: 10px;
   box-shadow: 1px;
+  height: 170px;
 
   .line-d {
     width: 5px;
@@ -40,10 +80,12 @@
   .avatar {
     width: 60px;
     height: 60px;
+    border-radius: 50%;
 
     img {
       width: 100%;
       height: 100%;
+      border-radius: 50%;
     }
   }
 
@@ -91,6 +133,7 @@
 
     .content-feed {
       padding:40px 5px  28px 28px ;
+      height: 170px;
 
       .line-d {
         margin-top: 0 ;

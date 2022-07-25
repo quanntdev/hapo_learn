@@ -38,4 +38,14 @@ class Course extends Model
     {
         return $this->hasMany(Comment::class, 'course_id');
     }
+
+    public function scopeMain($query)
+    {
+        return $query->limit(config('course.home_course_number'))->orderBy('id', config('course.sort_high_to_low'));
+    }
+
+    public function scopeOther($query)
+    {
+        return $query->inRandomOrder()->take(config('course.other_course_order'));
+    }
 }
