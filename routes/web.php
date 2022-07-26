@@ -22,14 +22,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/home', [HomeController::class, 'index']);
 
-Route::get('/test', [HomeController::class, 'test'])->middleware('auth');
-
 Route::resource('course', CourseController::class)->only([
     'index',
 ]);
 
 Route::get('/search', [CourseController::class,'search'])->name('search');
-
-Route::get('/sort', [CourseController::class, 'sort'])->name('sort');
-
-Route::get('/find', [CourseController::class, 'find'])->name('find');
