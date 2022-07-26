@@ -323,3 +323,15 @@
     visibility: hidden;
   }
 }
+
+.select2-dropdown {
+  z-index: 1;
+}
+
+.select2-container .select2-selection--single {
+  height: 34px;
+}
+
+.select2-container--default .select2-selection--single {
+  border-radius: 1px;
+}

@@ -137,6 +137,6 @@ class Course extends Model
                 </div>';
             }
         return Response($output);
-    }
+        }
     }
 }

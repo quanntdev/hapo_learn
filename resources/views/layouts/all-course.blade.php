@@ -11,7 +11,7 @@
                 <input type="text"
                     placeholder="{{ __('all-course.input_placeholder') }}"
                     name="search" id="search_input"
-                    @if($keysearch != '') value="{{ $keysearch }}" @endif>
+                    @if( $keysearch != '' ) value="{{ $keysearch }}" @endif>
                 <div class="search-icon">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
@@ -20,7 +20,7 @@
                     value="{{ __('all-course.input_placeholder') }}">
         </div>
     </div>
-    <div class="box-filter @if (isset($requests['_token'])) active  @endif " id="filter-content">
+    <div class="box-filter @if ( isset($requests['_token']) ) active  @endif " id="filter-content">
         <div class="row">
             <div class="col-1 title">{{ __('all-course.sort_by') }}</div>
             <div class="col-11">
@@ -28,11 +28,11 @@
                         <div class="inputGroup">
                             <input id="radio1"
                                     name="lastest"
-                                    @if (!isset($requests['lastest']) or $requests['lastest'] ==  config('all-course.high_to_low') or $requests['lastest'] = '' ) checked  @endif type="radio"
+                                    @if ( !isset($requests['lastest']) or $requests['lastest'] ==  config('all-course.high_to_low') or $requests['lastest'] = '' ) checked  @endif type="radio"
                                     value="{{ config('all-course.high_to_low') }}"/>
                             <label for="radio1">{{ __('all-course.last_est') }}</label>
                         </div>
-                 </div>
+                </div>
                 <div class="btn-option" >
                     <div class="inputGroup">
                         <input id="radio2"
@@ -44,14 +44,14 @@
                     </div>
                 </div>
                 <div class="btn-option">
-                    <select name="teacher" id="sort-teacher" class="sort">
+                    <select class="js-example-basic-single" name="teacher">
                         <option value="">{{ __('all-course.teacher') }}</option>
                         @foreach ($teachers as $key => $teacher)
                             <option {{ (isset($requests['teacher']) && $requests['teacher'] == $teacher->id) ? 'selected' : ''}} value="{{ $teacher->id }}">
                                 {{ $teacher->name }}
                             </option>
                         @endforeach
-                    </select>
+                      </select>
                 </div>
                 <div class="btn-option">
                     <select name="numberStudent" class="sort" id="sort-student">
@@ -93,7 +93,7 @@
                     </select>
                 </div>
                 <div class="btn-option">
-                    <select name="tags" id="sort-tag" class="sort">
+                    <select class="js-example-basic-single" name="tags">
                         <option value="">{{__('all-course.tags')}}</option>
                         @foreach ($tags as $key => $tag)
                             <option  {{ (isset($requests['tags']) && $requests['tags'] == $tag->id) ? 'selected' : ''}} value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
@@ -168,7 +168,7 @@
                                 Times
                             </div>
                             <div class="statics">
-                                {{ $course->timeLesson }} {{__('all-course.hour')}}
+                                {{ $course->timeLesson }} {{ __('all-course.hour') }}
                             </div>
                         </div>
                     </div>
