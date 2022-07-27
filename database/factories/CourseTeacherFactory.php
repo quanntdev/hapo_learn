@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Lesson;
 use App\Models\User;
+use App\Models\Course;
 
 class CourseTeacherFactory extends Factory
 {
@@ -16,8 +17,8 @@ class CourseTeacherFactory extends Factory
     public function definition()
     {
         return [
-            'status' => $this->faker->numberBetween($min = 0, $max = 1),
-            'course_id' => $this->faker->randomElement(Lesson::pluck('id')),
+            'status' => 1,
+            'course_id' => $this->faker->randomElement(Course::pluck('id')),
             'user_id' => $this->faker->randomElement(User::pluck('id')),
         ];
     }

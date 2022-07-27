@@ -9,4 +9,8 @@ return [
     'high_to_low' => 'desc',
     'paginate' => 14,
     'status' => 1,
+    'other_course_on_detail' => 5,
+    'lesson_paginate' => 8,
+    'endstatus' => 0,
+    'end_course' => 2,
 ];

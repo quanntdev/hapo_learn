@@ -26,13 +26,13 @@ class UserFactory extends Factory
             'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => Hash::make(12345678),
-            'role' => $this->faker->randomDigit(),
+            'role' => $this->faker->randomDigit(1, 2),
             'avatar' => $this->faker->imageUrl($width = 50, $height = 50),
             'date_of_birth' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
             'address' => $this->faker->streetAddress(),
             'phone' => $this->faker->e164PhoneNumber(),
             'about_me' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
-            'status' => $this->faker->numberBetween($min = 0, $max = 1),
+            'status' => 1,
         ];
     }
 

@@ -16,7 +16,7 @@ class TagFactory extends Factory
         return [
             'tag_name' => $this->faker->name($gender = null),
             'slug_tag' => $this->faker->unique()->slug(),
-            'status' => $this->faker->numberBetween($min = 0, $max = 1),
+            'status' => 1,
         ];
     }
 }

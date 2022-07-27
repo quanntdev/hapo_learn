@@ -35,4 +35,19 @@ class Lesson extends Model
     {
         return $this->hasMany(Program::class, 'lesson_id');
     }
+
+    public function scopeGetLesson($query, $id)
+    {
+        $query->with('course')->where('course_id', $id)->orderBy('id', config('course.high_to_low'));
+    }
+
+    public function scopeSearchLesson($query, $data)
+    {
+        if (!empty($data['search'])) {
+            $query->where('name_lesson', 'LIKE', "%{$data['search']}%")
+                ->orWhere('content', 'LIKE', "%{$data['search']}%");
+        }
+
+        return $query;
+    }
 }

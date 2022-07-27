@@ -56,6 +56,54 @@ class Course extends Model
         return $query->inRandomOrder()->take(config('course.other_course_order'));
     }
 
+    public function getJoinedAttribute()
+    {
+        if (auth()->check() && $this->users()->where('user_id', auth()->user()->id)->count() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public function getFinishedAttribute()
+    {
+        return $this->users()->where('user_id', auth()->user()->id)->where('user_course.status', '=', config('course.end_course'))->count();
+    }
+
+    public function getRatesAttribute()
+    {
+        return $this->comments()->where('parent_id', '=', null)->sum('star');
+    }
+
+    public function getCountRatesAttribute()
+    {
+        return $this->comments()->where('star', '>', 0)->where('parent_id', '=', null)->count();
+    }
+
+    public function getCountRates5Attribute()
+    {
+        return $this->comments()->where('star', '=', 5)->where('parent_id', '=', null)->count();
+    }
+
+    public function getCountRates4Attribute()
+    {
+        return $this->comments()->where('star', '=', 4)->where('parent_id', '=', null)->count();
+    }
+
+    public function getCountRates3Attribute()
+    {
+        return $this->comments()->where('star', '=', 3)->where('parent_id', '=', null)->count();
+    }
+
+    public function getCountRates2Attribute()
+    {
+        return $this->comments()->where('star', '=', 2)->where('parent_id', '=', null)->count();
+    }
+
+    public function getCountRates1Attribute()
+    {
+        return $this->comments()->where('star', '=', 1)->where('parent_id', '=', null)->count();
+    }
+
     public function getLearnersAttribute()
     {
         return $this->users()->count();
@@ -83,7 +131,7 @@ class Course extends Model
         }
 
         if (!empty($data['time'])) {
-            $query->withSum('lessons','time_lesson')->orderBy('lessons_sum_time_lesson', $data['time']);
+            $query->withSum('lessons', 'time_lesson')->orderBy('lessons_sum_time_lesson', $data['time']);
         }
 
         if (!empty($data['lesson'])) {
@@ -111,5 +159,15 @@ class Course extends Model
         }
 
         return $query;
+    }
+
+    public function scopeGetCourseId($query, $slug)
+    {
+        return $query->where('slug_course', $slug)->first()->id;
+    }
+
+    public function scopeOtherCourseDetail($query)
+    {
+        return $query->inRandomOrder()->take(config('course.other_course_on_detail'));
     }
 }

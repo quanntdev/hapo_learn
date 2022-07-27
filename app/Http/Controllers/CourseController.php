@@ -28,4 +28,21 @@ class CourseController extends Controller
 
         return view('course.index', compact('courses', 'teachers', 'tags', 'data'));
     }
+
+    public function show($slug, Request $request)
+    {
+        $idCourse = Course::GetCourseId($slug);
+
+        $data = $request->all();
+        $lessons = Lesson::GetLesson($idCourse)->SearchLesson($data)->paginate(config('course.lesson_paginate'));
+
+        $courses = Course::with('users')->find($idCourse);
+        $tags = Tag::GetTagDetail($idCourse)->get();
+        $teachers = User::GetTeacher($idCourse)->get();
+        $comments = Comment::GetComment($idCourse)->get();
+        $replys = Comment::GetReply($idCourse)->get();
+        $otherCourses = Course::OtherCourseDetail()->get();
+
+        return view('course.course-detail', compact('courses', 'tags', 'lessons', 'teachers', 'comments', 'replys', 'otherCourses', 'data'));
+    }
 }

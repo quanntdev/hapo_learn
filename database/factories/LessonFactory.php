@@ -28,7 +28,7 @@ class LessonFactory extends Factory
             'video' => $this->faker->imageUrl($width = 100, $height = 100),
             'content' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
             'time_lesson' => $this->faker->time($format = 'H:i:s', $max = 'now'),
-            'status' => $this->faker->numberBetween($min = 0, $max = 1),
+            'status' => 1,
             'course_id' => $this->faker->randomElement(Course::pluck('id')),
         ];
     }
