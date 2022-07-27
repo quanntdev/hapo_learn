@@ -61,21 +61,30 @@ class Course extends Model
         });
     }
 
-    public function scopeGetAllCourse($query)
-    {
-        return $query->withCount(['users', 'lessons', 'comments', 'tags'])->withSum('lessons', 'time_lesson')->where('status', config('all-course.status'));
-    }
-
-
-    public function getCourseSerch($key)
+    public function getCourseSerch($key) // phần này dùng làm ajax search
     {
         $courses = Course::getAllCourse()->where('course_name', 'like', '%' . $key . '%')->get();
         Course::addLessonTime($courses);
         return $courses;
     }
 
+    public function getLearnersAttribute()
+    {
+        return $this->users()->count();
+    }
 
-    public function scopeOutputSearchData($query, $keyword)
+    public function getLessonsAttribute()
+    {
+        return $this->lessons()->count();
+    }
+
+    public function getTimesAttribute()
+    {
+        return $this->lessons()->sum('time_lesson');
+    }
+
+
+    public function scopeOutputSearchData($query, $keyword) // dùng in ra dữ liệu ajax search
     {
         $output = '';
         $data = Course::getCourseSerch($keyword);
@@ -140,28 +149,27 @@ class Course extends Model
         }
     }
 
-    public function scopeSort($query, $data)
+    public function scopeFilter($query, $data)
     {
-        $query->getAllCourse();
         if (!empty($data['submit'])) {
-            if (!empty($data['search'])) {
-                $query->where('course_name', 'LIKE', "%{$data['search']}%");
+            if (!empty($data['keyword'])) {
+                $query->where('course_name', 'LIKE', "%{$data['keyword']}%");
             }
 
             if (!empty($data['numberStudent'])) {
-                $query->orderBy('users_count', $data['numberStudent']);
+                $query->withCount('users')->orderBy('users_count', $data['numberStudent']);
             }
 
             if (!empty($data['timeCourse'])) {
-                $query->orderBy('lessons_sum_time_lesson', $data['timeCourse']);
+                $query->withSum('lessons','time_lesson')->orderBy('lessons_sum_time_lesson', $data['timeCourse']);
             }
 
             if (!empty($data['lesson'])) {
-                $query->orderBy('lessons_count', $data['lesson']);
+                $query->withCount('lessons')->orderBy('lessons_count', $data['lesson']);
             }
 
             if (!empty($data['comment'])) {
-                $query->orderBy('comments_count', $data['comment']);
+                $query->withCount('comments')->orderBy('comments_count', $data['comment']);
             }
 
             if (!empty($data['tags'])) {

@@ -10,8 +10,8 @@
             @csrf
                 <input type="text"
                     placeholder="{{ __('all-course.input_placeholder') }}"
-                    name="search" id="search_input"
-                    @if( $keysearch != '' ) value="{{ $keysearch }}" @endif>
+                    name="keyword" id="search_input"
+                    @if( isset($requests['keyword'] ) && $requests['keyword'] != ''  ) value="{{ $requests['keyword'] }}" @endif>
                 <div class="search-icon">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
@@ -69,7 +69,7 @@
                 <div class="btn-option">
                     <select name="timeCourse" class="sort" id="sort-time">
                         <option value="">{{__('all-course.time')}}</option>
-                        <option {{ (isset($requests['time_course']) && $requests['time_course'] == config('all-course.low_to_high')) ? 'selected' : '' }}
+                        <option {{ (isset($requests['timeCourse']) && $requests['timeCourse'] == config('all-course.low_to_high')) ? 'selected' : '' }}
                             value="{{ config('all-course.low_to_high') }}">
                             {{ __('all-course.ascending') }}
                         </option>

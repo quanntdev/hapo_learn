@@ -20,20 +20,12 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        $keysearch = $request->search;
         $teachers = User::getTeacher();
         $tags = Tag::getTag();
         $requests = $request->all();
-        $courses = Course::Sort($requests);
+        $courses = Course::filter($requests);
         $countCourse = $courses->count();
-        return view('layouts.all-course', compact('courses', 'teachers', 'tags', 'requests', 'keysearch', 'countCourse'));
-    }
-
-    public function search()
-    {
-        $key = $_GET['key'];
-        $courses = Course::outputSearchData($key);
-        return $courses;
+        return view('layouts.list_course', compact('courses', 'teachers', 'tags', 'requests', 'countCourse'));
     }
 
     /**
