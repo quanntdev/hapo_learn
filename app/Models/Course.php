@@ -79,7 +79,7 @@ class Course extends Model
     {
         $output = '';
         $data = Course::getCourseSerch($keyword);
-        if ($data->count() == 0){
+        if ($data->count() == 0) {
             $output .= '<div class="no-course">
                 <div class="no-course-icon"><i class="fa-solid fa-sad-tear"></i></div>
                 <div class="no-course-text">' .__('all-course.no_course'). ' "' .$keyword. '"</div>
@@ -88,7 +88,7 @@ class Course extends Model
                 return Response($output);
         } else {
         foreach ($data as $key => $value) {
-                $output .= '
+            $output .= '
                 <div class="item float-start">
                     <div class="course-content">
                         <div class="row">
@@ -138,5 +138,48 @@ class Course extends Model
             }
         return Response($output);
         }
+    }
+
+    public function scopeSort($query, $data)
+    {
+        $query->getAllCourse();
+        if (!empty($data['submit'])) {
+            if (!empty($data['search'])) {
+                $query->where('course_name', 'LIKE', "%{$data['search']}%");
+            }
+
+            if (!empty($data['numberStudent'])) {
+                $query->orderBy('users_count', $data['numberStudent']);
+            }
+
+            if (!empty($data['timeCourse'])) {
+                $query->orderBy('lessons_sum_time_lesson', $data['timeCourse']);
+            }
+
+            if (!empty($data['lesson'])) {
+                $query->orderBy('lessons_count', $data['lesson']);
+            }
+
+            if (!empty($data['comment'])) {
+                $query->orderBy('comments_count', $data['comment']);
+            }
+
+            if (!empty($data['tags'])) {
+                $idCourse = CourseTag::where('tag_id', $data['tags'])->pluck('course_id');
+                $query->whereIn('id', $idCourse);
+            }
+
+            if (!empty($data['teacher'])) {
+                $idCourse = CourseTeacher::where('user_id', $data['teacher'])->pluck('course_id');
+                $query->whereIn('id', $idCourse);
+            }
+
+            if (!empty($data['lastest'])) {
+                $query->orderBy('created_at', $data['lastest']);
+            }
+        }
+        $query = $query->paginate(config('all-course.number_paginate'))->appends(request()->query());
+        Course::addLessonTime($query);
+        return $query;
     }
 }

@@ -23,50 +23,9 @@ class CourseController extends Controller
         $keysearch = $request->search;
         $teachers = User::getTeacher();
         $tags = Tag::getTag();
-        $courses = Course::getAllCourse();
         $requests = $request->all();
-        if (!empty($request->submit)) {
-            if (!empty($request->search)) {
-                $courses = $courses->where('course_name', 'LIKE', "%{$request->search}%");
-            }
-
-            if (!empty($request->numberStudent)) {
-                $courses = $courses->orderBy('users_count', $request->numberStudent);
-            }
-
-            if (!empty($request->timeCourse)) {
-                $courses = $courses->orderBy('lessons_sum_time_lesson', $request->timeCourse);
-            }
-
-            if (!empty($request->lesson)) {
-                $courses = $courses->orderBy('lessons_count', $request->lesson);
-            }
-
-            if (!empty($request->comment)) {
-                $courses = $courses->orderBy('comments_count', $request->comment);
-            }
-
-            if (!empty($request->tags)) {
-                $idCourse = CourseTag::where('tag_id', $request->tags)->pluck('course_id');
-                $courses = $courses->whereIn('id', $idCourse);
-            }
-
-            if (!empty($request->teacher)) {
-                $idCourse = CourseTeacher::where('user_id', $request->teacher)->pluck('course_id');
-                $courses = $courses->whereIn('id', $idCourse);
-            }
-
-            if (!empty($request->lastest)) {
-                $courses = $courses->orderBy('created_at', $request->lastest);
-            }
-        }
-
-        $courses = $courses->paginate(config('all-course.number_paginate'))->appends(request()->query());
-
-        Course::addLessonTime($courses);
-
+        $courses = Course::Sort($requests);
         $countCourse = $courses->count();
-
         return view('layouts.all-course', compact('courses', 'teachers', 'tags', 'requests', 'keysearch', 'countCourse'));
     }
 
