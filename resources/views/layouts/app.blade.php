@@ -53,25 +53,5 @@
             }
         })
       </script>
-
-      <script>
-        $(document).ready(function (){
-        $( "#search_input" ).keyup(function() {
-            var val = $(this).val();
-            url = "{{route('search')}}";
-		    $.ajax({
-			    url: url,
-			    type: 'get',
-			    data: {
-				    key : val,
-			    },
-			    success: function(data){
-                    //reload location
-                    $('#countryList').html(data)
-                }
-		    })
-        });
-        })
-      </script>
 </body>
 </html>

@@ -61,13 +61,6 @@ class Course extends Model
         });
     }
 
-    public function getCourseSerch($key) // phần này dùng làm ajax search
-    {
-        $courses = Course::getAllCourse()->where('course_name', 'like', '%' . $key . '%')->get();
-        Course::addLessonTime($courses);
-        return $courses;
-    }
-
     public function getLearnersAttribute()
     {
         return $this->users()->count();
@@ -81,72 +74,6 @@ class Course extends Model
     public function getTimesAttribute()
     {
         return $this->lessons()->sum('time_lesson');
-    }
-
-
-    public function scopeOutputSearchData($query, $keyword) // dùng in ra dữ liệu ajax search
-    {
-        $output = '';
-        $data = Course::getCourseSerch($keyword);
-        if ($data->count() == 0) {
-            $output .= '<div class="no-course">
-                <div class="no-course-icon"><i class="fa-solid fa-sad-tear"></i></div>
-                <div class="no-course-text">' .__('all-course.no_course'). ' "' .$keyword. '"</div>
-                </div>';
-
-                return Response($output);
-        } else {
-        foreach ($data as $key => $value) {
-            $output .= '
-                <div class="item float-start">
-                    <div class="course-content">
-                        <div class="row">
-                            <div class="col-2">
-                                <img src=" ' .$value->image. ' " alt="" class="img-course">
-                            </div>
-                            <div class="col-10">
-                                <div class="title">
-                                    ' .$value->course_name. '
-                                </div>
-                                <div class="content">
-                                    ' .$value->description. '
-                                </div>
-                                <div class="btn-learn">
-                                    <a href="">More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="course-statics">
-                        <div class="course-statics-items">
-                            <div class="title">
-                                Learners
-                            </div>
-                        <div class="statics">
-                                ' .$value->users_count. '
-                        </div>
-                        </div>
-                        <div class="course-statics-items">
-                            <div class="title">
-                                Lessons
-                            </div>
-                             <div class="statics">
-                                ' .$value->lessons_count. '
-                            </div>
-                        </div>
-                        <div class="course-statics-items">
-                            <div class="title">
-                                Times
-                            </div>
-                            <div class="statics">
-                                ' .$value->timeLesson . ' ' .__('all-course.hour'). '
-                            </div>
-                        </div>
-                    </div>
-                </div>';
-            }
-        return Response($output);
-        }
     }
 
     public function scopeFilter($query, $data)
