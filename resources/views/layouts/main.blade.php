@@ -4,7 +4,7 @@
    <strong>{{ session('success') }}</strong>
 </div>
 @endif
-<div class="messenger-box" id="mes-box">
+<div class="messenger-box" id="mesBox">
    <div class="logo-mes">
       <img src="{{ asset('images/avatar-mes.png') }}" alt="">
    </div>

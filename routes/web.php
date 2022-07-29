@@ -25,5 +25,3 @@ Route::get('/home', [HomeController::class, 'index']);
 Route::resource('course', CourseController::class)->only([
     'index',
 ]);
-
-Route::get('/search', [AjaxController::class,'search'])->name('search');

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'input_placeholder' => 'Search',
     'sort_by' => 'Sort By',
     'last_est' => 'Latest',

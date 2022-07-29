@@ -65,6 +65,6 @@ class User extends Authenticatable
 
     public function scopeTeachers($query)
     {
-        return $query->where('role', config('roles.teacher'))->orderBy('id', config('course.sort_high_to_low'));
+        return $query->where('role', config('roles.teacher'))->orderBy('id', config('course.high_to_low'));
     }
 }
