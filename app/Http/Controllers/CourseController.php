@@ -21,10 +21,10 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         $data = $request->all();
-        $courses = Course::filter($data)->paginate(config('all-course.number_paginate'));
+        $courses = Course::filter($data)->paginate(config('all-course.paginate'));
 
-        $teachers = User::getTeacher();
-        $tags = Tag::getTag();
+        $teachers = User::teachers()->get();
+        $tags = Tag::all();
 
         return view('course.index', compact('courses', 'teachers', 'tags', 'data'));
     }

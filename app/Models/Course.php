@@ -78,12 +78,12 @@ class Course extends Model
                 ->orWhere('description', 'LIKE', "%{$data['keyword']}%");
         }
 
-        if (!empty($data['number_student'])) {
-            $query->withCount('users')->orderBy('users_count', $data['number_student']);
+        if (!empty($data['learners'])) {
+            $query->withCount('users')->orderBy('users_count', $data['learners']);
         }
 
-        if (!empty($data['time_course'])) {
-            $query->withSum('lessons','time_lesson')->orderBy('lessons_sum_time_lesson', $data['time_course']);
+        if (!empty($data['time'])) {
+            $query->withSum('lessons','time_lesson')->orderBy('lessons_sum_time_lesson', $data['time']);
         }
 
         if (!empty($data['lesson'])) {
@@ -106,8 +106,8 @@ class Course extends Model
             });
         }
 
-        if (!empty($data['lastest'])) {
-            $query->orderBy('created_at', $data['lastest']);
+        if (!empty($data['created_time'])) {
+            $query->orderBy('created_at', $data['created_time']);
         }
 
         return $query;

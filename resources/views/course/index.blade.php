@@ -17,15 +17,15 @@
                 <button class="btn btn-search" type="submit">{{ __('all-course.input_placeholder') }}</button>
         </div>
     </div>
-    <div class="box-filter @if (isset($data['lastest'])) active  @endif " id="filter-content">
+    <div class="box-filter @if (isset($data['created_time'])) active  @endif " id="filter-content">
         <div class="row">
             <div class="col-1 title">{{ __('all-course.sort_by') }}</div>
             <div class="col-11">
                 <div class="btn-option">
                         <div class="inputGroup">
                             <input id="radio1"
-                                    name="lastest"
-                                    @if ( !isset($data['lastest']) or $data['lastest'] ==  config('all-course.high_to_low') or $data['lastest'] = '' ) checked  @endif type="radio"
+                                    name="created_time"
+                                    @if ( !isset($data['created_time']) or $data['created_time'] ==  config('all-course.high_to_low') or $data['lastest'] = '' ) checked  @endif type="radio"
                                     value="{{ config('all-course.high_to_low') }}"/>
                             <label for="radio1">{{ __('all-course.last_est') }}</label>
                         </div>
@@ -33,34 +33,34 @@
                 <div class="btn-option" >
                     <div class="inputGroup">
                         <input id="radio2"
-                                name="lastest"
+                                name="created_time"
                                 type="radio"
-                                @if ((isset($data['lastest']) && $data['lastest'] !=  config('all-course.high_to_low'))) checked  @endif
+                                @if ((isset($data['created_time']) && $data['created_time'] !=  config('all-course.high_to_low'))) checked  @endif
                                 value="{{ config('all-course.low_to_high') }}"/>
                         <label for="radio2">{{ __('all-course.old_est') }}</label>
                     </div>
                 </div>
                 <div class="btn-option">
-                    <select name="number_student" class="sort" id="sort-student">
+                    <select name="learners" class="sort" id="sort-student">
                         <option value="">{{__('all-course.number_student')}}</option>
-                        <option {{ (isset($data['numberStudent']) && $data['numberStudent'] == config('all-course.low_to_high')) ? 'selected' : '' }}
+                        <option {{ (isset($data['learners']) && $data['learners'] == config('all-course.low_to_high')) ? 'selected' : '' }}
                                 value="{{ config('all-course.low_to_high') }}">
                                 {{ __('all-course.ascending') }}
                         </option>
-                        <option {{ (isset($data['numberStudent']) && $data['numberStudent'] == config('all-course.high_to_low')) ? 'selected' : '' }}
+                        <option {{ (isset($data['learners']) && $data['learners'] == config('all-course.high_to_low')) ? 'selected' : '' }}
                                 value="{{ config('all-course.high_to_low') }}">
                                 {{ __('all-course.descending') }}
                         </option>
                     </select>
                 </div>
                 <div class="btn-option">
-                    <select name="time_course" class="sort" id="sort-time">
+                    <select name="time" class="sort" id="sort-time">
                         <option value="">{{ __('all-course.time') }}</option>
-                        <option {{ (isset($data['timeCourse']) && $data['timeCourse'] == config('all-course.low_to_high')) ? 'selected' : '' }}
+                        <option {{ (isset($data['time']) && $data['time'] == config('all-course.low_to_high')) ? 'selected' : '' }}
                             value="{{ config('all-course.low_to_high') }}">
                             {{ __('all-course.ascending') }}
                         </option>
-                        <option {{ (isset($data['time_course']) && $data['time_course'] == config('all-course.high_to_low')) ? 'selected' : '' }}
+                        <option {{ (isset($data['time']) && $data['time'] == config('all-course.high_to_low')) ? 'selected' : '' }}
                             value="{{ config('all-course.high_to_low') }}">
                             {{ __('all-course.descending') }}
                         </option>
