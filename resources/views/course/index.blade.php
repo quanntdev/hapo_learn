@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="btn-option">
-                    <select name="numberStudent" class="sort" id="sort-student">
+                    <select name="number_student" class="sort" id="sort-student">
                         <option value="">{{__('all-course.number_student')}}</option>
                         <option {{ (isset($data['numberStudent']) && $data['numberStudent'] == config('all-course.low_to_high')) ? 'selected' : '' }}
                                 value="{{ config('all-course.low_to_high') }}">
@@ -54,7 +54,7 @@
                     </select>
                 </div>
                 <div class="btn-option">
-                    <select name="timeCourse" class="sort" id="sort-time">
+                    <select name="time_course" class="sort" id="sort-time">
                         <option value="">{{ __('all-course.time') }}</option>
                         <option {{ (isset($data['timeCourse']) && $data['timeCourse'] == config('all-course.low_to_high')) ? 'selected' : '' }}
                             value="{{ config('all-course.low_to_high') }}">

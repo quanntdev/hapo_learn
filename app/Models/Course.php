@@ -74,15 +74,16 @@ class Course extends Model
     public function scopeFilter($query, $data)
     {
         if (!empty($data['keyword'])) {
-            $query->where('course_name', 'LIKE', "%{$data['keyword']}%")->orWhere('description', 'LIKE', "%{$data['keyword']}%");
+            $query->where('course_name', 'LIKE', "%{$data['keyword']}%")
+                ->orWhere('description', 'LIKE', "%{$data['keyword']}%");
         }
 
-        if (!empty($data['numberStudent'])) {
-            $query->withCount('users')->orderBy('users_count', $data['numberStudent']);
+        if (!empty($data['number_student'])) {
+            $query->withCount('users')->orderBy('users_count', $data['number_student']);
         }
 
-        if (!empty($data['timeCourse'])) {
-            $query->withSum('lessons','time_lesson')->orderBy('lessons_sum_time_lesson', $data['timeCourse']);
+        if (!empty($data['time_course'])) {
+            $query->withSum('lessons','time_lesson')->orderBy('lessons_sum_time_lesson', $data['time_course']);
         }
 
         if (!empty($data['lesson'])) {
