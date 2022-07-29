@@ -4,7 +4,7 @@
    <strong>{{ session('success') }}</strong>
 </div>
 @endif
-<div class="messenger-box" id="mes-box">
+<div class="messenger-box" id="mesBox">
    <div class="logo-mes">
       <img src="{{ asset('images/avatar-mes.png') }}" alt="">
    </div>
@@ -56,6 +56,7 @@
                <div class="content-items">
                   <p class="title">{{ $courseOther->course_name }}</p>
                   <p class="content">{{ $courseOther->description }}</p>
+
                   <p class="btn-link">
                      <a href="#" >Take This Course</a>
                   </p>

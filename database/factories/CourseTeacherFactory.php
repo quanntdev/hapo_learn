@@ -17,7 +17,7 @@ class CourseTeacherFactory extends Factory
     {
         return [
             'status' => $this->faker->numberBetween($min = 0, $max = 1),
-            'lesson_id' => $this->faker->randomElement(Lesson::pluck('id')),
+            'course_id' => $this->faker->randomElement(Lesson::pluck('id')),
             'user_id' => $this->faker->randomElement(User::pluck('id')),
         ];
     }

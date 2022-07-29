@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class, 'user_id', 'user_id', 'course_id');
+        return $this->belongsToMany(Course::class, 'user_course', 'user_id', 'course_id');
     }
 
     public function lessons()
@@ -61,5 +61,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class, 'user_id');
+    }
+
+    public function scopeTeachers($query)
+    {
+        return $query->where('role', config('roles.teacher'))->orderBy('id', config('course.high_to_low'));
     }
 }

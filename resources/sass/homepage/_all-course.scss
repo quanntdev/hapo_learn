@@ -1,0 +1,340 @@
+.all-course-body {
+  margin-top: 150px;
+  width: 90%;
+  margin: 140px auto;
+
+  .gruop-filter {
+    display: flex;
+
+    .btn-filter {
+      background-color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border : 1px solid $input-border-color;
+      border-radius: 5px;
+
+      i {
+        margin-right: 10px;
+      }
+    }
+
+    .gruop-search form{
+      display: flex;
+      margin-left: 30px;
+
+      input {
+        width: 355px;
+        height: 40px;
+        background-color: white;
+        color: $text-color-2;
+        border: 1px solid $input-border-color;
+        border-radius: 5px;
+        padding: 0 10px;
+      }
+
+      .search-icon {
+        position: absolute;
+        margin-left: 330px;
+        margin-top: 7px;
+      }
+
+      .btn-search {
+        background-color: $main-color;
+        color: white;
+        border: 0;
+        border-radius: 5px;
+        padding: 0 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-left: 10px;
+        width: 100px;
+      }
+    }
+  }
+}
+
+.box-filter {
+  background-color: #fff;
+  width: 98%;
+  margin-top: 20px;
+  border: 1px solid $input-border-color;
+  border-radius: 5px;
+  padding: 10px 5px;
+  display: none;
+
+  .title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .btn-option {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 15px;
+
+    button {
+      background-color: $option-color;
+      font-size: 16px;
+      font-weight: 600;
+      border: 0;
+      border-radius: 2px;
+      height: 34px;
+      padding: 0 40px
+    }
+
+    select {
+      height: 34px;
+      width: 180px;
+      border: 1px solid $input-border-color;
+    }
+  }
+}
+
+.on-select{
+  background-color: $main-color !important;
+  color: white;
+}
+
+.active {
+  display: block !important;
+}
+
+.list-course {
+  margin-top: 20px;
+  margin-bottom: 100px;
+
+  .item {
+    padding: 5px;
+    background-color: white;
+    width: 48%;
+    margin-right: 25px;
+    margin-top: 25px;
+    padding: 10px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    float: left;
+  }
+}
+
+.course-content {
+  padding-bottom: 10px;
+  border-bottom: 1px solid $input-border-color;
+
+  .img-course {
+    width: 89;
+    height: 89px;
+    border-radius: 50px;
+    align-items: center;
+    object-fit: cover;
+  }
+
+  .title {
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  .content {
+    margin-top: 10px;
+    font-size: 17px;
+    font-weight: 400;
+    color: black;
+    height: 130px;
+    overflow: hidden;
+    -webkit-line-clamp: 5;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+
+  .btn-learn {
+    margin-top: 20px;
+
+    a{
+      width: 106px;
+      border-radius: 22px;
+      background-color: $main-color;
+      box-shadow: inset 0px 2px 4px #6F8710;
+      float: right;
+      text-align: center;
+      padding: 7px 0;
+      color: white;
+    }
+  }
+}
+
+.course-statics {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+
+  .course-statics-items {
+    .title {
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .statics {
+      font-size: 30px;
+      font-weight: 700;
+      color: $main-color;
+      line-height: 37px;
+      letter-spacing: -0.05em;
+      text-align: center;
+    }
+  }
+}
+
+.pagination {
+  float: right;
+  margin-right: 30px;
+  margin-top: 20px;
+}
+
+.page-item.active .page-link {
+  background-color: $main-color;
+  border: 1px solid $main-color;
+}
+
+.page-item {
+  margin: 5px;
+  background-color: $background-color;
+}
+
+.page-link {
+  background-color: $background-color;
+  border: 1px solid $main-color;
+  color: $main-color;
+  font-weight: 600;
+}
+
+.page-item.disabled .page-link {
+  background-color: $main-color;
+  border: 1px solid $main-color;
+  color : white;
+}
+
+.search_key_title {
+  font-size: 20px;
+  font-weight: 500;
+
+  span {
+    font-size: 22px;
+    font-weight: 700;
+  }
+}
+
+.no-course {
+  text-align: center;
+
+  .no-course-icon {
+    font-size: 100px;
+    color: $main-color;
+  }
+
+  .no-course-text {
+    font-size: 25px;
+    font-weight: 500;
+
+    span {
+      font-size: 27px;
+      font-weight: 700;
+    }
+  }
+}
+
+.inputGroup {
+  background-color: #fff;
+  display: block;
+  position: relative;
+
+  label {
+    padding: 5px 30px;
+    width: 100%;
+    display: block;
+    text-align: left;
+    color: #3C454C;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition: color 200ms ease-in;
+    overflow: hidden;
+    background-color: $input-border-color;
+    font-weight: 400;
+
+    &:before {
+      width: 15px;
+      height: 5px;
+      border-radius: 50%;
+      content: '';
+      background-color: $main-color;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale3d(1, 1, 1);
+      transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1);
+      opacity: 0;
+      z-index: -1;
+    }
+
+    &:after {
+      width: 32px;
+      height: 32px;
+      content: '';
+      border: 2px solid #D1D7DC;
+      background-color: #fff;
+      background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+      background-repeat: no-repeat;
+      background-position: 2px 3px;
+      border-radius: 50%;
+      z-index: 2;
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      transition: all 200ms ease-in;
+      display: none;
+    }
+  }
+
+  input:checked ~ label {
+    color: #fff;
+
+    &:before {
+      transform: translate(-50%, -50%) scale3d(56, 56, 1);
+      opacity: 1;
+    }
+
+    &:after {
+      background-color: #54E0C7;
+      border-color: #54E0C7;
+      display: none;
+    }
+  }
+
+  input {
+    width: 32px;
+    height: 32px;
+    order: 1;
+    z-index: 2;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    visibility: hidden;
+  }
+}
+
+.select2-dropdown {
+  z-index: 1;
+}
+
+.select2-container .select2-selection--single {
+  height: 34px;
+}
+
+.select2-container--default .select2-selection--single {
+  border-radius: 1px;
+}
