@@ -7,20 +7,17 @@
         <button class="btn btn-filter" id="filter-btn"><i class="fa-solid fa-arrow-down-wide-short"></i> Filter</button>
         <div class="gruop-search">
             <form role="search" method="GET" action="{{ route('course.index') }}">
-            @csrf
                 <input type="text"
                     placeholder="{{ __('all-course.input_placeholder') }}"
                     name="keyword" id="search_input"
-                    @if( isset($requests['keyword'] ) && $requests['keyword'] != ''  ) value="{{ $requests['keyword'] }}" @endif>
+                    @if( isset($data['keyword'] ) && $data['keyword'] != ''  ) value="{{ $data['keyword'] }}" @endif>
                 <div class="search-icon">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-                <input class="btn btn-search"
-                    type="submit" name="submit"
-                    value="{{ __('all-course.input_placeholder') }}">
+                <button class="btn btn-search" type="submit">{{ __('all-course.input_placeholder') }}</button>
         </div>
     </div>
-    <div class="box-filter @if ( isset($requests['_token']) ) active  @endif " id="filter-content">
+    <div class="box-filter @if (isset($data['lastest'])) active  @endif " id="filter-content">
         <div class="row">
             <div class="col-1 title">{{ __('all-course.sort_by') }}</div>
             <div class="col-11">
@@ -28,7 +25,7 @@
                         <div class="inputGroup">
                             <input id="radio1"
                                     name="lastest"
-                                    @if ( !isset($requests['lastest']) or $requests['lastest'] ==  config('all-course.high_to_low') or $requests['lastest'] = '' ) checked  @endif type="radio"
+                                    @if ( !isset($data['lastest']) or $data['lastest'] ==  config('all-course.high_to_low') or $data['lastest'] = '' ) checked  @endif type="radio"
                                     value="{{ config('all-course.high_to_low') }}"/>
                             <label for="radio1">{{ __('all-course.last_est') }}</label>
                         </div>
@@ -38,29 +35,19 @@
                         <input id="radio2"
                                 name="lastest"
                                 type="radio"
-                                @if ((isset($requests['lastest']) && $requests['lastest'] !=  config('all-course.high_to_low'))) checked  @endif
+                                @if ((isset($data['lastest']) && $data['lastest'] !=  config('all-course.high_to_low'))) checked  @endif
                                 value="{{ config('all-course.low_to_high') }}"/>
                         <label for="radio2">{{ __('all-course.old_est') }}</label>
                     </div>
                 </div>
                 <div class="btn-option">
-                    <select class="js-example-basic-single" name="teacher[]" multiple>
-                        <option value="" {{ (!isset($requests['teacher'])) ? 'selected' : ''}} disabled>{{ __('all-course.teacher') }}</option>
-                        @foreach ($teachers as $key => $teacher)
-                            <option {{ (isset($requests['teacher']) && in_array($teacher->id, $requests['teacher'])) ? 'selected' : ''}} value="{{ $teacher->id }}">
-                                {{ $teacher->name }}
-                            </option>
-                        @endforeach
-                      </select>
-                </div>
-                <div class="btn-option">
                     <select name="numberStudent" class="sort" id="sort-student">
                         <option value="">{{__('all-course.number_student')}}</option>
-                        <option {{ (isset($requests['numberStudent']) && $requests['numberStudent'] == config('all-course.low_to_high')) ? 'selected' : '' }}
+                        <option {{ (isset($data['numberStudent']) && $data['numberStudent'] == config('all-course.low_to_high')) ? 'selected' : '' }}
                                 value="{{ config('all-course.low_to_high') }}">
                                 {{ __('all-course.ascending') }}
                         </option>
-                        <option {{ (isset($requests['numberStudent']) && $requests['numberStudent'] == config('all-course.high_to_low')) ? 'selected' : '' }}
+                        <option {{ (isset($data['numberStudent']) && $data['numberStudent'] == config('all-course.high_to_low')) ? 'selected' : '' }}
                                 value="{{ config('all-course.high_to_low') }}">
                                 {{ __('all-course.descending') }}
                         </option>
@@ -68,12 +55,12 @@
                 </div>
                 <div class="btn-option">
                     <select name="timeCourse" class="sort" id="sort-time">
-                        <option value="">{{__('all-course.time')}}</option>
-                        <option {{ (isset($requests['timeCourse']) && $requests['timeCourse'] == config('all-course.low_to_high')) ? 'selected' : '' }}
+                        <option value="">{{ __('all-course.time') }}</option>
+                        <option {{ (isset($data['timeCourse']) && $data['timeCourse'] == config('all-course.low_to_high')) ? 'selected' : '' }}
                             value="{{ config('all-course.low_to_high') }}">
                             {{ __('all-course.ascending') }}
                         </option>
-                        <option {{ (isset($requests['time_course']) && $requests['time_course'] == config('all-course.high_to_low')) ? 'selected' : '' }}
+                        <option {{ (isset($data['time_course']) && $data['time_course'] == config('all-course.high_to_low')) ? 'selected' : '' }}
                             value="{{ config('all-course.high_to_low') }}">
                             {{ __('all-course.descending') }}
                         </option>
@@ -82,36 +69,46 @@
                 <div class="btn-option">
                     <select name="lesson" id="sort-lesson" class="sort">
                         <option value="">{{__('all-course.number_lesson')}}</option>
-                        <option {{ (isset($requests['lesson']) && $requests['lesson'] == config('all-course.low_to_high')) ? 'selected' : '' }}
+                        <option {{ (isset($data['lesson']) && $data['lesson'] == config('all-course.low_to_high')) ? 'selected' : '' }}
                             value="{{ config('all-course.low_to_high') }}">
                             {{ __('all-course.most') }}
                         </option>
-                        <option {{ (isset($requests['lesson']) && $requests['lesson'] == config('all-course.high_to_low')) ? 'selected' : '' }}
+                        <option {{ (isset($data['lesson']) && $data['lesson'] == config('all-course.high_to_low')) ? 'selected' : '' }}
                              value="{{ config('all-course.high_to_low') }}">
                              {{ __('all-course.least') }}
                         </option>
                     </select>
                 </div>
                 <div class="btn-option">
-                    <select class="js-example-basic-single" name="tags[]" multiple>
-                        <option value="" {{ (!isset($requests['tags'])) ? 'selected' : ''}} disabled>{{__('all-course.tags')}}</option>
-                        @foreach ($tags as $key => $tag)
-                            <option  {{ (isset($requests['tags']) && in_array($tag->id, $requests['tags'])) ? 'selected' : ''}} value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="btn-option">
                     <select name="comment" id="sort-comment" class="sort">
                         <option value="">{{__('all-course.review')}}</option>
-                        <option {{ (isset($requests['comment']) && $requests['comment'] == config('all-course.low_to_high')) ? 'selected' : '' }}
+                        <option {{ (isset($data['comment']) && $data['comment'] == config('all-course.low_to_high')) ? 'selected' : '' }}
                              value="{{ config('all-course.low_to_high') }}">
                              {{ __('all-course.ascending') }}
                         </option>
-                        <option {{ (isset($requests['comment']) && $requests['comment'] == config('all-course.high_to_low')) ? 'selected' : '' }}
+                        <option {{ (isset($data['comment']) && $data['comment'] == config('all-course.high_to_low')) ? 'selected' : '' }}
                             value="{{ config('all-course.high_to_low') }}">
                             {{ __('all-course.descending') }}
                         </option>
                     </select>
+                </div>
+                <div class="btn-option">
+                    <select class="js-example-basic-single" name="tags[]" multiple>
+                        <option value="" {{ (!isset($data['tags'])) ? 'selected' : ''}} disabled>{{__('all-course.tags')}}</option>
+                        @foreach ($tags as $key => $tag)
+                            <option  {{ (isset($data['tags']) && in_array($tag->id, $data['tags'])) ? 'selected' : ''}} value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="btn-option">
+                    <select class="js-example-basic-single" name="teacher[]" multiple>
+                        <option value="" {{ (!isset($data['teacher'])) ? 'selected' : ''}} disabled>{{ __('all-course.teacher') }}</option>
+                        @foreach ($teachers as $key => $teacher)
+                            <option {{ (isset($data['teacher']) && in_array($teacher->id, $data['teacher'])) ? 'selected' : ''}} value="{{ $teacher->id }}">
+                                {{ $teacher->name }}
+                            </option>
+                        @endforeach
+                      </select>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -120,7 +117,7 @@
 </form>
     <div class="list-course">
         <div id="countryList">
-            @if( $countCourse == 0)
+            @if( $courses->count() == 0)
                 <div class="no-course">
                     <div class="no-course-icon"><i class="fa-solid fa-sad-tear"></i></div>
                     <div class="no-course-text">{{ __('all-course.no_course') }}</div>
@@ -168,7 +165,7 @@
                                 Times
                             </div>
                             <div class="statics">
-                                {{ $course->timeLesson }} {{ __('all-course.hour') }}
+                                {{ round(($course->times) / 3600) }} {{ __('all-course.hour') }}
                             </div>
                         </div>
                     </div>

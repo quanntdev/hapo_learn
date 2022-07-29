@@ -20,12 +20,13 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
+        $data = $request->all();
+        $courses = Course::filter($data)->paginate(config('all-course.number_paginate'))->appends(request()->query());
+
         $teachers = User::getTeacher();
         $tags = Tag::getTag();
-        $requests = $request->all();
-        $courses = Course::filter($requests);
-        $countCourse = $courses->count();
-        return view('layouts.list_course', compact('courses', 'teachers', 'tags', 'requests', 'countCourse'));
+
+        return view('course.index', compact('courses', 'teachers', 'tags', 'data'));
     }
 
     /**

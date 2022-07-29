@@ -56,16 +56,6 @@ class Course extends Model
         return $query->inRandomOrder()->take(config('course.other_course_order'));
     }
 
-    public function scopeAddLessonTime($query, $db)
-    {
-        $db->map(function ($dbFunction) {
-            $dbFunction->timeLesson = Lesson::where('course_id', $dbFunction->id)->pluck('time_lesson')->map(function ($time) {
-                return Lesson::timeToMinutes($time);
-            })->sum();
-            return $dbFunction;
-        });
-    }
-
     public function getLearnersAttribute()
     {
         return $this->users()->count();
@@ -83,45 +73,42 @@ class Course extends Model
 
     public function scopeFilter($query, $data)
     {
-        if (!empty($data['submit'])) {
-            if (!empty($data['keyword'])) {
-                $query->where('course_name', 'LIKE', "%{$data['keyword']}%");
-            }
-
-            if (!empty($data['numberStudent'])) {
-                $query->withCount('users')->orderBy('users_count', $data['numberStudent']);
-            }
-
-            if (!empty($data['timeCourse'])) {
-                $query->withSum('lessons','time_lesson')->orderBy('lessons_sum_time_lesson', $data['timeCourse']);
-            }
-
-            if (!empty($data['lesson'])) {
-                $query->withCount('lessons')->orderBy('lessons_count', $data['lesson']);
-            }
-
-            if (!empty($data['comment'])) {
-                $query->withCount('comments')->orderBy('comments_count', $data['comment']);
-            }
-
-            if (!empty($data['tags'])) {
-                $query->whereHas('tags', function ($query) use ($data) {
-                    $query->whereIn('tag_id', $data['tags']);
-                });
-            }
-
-            if (!empty($data['teacher'])) {
-                $query->whereHas('teachers', function ($query) use ($data) {
-                    $query->whereIn('user_id', $data['teacher']);
-                });
-            }
-
-            if (!empty($data['lastest'])) {
-                $query->orderBy('created_at', $data['lastest']);
-            }
+        if (!empty($data['keyword'])) {
+            $query->where('course_name', 'LIKE', "%{$data['keyword']}%")->orWhere('description', 'LIKE', "%{$data['keyword']}%");
         }
-        $query = $query->paginate(config('all-course.number_paginate'))->appends(request()->query());
-        Course::addLessonTime($query);
+
+        if (!empty($data['numberStudent'])) {
+            $query->withCount('users')->orderBy('users_count', $data['numberStudent']);
+        }
+
+        if (!empty($data['timeCourse'])) {
+            $query->withSum('lessons','time_lesson')->orderBy('lessons_sum_time_lesson', $data['timeCourse']);
+        }
+
+        if (!empty($data['lesson'])) {
+            $query->withCount('lessons')->orderBy('lessons_count', $data['lesson']);
+        }
+
+        if (!empty($data['comment'])) {
+            $query->withCount('comments')->orderBy('comments_count', $data['comment']);
+        }
+
+        if (!empty($data['tags'])) {
+            $query->whereHas('tags', function ($query) use ($data) {
+                $query->whereIn('tag_id', $data['tags']);
+            });
+        }
+
+        if (!empty($data['teacher'])) {
+            $query->whereHas('teachers', function ($query) use ($data) {
+                $query->whereIn('user_id', $data['teacher']);
+            });
+        }
+
+        if (!empty($data['lastest'])) {
+            $query->orderBy('created_at', $data['lastest']);
+        }
+
         return $query;
     }
 }
