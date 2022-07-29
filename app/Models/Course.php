@@ -36,6 +36,11 @@ class Course extends Model
         return $this->belongsToMany(User::class, 'user_course', 'course_id', 'user_id');
     }
 
+    public function teachers()
+    {
+        return $this->belongsToMany(User::class, 'course_teacher', 'course_id', 'user_id');
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class, 'course_id');
@@ -100,13 +105,15 @@ class Course extends Model
             }
 
             if (!empty($data['tags'])) {
-                $idCourse = CourseTag::where('tag_id', $data['tags'])->pluck('course_id');
-                $query->whereIn('id', $idCourse);
+                $query->whereHas('tags', function ($query) use ($data) {
+                    $query->whereIn('tag_id', $data['tags']);
+                });
             }
 
             if (!empty($data['teacher'])) {
-                $idCourse = CourseTeacher::where('user_id', $data['teacher'])->pluck('course_id');
-                $query->whereIn('id', $idCourse);
+                $query->whereHas('teachers', function ($query) use ($data) {
+                    $query->whereIn('user_id', $data['teacher']);
+                });
             }
 
             if (!empty($data['lastest'])) {

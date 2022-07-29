@@ -44,10 +44,10 @@
                     </div>
                 </div>
                 <div class="btn-option">
-                    <select class="js-example-basic-single" name="teacher">
-                        <option value="">{{ __('all-course.teacher') }}</option>
+                    <select class="js-example-basic-single" name="teacher[]" multiple>
+                        <option value="" {{ (!isset($requests['teacher'])) ? 'selected' : ''}} disabled>{{ __('all-course.teacher') }}</option>
                         @foreach ($teachers as $key => $teacher)
-                            <option {{ (isset($requests['teacher']) && $requests['teacher'] == $teacher->id) ? 'selected' : ''}} value="{{ $teacher->id }}">
+                            <option {{ (isset($requests['teacher']) && in_array($teacher->id, $requests['teacher'])) ? 'selected' : ''}} value="{{ $teacher->id }}">
                                 {{ $teacher->name }}
                             </option>
                         @endforeach
@@ -93,10 +93,10 @@
                     </select>
                 </div>
                 <div class="btn-option">
-                    <select class="js-example-basic-single" name="tags">
-                        <option value="">{{__('all-course.tags')}}</option>
+                    <select class="js-example-basic-single" name="tags[]" multiple>
+                        <option value="" {{ (!isset($requests['tags'])) ? 'selected' : ''}} disabled>{{__('all-course.tags')}}</option>
                         @foreach ($tags as $key => $tag)
-                            <option  {{ (isset($requests['tags']) && $requests['tags'] == $tag->id) ? 'selected' : ''}} value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
+                            <option  {{ (isset($requests['tags']) && in_array($tag->id, $requests['tags'])) ? 'selected' : ''}} value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -152,7 +152,7 @@
                                 Learners
                             </div>
                             <div class="statics">
-                                {{ $course->users_count }}
+                                {{ $course->learners }}
                             </div>
                         </div>
                         <div class="course-statics-items">
@@ -160,7 +160,7 @@
                                 Lessons
                             </div>
                             <div class="statics">
-                                {{ $course->lessons_count }}
+                                {{ $course->lessons }}
                             </div>
                         </div>
                         <div class="course-statics-items">
