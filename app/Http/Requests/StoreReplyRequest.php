@@ -30,12 +30,12 @@ class StoreReplyRequest extends FormRequest
         ];
     }
 
-    public function attributes()
+    public function messages()
     {
         return [
-            'course_id' => __('course-detail.course_id'),
-            'comment' => __('course-detail.comment'),
-            'parent_id' => __('course-detail.parent_id'),
+            'course_id.required' => __('course-detail.course_id'),
+            'comment.required' => __('course-detail.comment'),
+            'parent_id.required' => __('course-detail.parent_id'),
         ];
     }
 }

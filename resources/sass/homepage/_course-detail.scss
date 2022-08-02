@@ -636,3 +636,22 @@
 .form-reply {
   margin-top: 20px;
 }
+
+.edit-button {
+  float: right;
+  background-color: white;
+  transform:translateY(30px);
+}
+
+.none {
+  display: none !important;
+}
+
+.block {
+  display: block !important;
+}
+
+.box-edit {
+  display: none;
+  margin-top: 20px;
+}

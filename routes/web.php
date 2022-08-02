@@ -7,6 +7,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserCourseController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReplyController;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,14 @@ Route::resource('course-users', UserCourseController::class)->middleware('auth')
 ]);
 
 Route::resource('comments', CommentController::class)->middleware('auth')->only([
-    'store',
+    'store', 'update',
 ]);
 
 Route::resource('replies', ReplyController::class)->middleware('auth')->only([
-    'store',
+    'store', 'update',
 ]);
+
+Route::get('/redirects', function(){
+	return redirect(Redirect::intended()->getTargetUrl());
+	return back();
+});

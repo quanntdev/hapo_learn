@@ -72,11 +72,4 @@ class User extends Authenticatable
     {
         return $query->where('role', config('roles.teacher'));
     }
-
-    public function scopeGetTeacher($query, $id)
-    {
-        return $query->with('coursesTeacher')->whereHas('coursesTeacher', function ($query) use ($id) {
-            $query->where('course_id', $id)->where('users.role', config('roles.teacher'));
-        });
-    }
 }

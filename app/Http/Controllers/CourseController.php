@@ -39,7 +39,7 @@ class CourseController extends Controller
         $teachers = $course->teachers()->get();
         $comments = $course->comments()->where('parent_id', '=', null)->orderBy('id', config('course.high_to_low'))->get();
         $replys = $course->comments()->where('parent_id', '<>', null)->orderBy('id', config('course.high_to_low'))->get();
-        $otherCourses = Course::OtherCourseDetail()->get();
+        $otherCourses = $course->inRandomOrder()->take(config('course.other_course_on_detail'))->get();
 
         return view('course.show', compact('course', 'tags', 'lessons', 'teachers', 'comments', 'replys', 'otherCourses', 'data'));
     }

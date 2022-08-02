@@ -162,9 +162,4 @@ class Course extends Model
 
         return $query;
     }
-
-    public function scopeOtherCourseDetail($query)
-    {
-        return $query->inRandomOrder()->take(config('course.other_course_on_detail'));
-    }
 }

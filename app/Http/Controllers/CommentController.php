@@ -22,4 +22,10 @@ class CommentController extends Controller
         Comment::create($data);
         return redirect()->back()->with('success', __('comment.comment_success'));
     }
+
+    public function update(StoreCommentRequest $request, Comment $comment)
+    {
+        $comment->update($request->all());
+        return redirect()->back()->with('success', __('comment.comment_success'));
+    }
 }

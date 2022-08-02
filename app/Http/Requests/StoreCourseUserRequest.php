@@ -28,10 +28,10 @@ class StoreCourseUserRequest extends FormRequest
         ];
     }
 
-    public function attributes()
+    public function messages()
     {
         return [
-            'course_id' => __('course-detail.course_id'),
+            'course_id.required' => __('course-detail.course_id'),
         ];
     }
 }

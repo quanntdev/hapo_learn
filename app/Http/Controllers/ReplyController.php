@@ -7,7 +7,6 @@ use App\Http\Requests\StoreReplyRequest;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Comment;
-use App\Models\Reply;
 
 class ReplyController extends Controller
 {
@@ -22,6 +21,13 @@ class ReplyController extends Controller
 
         Comment::create($data);
 
+        return redirect()->back()->with('success', __('comment.comment_success'));
+    }
+
+    public function update(StoreReplyRequest $request, $id)
+    {
+        $comment = Comment::findOrFail($id);
+        $comment->update($request->all());
         return redirect()->back()->with('success', __('comment.comment_success'));
     }
 }
