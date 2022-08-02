@@ -43,6 +43,6 @@ class CourseController extends Controller
         $replys = Comment::GetReply($idCourse)->get();
         $otherCourses = Course::OtherCourseDetail()->get();
 
-        return view('course.course-detail', compact('courses', 'tags', 'lessons', 'teachers', 'comments', 'replys', 'otherCourses', 'data'));
+        return view('course.show', compact('courses', 'tags', 'lessons', 'teachers', 'comments', 'replys', 'otherCourses', 'data'));
     }
 }
