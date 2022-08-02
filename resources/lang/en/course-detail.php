@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'add_course' => 'Take part in the course',
     'link_lesson' => 'Learn',
     'description' => 'Descriptions course',
