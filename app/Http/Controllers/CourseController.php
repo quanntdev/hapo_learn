@@ -39,8 +39,8 @@ class CourseController extends Controller
         $courses = Course::with('users')->find($idCourse);
         $tags = Tag::GetTagDetail($idCourse)->get();
         $teachers = User::GetTeacher($idCourse)->get();
-        $comments = Comment::GetComment($idCourse)->get();
-        $replys = Comment::GetReply($idCourse)->get();
+        $comments = $courses->comments()->where('parent_id', '=', null)->orderBy('id', config('course.high_to_low'))->get();
+        $replys = $courses->comments()->where('parent_id', '<>', null)->orderBy('id', config('course.high_to_low'))->get();
         $otherCourses = Course::OtherCourseDetail()->get();
 
         return view('course.show', compact('courses', 'tags', 'lessons', 'teachers', 'comments', 'replys', 'otherCourses', 'data'));

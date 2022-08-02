@@ -56,7 +56,7 @@ class Course extends Model
         return $query->inRandomOrder()->take(config('course.other_course_order'));
     }
 
-    public function getJoinedAttribute()
+    public function getIsJoinedAttribute()
     {
         if (auth()->check() && $this->users()->where('user_id', auth()->user()->id)->count() > 0) {
             return true;
@@ -64,7 +64,7 @@ class Course extends Model
         return false;
     }
 
-    public function getFinishedAttribute()
+    public function getIsFinishedAttribute()
     {
         return $this->users()->where('user_id', auth()->user()->id)->where('user_course.status', '=', config('course.end_course'))->count();
     }

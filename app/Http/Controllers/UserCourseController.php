@@ -9,19 +9,14 @@ use App\Models\UserCourse;
 
 class UserCourseController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth')->only('store', 'update');
-    }
-
     public function store(StoreCourseUserRequest $request)
     {
-        $courseUser = UserCourse::create([
+        $data = [
             'user_id' => auth()->user()->id,
             'course_id' => $request['course_id'],
             'status' => 1
-        ]);
-        $courseUser->save();
+        ];
+        UserCourse::create($data);
         return redirect()->back();
     }
 

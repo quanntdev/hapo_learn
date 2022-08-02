@@ -50,12 +50,12 @@
                                 </form>
                                 <form action="{{ route('course-user.store') }}" method="POST">
                                     @csrf
-                                    @if (!$courses->joined)
+                                    @if (!$courses->isJoined)
                                         <input type="hidden" name="course_id" value="{{ $courses->id }}">
                                         <button class="add-course" type="submit">{{ __('course-detail.add_course') }}</button>
-                                    @elseif ($courses->joined && $courses->finished == 0)
+                                    @elseif ($courses->isJoined && $courses->isFinished == 0)
                                         <div class="btn btn-success text-light"> {{__('course-detail.on_learn')}} </div>
-                                    @elseif ($courses->joined && $courses->finished != 0)
+                                    @elseif ($courses->isJoined && $courses->isFinished != 0)
                                         <div class="btn btn-danger text-light"> {{__('course-detail.finish_learn')}} </div>
                                     @else
                                         <a href="{{ route('login') }}" class="login-course">{{ __('course-detail.must_login_learn') }}</a>
@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="link-lesson">
-                                        @if ($courses->joined)
+                                        @if ($courses->isJoined)
                                         <a href="#"> {{ __('course-detail.link_lesson') }} </a>
                                         @else
                                         <div class="cant-learn"> {{ __('course-detail.link_lesson') }} </div>
@@ -385,7 +385,7 @@
                             @endif
                         </div>
                     </div>
-                    @if ($courses->joined && $courses->finished == 0)
+                    @if ($courses->isJoined && $courses->isFinished == 0)
                         <form action="{{ route('course-user.update',[$courses->id]) }}" method="POST" class="form-end-course">
                             @method('PUT')
                             @csrf

@@ -11,20 +11,17 @@ use App\Models\Reply;
 
 class ReplyController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth')->only('store');
-    }
-
     public function store(StoreReplyRequest $request)
     {
-        $reply = Comment::create([
+        $data = [
             'user_id' => auth()->user()->id,
             'course_id' => $request['course_id'],
             'comment' => $request['comment'],
             'parent_id' => $request['parent_id'],
-        ]);
-        $reply->save();
+        ];
+
+        Comment::create($data);
+
         return redirect()->back()->with('success', __('comment.comment_success'));
     }
 }
