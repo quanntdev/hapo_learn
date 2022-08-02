@@ -31,18 +31,16 @@ class CourseController extends Controller
 
     public function show($slug, Request $request)
     {
-        $idCourse = Course::GetCourseId($slug);
-
         $data = $request->all();
-        $lessons = Lesson::GetLesson($idCourse)->SearchLesson($data)->paginate(config('course.lesson_paginate'));
 
-        $courses = Course::with('users')->find($idCourse);
-        $tags = Tag::GetTagDetail($idCourse)->get();
-        $teachers = User::GetTeacher($idCourse)->get();
-        $comments = $courses->comments()->where('parent_id', '=', null)->orderBy('id', config('course.high_to_low'))->get();
-        $replys = $courses->comments()->where('parent_id', '<>', null)->orderBy('id', config('course.high_to_low'))->get();
+        $course = Course::with('users')->where('slug_course', $slug)->firstOrFail();
+        $lessons = $course->lessons()->SearchLesson($data)->paginate(config('course.lesson_paginate'));
+        $tags = $course->tags()->get();
+        $teachers = $course->teachers()->get();
+        $comments = $course->comments()->where('parent_id', '=', null)->orderBy('id', config('course.high_to_low'))->get();
+        $replys = $course->comments()->where('parent_id', '<>', null)->orderBy('id', config('course.high_to_low'))->get();
         $otherCourses = Course::OtherCourseDetail()->get();
 
-        return view('course.show', compact('courses', 'tags', 'lessons', 'teachers', 'comments', 'replys', 'otherCourses', 'data'));
+        return view('course.show', compact('course', 'tags', 'lessons', 'teachers', 'comments', 'replys', 'otherCourses', 'data'));
     }
 }

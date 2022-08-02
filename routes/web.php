@@ -28,14 +28,14 @@ Route::resource('course', CourseController::class)->only([
     'index', 'show'
 ]);
 
-Route::resource('course-user', UserCourseController::class)->middleware('auth')->only([
+Route::resource('course-users', UserCourseController::class)->middleware('auth')->only([
      'store', 'update'
 ]);
 
-Route::resource('comment', CommentController::class)->middleware('auth')->only([
+Route::resource('comments', CommentController::class)->middleware('auth')->only([
     'store',
 ]);
 
-Route::resource('reply', ReplyController::class)->middleware('auth')->only([
+Route::resource('replies', ReplyController::class)->middleware('auth')->only([
     'store',
 ]);

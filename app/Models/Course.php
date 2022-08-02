@@ -58,15 +58,17 @@ class Course extends Model
 
     public function getIsJoinedAttribute()
     {
-        if (auth()->check() && $this->users()->where('user_id', auth()->user()->id)->count() > 0) {
-            return true;
-        }
-        return false;
+        return $this->users()->whereExists(function ($query) {
+            $query->where('user_id', auth()->id());
+        })->exists();
     }
 
     public function getIsFinishedAttribute()
     {
-        return $this->users()->where('user_id', auth()->user()->id)->where('user_course.status', '=', config('course.end_course'))->count();
+        return $this->users()->whereExists(function ($query) {
+            $query->where('user_id', auth()->id())
+                    ->where('user_course.status', '=', config('course.end_course'));
+        })->exists();
     }
 
     public function getRatesAttribute()
@@ -159,11 +161,6 @@ class Course extends Model
         }
 
         return $query;
-    }
-
-    public function scopeGetCourseId($query, $slug)
-    {
-        return $query->where('slug_course', $slug)->first()->id;
     }
 
     public function scopeOtherCourseDetail($query)

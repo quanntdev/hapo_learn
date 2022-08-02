@@ -3,7 +3,7 @@
 @section('content')
 
 @php
-    $rate = round($courses->rates / $comments->count());
+    $rate = round($course->rates / $comments->count());
 @endphp
 
 <div class="container course-detail">
@@ -11,7 +11,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ route('home') }}" class="breadcrumb-link">Home</a></li>
           <li class="breadcrumb-item" aria-current="page"><a href="{{ route('course.index') }}" class="breadcrumb-link">All Course</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{ $courses->course_name }}</li>
+          <li class="breadcrumb-item active" aria-current="page">{{ $course->course_name }}</li>
         </ol>
     </nav>
 </div>
@@ -21,7 +21,7 @@
         <div class="row ">
             <div class="col-8 mt-4">
                 <div class="course-image">
-                    <img src="{{ $courses->image }}" alt="">
+                    <img src="{{ $course->image }}" alt="">
                 </div>
                 <div class="course-lesson">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -38,7 +38,7 @@
                       <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade @if (empty(session('success'))) show active  @endif" id="lesson-tab-pane" role="tabpanel" aria-labelledby="lesson-tab" tabindex="0">
                             <div class="gruop-search">
-                                <form role="search" method="GET" action="{{ route('course.show', [$courses->slug_course]), }}">
+                                <form role="search" method="GET" action="{{ route('course.show', [$course->slug_course]), }}">
                                     <input type="text"
                                         placeholder="{{ __('course.input_placeholder') }}"
                                         name="search" id="search_input"  @if( !empty($data['search']) ) value="{{ $data['search'] }}" @endif>
@@ -48,14 +48,14 @@
                                     <button class="btn btn-search"
                                             type="submit" name="submit">{{ __('course.input_placeholder') }}</button>
                                 </form>
-                                <form action="{{ route('course-user.store') }}" method="POST">
+                                <form action="{{ route('course-users.store') }}" method="POST">
                                     @csrf
-                                    @if (!$courses->isJoined)
-                                        <input type="hidden" name="course_id" value="{{ $courses->id }}">
+                                    @if (!$course->isJoined)
+                                        <input type="hidden" name="course_id" value="{{ $course->id }}">
                                         <button class="add-course" type="submit">{{ __('course-detail.add_course') }}</button>
-                                    @elseif ($courses->isJoined && $courses->isFinished == 0)
+                                    @elseif ($course->isJoined && $course->isFinished == 0)
                                         <div class="btn btn-success text-light"> {{__('course-detail.on_learn')}} </div>
-                                    @elseif ($courses->isJoined && $courses->isFinished != 0)
+                                    @elseif ($course->isJoined && $course->isFinished != 0)
                                         <div class="btn btn-danger text-light"> {{__('course-detail.finish_learn')}} </div>
                                     @else
                                         <a href="{{ route('login') }}" class="login-course">{{ __('course-detail.must_login_learn') }}</a>
@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="link-lesson">
-                                        @if ($courses->isJoined)
+                                        @if ($course->isJoined)
                                         <a href="#"> {{ __('course-detail.link_lesson') }} </a>
                                         @else
                                         <div class="cant-learn"> {{ __('course-detail.link_lesson') }} </div>
@@ -117,7 +117,7 @@
                                             @endfor
                                         </div>
                                         <div class="number-vote">
-                                            {{ $courses->countRates }} {{ __('course-detail.rating') }}
+                                            {{ $course->countRates }} {{ __('course-detail.rating') }}
                                         </div>
                                     </div>
                                     <div class="see-star-vote">
@@ -126,55 +126,55 @@
                                         </div>
                                         <div class="middle">
                                             <div class="bar-container">
-                                              <div class="bar-status" style="width: {{ ($courses->countRates5 / $courses->countRates)*100 }}%"></div>
+                                              <div class="bar-status" style="width: {{ ($course->countRates5 / $course->countRates)*100 }}%"></div>
                                             </div>
                                         </div>
                                         <div class="side right">
-                                            <div> {{ $courses->countRates5 }} </div>
+                                            <div> {{ $course->countRates5 }} </div>
                                         </div>
                                         <div class="side">
                                             <div>4 star</div>
                                         </div>
                                         <div class="middle">
                                         <div class="bar-container">
-                                            <div class="bar-status" style="width: {{ ($courses->countRates4 / $courses->countRates)*100 }}%"></div>
+                                            <div class="bar-status" style="width: {{ ($course->countRates4 / $course->countRates)*100 }}%"></div>
                                         </div>
                                         </div>
                                         <div class="side right">
-                                            <div> {{ $courses->countRates4 }} </div>
+                                            <div> {{ $course->countRates4 }} </div>
                                         </div>
                                         <div class="side">
                                             <div>3 star</div>
                                         </div>
                                         <div class="middle">
                                             <div class="bar-container">
-                                                <div class="bar-status" style="width: {{ ($courses->countRates3 / $courses->countRates)*100 }}%"></div>
+                                                <div class="bar-status" style="width: {{ ($course->countRates3 / $course->countRates)*100 }}%"></div>
                                             </div>
                                         </div>
                                         <div class="side right">
-                                            <div> {{ $courses->countRates3 }} </div>
+                                            <div> {{ $course->countRates3 }} </div>
                                         </div>
                                         <div class="side">
                                             <div>2 star</div>
                                         </div>
                                         <div class="middle">
                                             <div class="bar-container">
-                                                <div class="bar-status" style="width: {{ ($courses->countRates2 / $courses->countRates)*100 }}%"></div>
+                                                <div class="bar-status" style="width: {{ ($course->countRates2 / $course->countRates)*100 }}%"></div>
                                             </div>
                                         </div>
                                         <div class="side right">
-                                            <div> {{ $courses->countRates2 }} </div>
+                                            <div> {{ $course->countRates2 }} </div>
                                         </div>
                                         <div class="side">
                                             <div>1 star</div>
                                         </div>
                                         <div class="middle">
                                             <div class="bar-container">
-                                                <div class="bar-status" style="width: {{ ($courses->countRates1 / $courses->countRates)*100 }}%"></div>
+                                                <div class="bar-status" style="width: {{ ($course->countRates1 / $course->countRates)*100 }}%"></div>
                                             </div>
                                         </div>
                                         <div class="side right">
-                                            <div> {{ $courses->countRates1 }} </div>
+                                            <div> {{ $course->countRates1 }} </div>
                                         </div>
                                         <div class="clear"></div>
                                     </div>
@@ -215,13 +215,13 @@
                                             <div id="flush-collapse{{$comment->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$comment->id}}" data-bs-parent="#accordionFlushExample">
                                               <div class="accordion-body">
                                                 <div class="form-comment form-reply">
-                                                    <form action="{{ route('reply.store') }}" method="POST">
+                                                    <form action="{{ route('replies.store') }}" method="POST">
                                                         @csrf
                                                         <div class="form-floating">
                                                             <textarea class="form-control comment-input" placeholder="Leave a comment here" id="floatingTextarea" rows="10" name="comment"></textarea>
                                                             <label for="floatingTextarea">Comments</label>
                                                         </div>
-                                                        <input type="hidden" name="course_id" value="{{ $courses->id }}">
+                                                        <input type="hidden" name="course_id" value="{{ $course->id }}">
                                                         <input type="hidden" name="parent_id" value="{{ $comment->id }}">
                                                         <div class="btn-comment btn-reply">
                                                             <button type="submit"> {{__('course-detail.send') }} </button>
@@ -267,7 +267,7 @@
                                         <div class="title">
                                             {{ __('course-detail.message') }}
                                         </div>
-                                        <form action="{{ route('comment.store') }}" method="POST">
+                                        <form action="{{ route('comments.store') }}" method="POST">
                                             @csrf
                                             <div class="form-floating">
                                                 <textarea class="form-control comment-input" placeholder="Leave a comment here" id="floatingTextarea" rows="10" name="comment"></textarea>
@@ -290,7 +290,7 @@
                                                         <label class="star star-1" for="star-1"></label>
                                                     </div>
                                             </div>
-                                            <input type="hidden" name="course_id" value="{{ $courses->id }}">
+                                            <input type="hidden" name="course_id" value="{{ $course->id }}">
                                             <div class="btn-comment">
                                                 <button type="submit"> {{__('course-detail.send') }} </button>
                                             </div>
@@ -314,7 +314,7 @@
                         {{ __('course-detail.description') }}
                     </div>
                     <div class="content">
-                        {{ $courses->description }}
+                        {{ $course->description }}
                     </div>
                 </div>
                 <div class="info">
@@ -326,7 +326,7 @@
                             {{ __('course-detail.learner') }}
                         </div>
                         <div class="content">
-                            : {{ $courses->learners }}
+                            : {{ $course->learners }}
                         </div>
                     </div>
                     <div class="line"></div>
@@ -338,7 +338,7 @@
                             {{ __('course-detail.lessons') }}
                         </div>
                         <div class="content">
-                            : {{ $courses->lessons }} {{ __('course-detail.lesson_value') }}
+                            : {{ $course->lessons }} {{ __('course-detail.lesson_value') }}
                         </div>
                     </div>
                     <div class="line"></div>
@@ -350,7 +350,7 @@
                             {{ __('course-detail.time') }}
                         </div>
                         <div class="content">
-                             {{ round(($courses->times) / 3600) }} {{ __('course-detail.time_value') }}
+                             {{ round(($course->times) / 3600) }} {{ __('course-detail.time_value') }}
                         </div>
                     </div>
                     <div class="line"></div>
@@ -378,18 +378,18 @@
                             {{ __('course-detail.price') }}
                         </div>
                         <div class="content">
-                            @if($courses->price == 0)
+                            @if($course->price == 0)
                             {{ __('course-detail.free') }}
                             @else
-                            : {{ number_format($courses->price) }} {{ __('course-detail.price_value') }}
+                            : {{ number_format($course->price) }} {{ __('course-detail.price_value') }}
                             @endif
                         </div>
                     </div>
-                    @if ($courses->isJoined && $courses->isFinished == 0)
-                        <form action="{{ route('course-user.update',[$courses->id]) }}" method="POST" class="form-end-course">
+                    @if ($course->isJoined && $course->isFinished == 0)
+                        <form action="{{ route('course-users.update',[$course->id]) }}" method="POST" class="form-end-course">
                             @method('PUT')
                             @csrf
-                            <input type="hidden" name="course_id" value="{{ $courses->id }}">
+                            <input type="hidden" name="course_id" value="{{ $course->id }}">
                             <button class="button-end-course" type="submit">{{ __('course-detail.end_course') }}</button>
                         </form>
                     @endif
@@ -397,7 +397,7 @@
                 </div>
                 <div class="other-course">
                     <div class="title">
-                        {{ __('course-detail.other_courses') }}
+                        {{ __('course-detail.other_course') }}
                     </div>
                     <div class="list-course-other">
                         @foreach ($otherCourses as $key => $otherCourse)
