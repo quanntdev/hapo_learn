@@ -159,6 +159,9 @@
       text-align: center;
       padding: 7px 0;
       color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
     }
   }
 }
@@ -337,4 +340,27 @@
 
 .select2-container--default .select2-selection--single {
   border-radius: 1px;
+}
+
+.form-end-course {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+
+  .button-end-course {
+    width: 60%;
+    height: 40px;
+    border-radius: 20px;
+    background-color: red;
+    box-shadow: inset 0px 2px 4px #6F8710;
+    margin: 0 auto;
+    text-align: center;
+    padding: 7px 0;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+    border: 0;
+  }
 }

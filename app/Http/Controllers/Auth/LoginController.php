@@ -43,15 +43,15 @@ class LoginController extends Controller
     public function login(LoginFormRequest $request)
     {
         $credentials = $request->only(['username', 'password']);
-        if (Auth::attempt($credentials)) {
-            return redirect('home')->with('success', __('login.login_success').Auth::user()->name);
+        if (auth()->attempt($credentials)) {
+            return redirect()->back()->with('success', __('login.login_success').auth()->user()->name);
         }
         return redirect()->back()->with('error', __('login.login_error'));
     }
 
     public function logout()
     {
-        Auth::logout();
+        auth()->logout();
         return redirect('/');
     }
 }

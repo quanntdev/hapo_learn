@@ -138,7 +138,7 @@
                                     {{ $course->description }}
                                 </div>
                                 <div class="btn-learn">
-                                    <a href="">More</a>
+                                    <a href="{{ route('course.show', [$course->slug_course]) }}">More</a>
                                 </div>
                             </div>
                         </div>
@@ -165,7 +165,7 @@
                                 Times
                             </div>
                             <div class="statics">
-                                {{ round(($course->times) / 3600) }} {{ __('course.hour') }}
+                                {{ $course->times }} {{ __('course.hour') }}
                             </div>
                         </div>
                     </div>

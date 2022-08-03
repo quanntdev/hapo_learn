@@ -32,4 +32,14 @@ class Comment extends Model
     {
         return $query->limit(config('course.home_comment_number'));
     }
+
+    public function scopeComments($query)
+    {
+        return $query->whereNull('parent_id')->orderBy('id', config('course.high_to_low'));
+    }
+
+    public function scopeReplies($query)
+    {
+        return $query->whereNotNull('parent_id')->orderBy('id', config('course.high_to_low'));
+    }
 }

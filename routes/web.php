@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\UserCourseController;
+use App\Http\Controllers\CommentController;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\LessonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +26,28 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index']);
 
 Route::resource('course', CourseController::class)->only([
-    'index',
+    'index', 'show'
+]);
+
+Route::get('/redirects', function(){
+    return redirect(Redirect::intended()->getTargetUrl());
+});
+
+Route::group(['middleware' => 'auth'], function () {
+});
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'canJoin'], function () {
+        Route::resource('/course-users', UserCourseController::class)->only(['store']);
+    });
+    Route::group(['middleware' => 'canComment'], function () {
+        Route::resource('/comments', CommentController::class)->only(['store']);
+    });
+    Route::resource('/course-users', UserCourseController::class)->only(['update']);
+    Route::resource('/comments', CommentController::class)->only(['update']);
+});
+
+Route::resource('lessons', LessonController::class)->only([
+    'show'
 ]);

@@ -3,13 +3,11 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
 @import '~select2/dist/css/select2.css';
 
 // Variables
 @import 'variables';
 
-// Variables
 @import 'homepage/header';
 
 @import 'homepage/footer';
@@ -29,3 +27,7 @@
 @import 'homepage/statics';
 
 @import 'homepage/all-course';
+
+@import 'homepage/course-detail';
+
+@import 'homepage/lesson_detail';
