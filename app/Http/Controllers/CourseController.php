@@ -37,8 +37,8 @@ class CourseController extends Controller
         $lessons = $course->lessons()->search($data)->paginate(config('course.lesson_paginate'));
         $tags = $course->tags;
         $teachers = $course->teachers;
-        $comments = $course->comments()->orderComments()->get();
-        $replys = $course->comments()->orderReplies()->get();
+        $comments = $course->comments()->comments()->get();
+        $replys = $course->comments()->replies()->get();
         $otherCourses = $course->inRandomOrder()->take(config('course.other_course_on_detail'))->get();
 
         return view('course.show', compact('course', 'tags', 'lessons', 'teachers', 'comments', 'replys', 'otherCourses', 'data'));

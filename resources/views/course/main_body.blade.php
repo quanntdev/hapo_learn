@@ -28,9 +28,9 @@
                     @if (!$course->isJoined)
                         <input type="hidden" name="course_id" value="{{ $course->id }}">
                         <button class="add-course" type="submit">{{ __('course-detail.add_course') }}</button>
-                    @elseif ($course->isJoined && $course->isFinished == 0)
+                    @elseif (!$course->isFinished)
                         <div class="btn btn-success text-light"> {{__('course-detail.on_learn')}} </div>
-                    @elseif ($course->isJoined && $course->isFinished != 0)
+                    @elseif ($course->isFinished)
                         <div class="btn btn-danger text-light"> {{__('course-detail.finish_learn')}} </div>
                     @else
                         <a href="{{ route('login') }}" class="login-course">{{ __('course-detail.must_login_learn') }}</a>
@@ -47,8 +47,8 @@
                         </div>
                     </div>
                     <div class="link-lesson">
-                        @if ($course->isJoined)
-                        <a href="#"> {{ __('course-detail.link_lesson') }} </a>
+                        @if ($course->isJoined || $course->isFinished )
+                        <a href=""> {{ __('course-detail.link_lesson') }} </a>
                         @else
                         <div class="cant-learn"> {{ __('course-detail.link_lesson') }} </div>
                         @endif
@@ -218,7 +218,7 @@
                                 </form>
                             </div>
                         </div>
-                        @if (Auth::user())
+                        @if (auth()->user())
                         <div class="accordion-item button-reply-items">
                             <h2 class="accordion-header" id="flush-heading{{$comment->id}}">
                               <button class="accordion-button collapsed button-reply" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$comment->id}}" aria-expanded="false" aria-controls="flush-collapse{{$comment->id}}">
@@ -304,7 +304,7 @@
                     <div class="title">
                         {{ __('course-detail.your_review') }}
                     </div>
-                    @if (Auth::user())
+                    @if (auth()->user())
                     <div class="form-comment">
                         <div class="title">
                             {{ __('course-detail.message') }}
@@ -338,7 +338,6 @@
                                     </div>
                             </div>
                             <input type="hidden" name="course_id" value="{{ $course->id }}">
-                            <input type="hidden" name="parent_id" value="">
                             <div class="btn-comment">
                                 <button type="submit"> {{__('course-detail.send') }} </button>
                             </div>

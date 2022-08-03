@@ -66,44 +66,50 @@ class Course extends Model
     public function getIsFinishedAttribute()
     {
         return $this->users()->whereExists(function ($query) {
-            $query->where('user_id', auth()->id())
-                    ->where('user_course.status', '=', config('course.end_course'));
+            $query->where('user_id', auth()->id())->where('user_course.status', '=', config('course.end_course'));
         })->exists();
+    }
+
+    public function getIsnotFinishedAttribute()
+    {
+        return $this->users()->whereExists(function ($query) {
+            $query->where('user_id', auth()->id())->where('user_course.status', '=', config('course.onstatus'));
+        })->count();
     }
 
     public function getRatesAttribute()
     {
-        return $this->comments()->orderComments()->sum('star');
+        return $this->comments()->comments()->sum('star');
     }
 
     public function getCountRatesAttribute()
     {
-        return $this->comments()->where('star', '>', 0)->orderComments()->count();
+        return $this->comments()->where('star', '>', 0)->comments()->count();
     }
 
     public function getCountRates5Attribute()
     {
-        return $this->comments()->where('star', '=', 5)->orderComments()->count();
+        return $this->comments()->where('star', '=', 5)->comments()->count();
     }
 
     public function getCountRates4Attribute()
     {
-        return $this->comments()->where('star', '=', 4)->orderComments()->count();
+        return $this->comments()->where('star', '=', 4)->comments()->count();
     }
 
     public function getCountRates3Attribute()
     {
-        return $this->comments()->where('star', '=', 3)->orderComments()->count();
+        return $this->comments()->where('star', '=', 3)->comments()->count();
     }
 
     public function getCountRates2Attribute()
     {
-        return $this->comments()->where('star', '=', 2)->orderComments()->count();
+        return $this->comments()->where('star', '=', 2)->comments()->count();
     }
 
     public function getCountRates1Attribute()
     {
-        return $this->comments()->where('star', '=', 1)->orderComments()->count();
+        return $this->comments()->where('star', '=', 1)->comments()->count();
     }
 
     public function getLearnersAttribute()
@@ -118,7 +124,12 @@ class Course extends Model
 
     public function getTimesAttribute()
     {
-        return $this->lessons()->sum('time_lesson');
+        return round($this->lessons()->sum('time_lesson')/3600);
+    }
+
+    public function getCheckPriceAttribute()
+    {
+        return $this->price == 0 ? ': '.config('course.free') : ': '.$this->price.config('course.dolar');
     }
 
     public function scopeFilter($query, $data)

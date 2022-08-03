@@ -13,4 +13,6 @@ return [
     'lesson_paginate' => 8,
     'endstatus' => 0,
     'end_course' => 2,
+    'free' => "Free",
+    'dolar' => "$",
 ];

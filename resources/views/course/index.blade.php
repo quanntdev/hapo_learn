@@ -165,7 +165,7 @@
                                 Times
                             </div>
                             <div class="statics">
-                                {{ round(($course->times) / 3600) }} {{ __('course.hour') }}
+                                {{ $course->times }} {{ __('course.hour') }}
                             </div>
                         </div>
                     </div>
