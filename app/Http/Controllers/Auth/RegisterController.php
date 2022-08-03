@@ -56,7 +56,7 @@ class RegisterController extends Controller
     public function register(RegisterFormRequest $request)
     {
         $user = $this->create($request->all());
-        Auth::login($user);
+        auth()->login($user);
         return redirect('home')->with('success', __('register.register_success').$user->name);
     }
 }

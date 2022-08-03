@@ -34,7 +34,7 @@
                         {{ $course->description }}
                     </div>
                 </div>
-                @include('course.info_and_otherCourse')
+                @include('course.info_and_other_course')
             </div>
         </div>
     </div>

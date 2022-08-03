@@ -73,37 +73,37 @@ class Course extends Model
 
     public function getRatesAttribute()
     {
-        return $this->comments()->where('parent_id', '=', null)->sum('star');
+        return $this->comments()->orderComments()->sum('star');
     }
 
     public function getCountRatesAttribute()
     {
-        return $this->comments()->where('star', '>', 0)->where('parent_id', '=', null)->count();
+        return $this->comments()->where('star', '>', 0)->orderComments()->count();
     }
 
     public function getCountRates5Attribute()
     {
-        return $this->comments()->where('star', '=', 5)->where('parent_id', '=', null)->count();
+        return $this->comments()->where('star', '=', 5)->orderComments()->count();
     }
 
     public function getCountRates4Attribute()
     {
-        return $this->comments()->where('star', '=', 4)->where('parent_id', '=', null)->count();
+        return $this->comments()->where('star', '=', 4)->orderComments()->count();
     }
 
     public function getCountRates3Attribute()
     {
-        return $this->comments()->where('star', '=', 3)->where('parent_id', '=', null)->count();
+        return $this->comments()->where('star', '=', 3)->orderComments()->count();
     }
 
     public function getCountRates2Attribute()
     {
-        return $this->comments()->where('star', '=', 2)->where('parent_id', '=', null)->count();
+        return $this->comments()->where('star', '=', 2)->orderComments()->count();
     }
 
     public function getCountRates1Attribute()
     {
-        return $this->comments()->where('star', '=', 1)->where('parent_id', '=', null)->count();
+        return $this->comments()->where('star', '=', 1)->orderComments()->count();
     }
 
     public function getLearnersAttribute()
