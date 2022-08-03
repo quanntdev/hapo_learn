@@ -17,6 +17,7 @@ class CommentController extends Controller
             'course_id' => $request['course_id'],
             'comment' => $request['comment'],
             'star' => $request['star'],
+            'parent_id' => $request['parent_id'],
         ];
 
         Comment::create($data);

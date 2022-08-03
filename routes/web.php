@@ -37,10 +37,6 @@ Route::resource('comments', CommentController::class)->middleware('auth')->only(
     'store', 'update',
 ]);
 
-Route::resource('replies', ReplyController::class)->middleware('auth')->only([
-    'store', 'update',
-]);
-
 Route::get('/redirects', function(){
 	return redirect(Redirect::intended()->getTargetUrl());
 	return back();

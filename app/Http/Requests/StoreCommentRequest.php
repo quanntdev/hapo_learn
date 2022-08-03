@@ -27,6 +27,7 @@ class StoreCommentRequest extends FormRequest
             'course_id' => 'required|integer',
             'comment' => 'required|string',
             'star' => 'Nullable',
+            'parent_id' => 'Nullable|integer',
         ];
     }
 
@@ -35,6 +36,7 @@ class StoreCommentRequest extends FormRequest
         return [
             'course_id.required' => __('course-detail.course_id'),
             'comment.required' => __('course-detail.comment'),
+            'parent_id.required' => __('course-detail.parent_id'),
         ];
     }
 }

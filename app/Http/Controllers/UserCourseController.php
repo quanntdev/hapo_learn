@@ -11,20 +11,15 @@ class UserCourseController extends Controller
 {
     public function store(StoreCourseUserRequest $request)
     {
-        $data = [
-            'user_id' => auth()->user()->id,
-            'course_id' => $request['course_id'],
-            'status' => 1
-        ];
-        UserCourse::create($data);
+        $course = Course::find($request['course_id']);
+        $course->users()->attach(auth()->user()->id, ['status' => config('course.onstatus')]);
         return redirect()->back();
     }
 
     public function update(StoreCourseUserRequest $request, $id)
     {
-        $courseUser = UserCourse::where('user_id', auth()->user()->id)->where('course_id', $id)->first();
-        $courseUser->status = config('course.end_course');
-        $courseUser->save();
+        $course = Course::find($request['course_id']);
+        $course->users()->updateExistingPivot(auth()->user()->id, ['status' => config('course.end_course')]);
         return redirect()->back();
     }
 }

@@ -228,7 +228,7 @@
                             <div id="flush-collapse{{$comment->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$comment->id}}" data-bs-parent="#accordionFlushExample">
                               <div class="accordion-body">
                                 <div class="form-comment form-reply">
-                                    <form action="{{ route('replies.store') }}" method="POST">
+                                    <form action="{{ route('comments.store') }}" method="POST">
                                         @csrf
                                         <div class="form-floating">
                                             <textarea class="form-control comment-input" placeholder="Leave a comment here" id="floatingTextarea" rows="10" name="comment"></textarea>
@@ -267,7 +267,7 @@
                                     </div>
                                     <div class="box-edit" id="editReply{{$reply->id}}">
                                         <div class="form-comment">
-                                            <form action="{{ route('replies.update',[$reply->id]) }}" method="POST">
+                                            <form action="{{ route('comments.update',[$reply->id]) }}" method="POST">
                                                 @method('PUT')
                                                 @csrf
                                                 <div class="form-floating">
@@ -338,6 +338,7 @@
                                     </div>
                             </div>
                             <input type="hidden" name="course_id" value="{{ $course->id }}">
+                            <input type="hidden" name="parent_id" value="">
                             <div class="btn-comment">
                                 <button type="submit"> {{__('course-detail.send') }} </button>
                             </div>

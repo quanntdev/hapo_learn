@@ -34,11 +34,11 @@ class CourseController extends Controller
         $data = $request->all();
 
         $course = Course::with('users')->where('slug_course', $slug)->firstOrFail();
-        $lessons = $course->lessons()->SearchLesson($data)->paginate(config('course.lesson_paginate'));
-        $tags = $course->tags()->get();
-        $teachers = $course->teachers()->get();
-        $comments = $course->comments()->where('parent_id', '=', null)->orderBy('id', config('course.high_to_low'))->get();
-        $replys = $course->comments()->where('parent_id', '<>', null)->orderBy('id', config('course.high_to_low'))->get();
+        $lessons = $course->lessons()->search($data)->paginate(config('course.lesson_paginate'));
+        $tags = $course->tags;
+        $teachers = $course->teachers;
+        $comments = $course->comments()->orderComments()->get();
+        $replys = $course->comments()->orderReplies()->get();
         $otherCourses = $course->inRandomOrder()->take(config('course.other_course_on_detail'))->get();
 
         return view('course.show', compact('course', 'tags', 'lessons', 'teachers', 'comments', 'replys', 'otherCourses', 'data'));
