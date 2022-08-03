@@ -6,7 +6,7 @@
                 <p class="banner-content-slogan">
                     Interactive lessons, "on-the-go" practice, peer support.
                 </p>
-                <p><a href="#" class="link-learn">Start learning Now!</a></p> 
+                <p><a href="#" class="link-learn">Start learning Now!</a></p>
         </div>
     </div>
 </div>

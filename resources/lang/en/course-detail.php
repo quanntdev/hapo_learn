@@ -35,4 +35,7 @@ return [
     'add_your_reply' => 'Add your reply',
     'parent_id' => 'Parent ID',
     'free' => 'Free',
+    'programs' => 'Programs',
+    'description_lesson' => 'Descriptions Lesson',
+    'course' => 'Course',
 ];

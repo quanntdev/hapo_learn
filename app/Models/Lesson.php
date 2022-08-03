@@ -45,4 +45,26 @@ class Lesson extends Model
 
         return $query;
     }
+
+    public function getIsJoinedLessonAttribute()
+    {
+        return $this->users()->whereExists(function ($query) {
+            $query->where('user_id', auth()->id());
+        })->exists();
+    }
+
+    public function getIsFinishLessonAttribute()
+    {
+        return $this->users()->whereExists(function ($query) {
+            $query->where('user_id', auth()->id())->where('user_lesson.status', '=', config('program.finish_lesson'));
+        })->exists();
+    }
+
+    public function scopeUpdateFinishLesson($query, $valueProgramsFinish, $valueCountPrograms, $idLesson)
+    {
+        if ($valueProgramsFinish == $valueCountPrograms) {
+            $lesson = Lesson::find($idLesson);
+            $lesson->users()->updateExistingPivot(auth()->user()->id, ['status' => config('program.finish_lesson')]);
+        }
+    }
 }

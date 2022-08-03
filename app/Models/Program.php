@@ -24,6 +24,55 @@ class Program extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_lesson', 'lesson_id', 'user_id');
+        return $this->belongsToMany(User::class, 'user_program', 'program_id', 'user_id');
+    }
+
+    public function getTypeProgramAttribute()
+    {
+        $programsValue = $this->type;
+        if ($programsValue == config('program.value_doc')) {
+            return __('lesson.type_doc');
+        } elseif ($programsValue == config('program.value_pdf')) {
+            return __('lesson.type_pdf');
+        } elseif ($programsValue == config('program.value_video')) {
+            return __('lesson.type_video');
+        }
+    }
+
+    public function getPictureProgramAttribute()
+    {
+        $programsValue = $this->type;
+        if ($programsValue == config('program.value_doc')) {
+            return config('program.pic_doc');
+        } elseif ($programsValue == config('program.value_pdf')) {
+            return config('program.pic_pdf');
+        } elseif ($programsValue == config('program.value_video')) {
+            return config('program.pic_video');
+        }
+    }
+
+    public function getIsJoinedProgramsAttribute()
+    {
+        return $this->users()->whereExists(function ($query) {
+            $query->where('user_id', auth()->id());
+        })->exists();
+    }
+
+    public function getCountJoinedProgramsAttribute()
+    {
+        return $this->users()->whereExists(function ($query) {
+            $query->where('user_id', auth()->id());
+        })->count();
+    }
+
+    public function scopeGetCountUserPrograms($query, $programs)
+    {
+        $count = 0;
+        foreach ($programs as $program) {
+            $program = $program->countJoinedPrograms;
+            $count += $program;
+        }
+
+        return $count;
     }
 }

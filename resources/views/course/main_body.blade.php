@@ -47,8 +47,10 @@
                         </div>
                     </div>
                     <div class="link-lesson">
-                        @if ($course->isJoined || $course->isFinished)
-                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}"> {{ __('course-detail.link_lesson') }} </a>
+                        @if (($course->isJoined || $course->isFinished) && !$lesson->IsFinishLesson)
+                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn-start-learn"> {{ __('course-detail.link_lesson') }} </a>
+                        @elseif ($lesson->IsFinishLesson )
+                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn btn-success"> complete </a>
                         @else
                         <div class="cant-learn"> {{ __('course-detail.link_lesson') }} </div>
                         @endif
