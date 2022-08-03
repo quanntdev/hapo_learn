@@ -37,10 +37,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::group(['middleware' => 'joined'], function () {
+    Route::group(['middleware' => 'canJoin'], function () {
         Route::resource('/course-users', UserCourseController::class)->only(['store']);
     });
-    Route::group(['middleware' => 'comment'], function () {
+    Route::group(['middleware' => 'canComment'], function () {
         Route::resource('/comments', CommentController::class)->only(['store']);
     });
     Route::resource('/course-users', UserCourseController::class)->only(['update']);

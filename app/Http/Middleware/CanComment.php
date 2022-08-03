@@ -6,7 +6,7 @@ use App\Models\Course;
 use Closure;
 use Illuminate\Http\Request;
 
-class Comment
+class CanComment
 {
     /**
      * Handle an incoming request.

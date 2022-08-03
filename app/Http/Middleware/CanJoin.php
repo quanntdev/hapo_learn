@@ -6,7 +6,7 @@ use Closure;
 use App\Models\Course;
 use Illuminate\Http\Request;
 
-class Joined
+class CanJoin
 {
     /**
      * Handle an incoming request.
