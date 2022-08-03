@@ -18,7 +18,7 @@ class ProgramFactory extends Factory
         return [
             'type' => $this->faker->numberBetween($min = 1, $max = 3),
             'file' => $this->faker->imageUrl($width = 50, $height = 50),
-            'status' => $this->faker->numberBetween($min = 0, $max = 1),
+            'status' => 1,
             'lesson_id' => $this->faker->randomElement(Lesson::pluck('id')),
         ];
     }

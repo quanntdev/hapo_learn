@@ -35,4 +35,14 @@ class Lesson extends Model
     {
         return $this->hasMany(Program::class, 'lesson_id');
     }
+
+    public function scopeSearch($query, $data)
+    {
+        if (!empty($data['search'])) {
+            $query->where('name_lesson', 'LIKE', "%{$data['search']}%")
+                ->orWhere('content', 'LIKE', "%{$data['search']}%");
+        }
+
+        return $query;
+    }
 }
