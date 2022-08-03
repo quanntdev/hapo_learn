@@ -8,6 +8,7 @@ use App\Http\Controllers\UserCourseController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReplyController;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\LessonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,7 @@ Route::get('/redirects', function(){
 	return redirect(Redirect::intended()->getTargetUrl());
 	return back();
 });
+
+Route::resource('lessons', LessonController::class)->only([
+    'show'
+]);

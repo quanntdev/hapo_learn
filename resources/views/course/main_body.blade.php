@@ -48,7 +48,7 @@
                     </div>
                     <div class="link-lesson">
                         @if ($course->isJoined)
-                        <a href="#"> {{ __('course-detail.link_lesson') }} </a>
+                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}"> {{ __('course-detail.link_lesson') }} </a>
                         @else
                         <div class="cant-learn"> {{ __('course-detail.link_lesson') }} </div>
                         @endif
@@ -218,7 +218,7 @@
                                 </form>
                             </div>
                         </div>
-                        @if (Auth::user())
+                        @if (auth()->user())
                         <div class="accordion-item button-reply-items">
                             <h2 class="accordion-header" id="flush-heading{{$comment->id}}">
                               <button class="accordion-button collapsed button-reply" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$comment->id}}" aria-expanded="false" aria-controls="flush-collapse{{$comment->id}}">
@@ -304,7 +304,7 @@
                     <div class="title">
                         {{ __('course-detail.your_review') }}
                     </div>
-                    @if (Auth::user())
+                    @if (auth()->user())
                     <div class="form-comment">
                         <div class="title">
                             {{ __('course-detail.message') }}
