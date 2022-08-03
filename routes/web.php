@@ -33,6 +33,16 @@ Route::get('/redirects', function(){
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('/course-users', UserCourseController::class)->only(['store', 'update']);
-    Route::resource('/comments', CommentController::class)->only(['store', 'update']);
+});
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'joined'], function () {
+        Route::resource('/course-users', UserCourseController::class)->only(['store']);
+    });
+    Route::group(['middleware' => 'comment'], function () {
+        Route::resource('/comments', CommentController::class)->only(['store']);
+    });
+    Route::resource('/course-users', UserCourseController::class)->only(['update']);
+    Route::resource('/comments', CommentController::class)->only(['update']);
 });

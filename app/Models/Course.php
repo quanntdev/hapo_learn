@@ -80,7 +80,11 @@ class Course extends Model
 
     public function getRatesAttribute()
     {
-        return round(($this->comments()->comments()->sum('star'))/($this->comments()->where('star', '>', 0)->comments()->count()));
+        if($this->comments()->where('star', '>', 0)->comments()->count() >0) {
+            return round(($this->comments()->comments()->sum('star'))/($this->comments()->where('star', '>', 0)->comments()->count()));
+        } else {
+            return 0;
+        }
     }
 
     public function getCountRatesAttribute()

@@ -101,7 +101,7 @@
                         </div>
                         <div class="middle">
                             <div class="bar-container">
-                              <div class="bar-status" style="width: {{ ($course->countRates5 / $course->countRates)*100 }}%"></div>
+                              <div class="bar-status" style="width: {{  $course->countRates >0 ? ($course->countRates5 / $course->countRates) * 100 : 0 }}%"></div>
                             </div>
                         </div>
                         <div class="side right">
@@ -112,7 +112,7 @@
                         </div>
                         <div class="middle">
                         <div class="bar-container">
-                            <div class="bar-status" style="width: {{ ($course->countRates4 / $course->countRates)*100 }}%"></div>
+                            <div class="bar-status" style="width: {{ $course->countRates >0 ? ($course->countRates4 / $course->countRates) * 100 : 0 }}%"></div>
                         </div>
                         </div>
                         <div class="side right">
@@ -123,7 +123,7 @@
                         </div>
                         <div class="middle">
                             <div class="bar-container">
-                                <div class="bar-status" style="width: {{ ($course->countRates3 / $course->countRates)*100 }}%"></div>
+                                <div class="bar-status" style="width: {{  $course->countRates >0 ? ($course->countRates3 / $course->countRates) * 100 : 0 }}%"></div>
                             </div>
                         </div>
                         <div class="side right">
@@ -134,7 +134,7 @@
                         </div>
                         <div class="middle">
                             <div class="bar-container">
-                                <div class="bar-status" style="width: {{ ($course->countRates2 / $course->countRates)*100 }}%"></div>
+                                <div class="bar-status" style="width: {{  $course->countRates >0 ? ($course->countRates2 / $course->countRates) * 100 : 0 }}%"></div>
                             </div>
                         </div>
                         <div class="side right">
@@ -145,7 +145,7 @@
                         </div>
                         <div class="middle">
                             <div class="bar-container">
-                                <div class="bar-status" style="width: {{ ($course->countRates1 / $course->countRates)*100 }}%"></div>
+                                <div class="bar-status" style="width: {{  $course->countRates >0 ? ($course->countRates1 / $course->countRates) * 100 : 0 }}%"></div>
                             </div>
                         </div>
                         <div class="side right">
