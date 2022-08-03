@@ -15,7 +15,7 @@ class UserLessonSeeder extends Seeder
     public function run()
     {
         UserLesson::factory()
-        ->count(50)
+        ->count(25)
         ->create();
     }
 }

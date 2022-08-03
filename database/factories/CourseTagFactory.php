@@ -16,7 +16,7 @@ class CourseTagFactory extends Factory
     public function definition()
     {
         return [
-            'status' => $this->faker->numberBetween($min = 0, $max = 1),
+            'status' => 1,
             'course_id' => $this->faker->randomElement(Course::pluck('id')),
             'tag_id' => $this->faker->randomElement(Tag::pluck('id')),
         ];

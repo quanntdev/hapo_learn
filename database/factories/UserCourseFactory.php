@@ -16,7 +16,7 @@ class UserCourseFactory extends Factory
     public function definition()
     {
         return [
-            'status' => $this->faker->numberBetween($min = 0, $max = 1),
+            'status' => 1,
             'course_id' => $this->faker->randomElement(Course::pluck('id')),
             'user_id' => $this->faker->randomElement(User::pluck('id')),
         ];
