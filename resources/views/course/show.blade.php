@@ -2,10 +2,6 @@
 
 @section('content')
 
-@php
-    $rate = round($course->rates / $comments->count());
-@endphp
-
 <div class="container course-detail">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -93,7 +89,7 @@
                             {{ __('course-detail.price') }}
                         </div>
                         <div class="content">
-                            {{ $course->checkPrice }}
+                            {{ $course->prices }}
                         </div>
                     </div>
                     @if ($course->isnotFinished)

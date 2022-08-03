@@ -85,9 +85,9 @@
                 </div>
                 <div class="view-vote">
                     <div class="all-star-vote">
-                        <div class="point">{{ $rate }}</div>
+                        <div class="point">{{ $course->rates }}</div>
                         <div class="star">
-                            @for ($i = 0; $i < $rate; $i++)
+                            @for ($i = 0; $i < $course->rates; $i++)
                                 <span class="fa fa-star checked"></span>
                             @endfor
                         </div>

@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserCourseController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\ReplyController;
 use Illuminate\Support\Facades\Redirect;
 
 /*
@@ -29,15 +28,11 @@ Route::resource('course', CourseController::class)->only([
     'index', 'show'
 ]);
 
-Route::resource('course-users', UserCourseController::class)->middleware('auth')->only([
-     'store', 'update'
-]);
-
-Route::resource('comments', CommentController::class)->middleware('auth')->only([
-    'store', 'update',
-]);
-
 Route::get('/redirects', function(){
-	return redirect(Redirect::intended()->getTargetUrl());
-	return back();
+    return redirect(Redirect::intended()->getTargetUrl());
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('/course-users', UserCourseController::class)->only(['store', 'update']);
+    Route::resource('/comments', CommentController::class)->only(['store', 'update']);
 });

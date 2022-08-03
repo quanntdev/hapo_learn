@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Pipeline\Hub;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -79,7 +80,7 @@ class Course extends Model
 
     public function getRatesAttribute()
     {
-        return $this->comments()->comments()->sum('star');
+        return round(($this->comments()->comments()->sum('star'))/($this->comments()->where('star', '>', 0)->comments()->count()));
     }
 
     public function getCountRatesAttribute()
@@ -124,12 +125,17 @@ class Course extends Model
 
     public function getTimesAttribute()
     {
-        return round($this->lessons()->sum('time_lesson')/3600);
+        $time = $this->lessons()->sum('time_lesson');
+        $second = $time % config('course.change_time');
+        $minute = (($time - $second) / config('course.change_time')) % config('course.change_time');
+        $hour = ($time - $second - $minute * config('course.change_time')) / (config('course.change_time') * config('course.change_time'));
+        return round(($hour * config('course.times') + $minute * config('course.sec') + $second) / config('course.times'));
+
     }
 
-    public function getCheckPriceAttribute()
+    public function getPricesAttribute()
     {
-        return $this->price == 0 ? ': '.__('course-detail.free') : ': '.$this->price.__('course-detail.price_value');
+        return $this->price == 0 ? ': ' . __('course-detail.free') : ': ' . $this->price . __('course-detail.price_value');
     }
 
     public function scopeFilter($query, $data)

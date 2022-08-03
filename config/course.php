@@ -15,4 +15,7 @@ return [
     'end_course' => 2,
     'free' => "Free",
     'dolar' => "$",
+    'times' => 3600,
+    'sec' => 60,
+    'change_time' => 100,
 ];
