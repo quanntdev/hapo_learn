@@ -35,11 +35,11 @@ class Comment extends Model
 
     public function scopeComments($query)
     {
-        return $query->where('parent_id', '=', null)->orderBy('id', config('course.high_to_low'));
+        return $query->whereNull('parent_id')->orderBy('id', config('course.high_to_low'));
     }
 
     public function scopeReplies($query)
     {
-        return $query->where('parent_id', '<>', null)->orderBy('id', config('course.high_to_low'));
+        return $query->whereNotNull('parent_id')->orderBy('id', config('course.high_to_low'));
     }
 }

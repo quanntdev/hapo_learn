@@ -129,7 +129,7 @@ class Course extends Model
 
     public function getCheckPriceAttribute()
     {
-        return $this->price == 0 ? ': '.config('course.free') : ': '.$this->price.config('course.dolar');
+        return $this->price == 0 ? ': '.__('course-detail.free') : ': '.$this->price.__('course-detail.price_value');
     }
 
     public function scopeFilter($query, $data)

@@ -26,8 +26,8 @@ class StoreCommentRequest extends FormRequest
         return [
             'course_id' => 'required|integer',
             'comment' => 'required|string',
-            'star' => 'Nullable',
-            'parent_id' => 'Nullable|integer',
+            'star' => 'nullable',
+            'parent_id' => 'nullable|integer',
         ];
     }
 
