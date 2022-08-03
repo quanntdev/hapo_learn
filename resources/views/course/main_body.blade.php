@@ -304,7 +304,7 @@
                     <div class="title">
                         {{ __('course-detail.your_review') }}
                     </div>
-                    @if (auth()->user())
+                    @if (auth()->user() && $course->isJoined)
                     <div class="form-comment">
                         <div class="title">
                             {{ __('course-detail.message') }}
@@ -344,6 +344,12 @@
                             <div class="clear"></div>
                         </form>
                     </div>
+                    @elseif (auth()->user() && !$course->isJoined)
+                    <form action="{{ route('course-users.store') }}" method="POST">
+                        @csrf
+                            <input type="hidden" name="course_id" value="{{ $course->id }}">
+                            <button class="add-course-comment" type="submit">{{ __('course-detail.add_course') }}</button>
+                    </form>
                     @else
                     <div class="must-login">
                         <a href="{{ route('login') }}">{{ __('course-detail.must_comment') }}</a>

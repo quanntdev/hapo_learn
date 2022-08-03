@@ -655,3 +655,17 @@
   display: none;
   margin-top: 20px;
 }
+
+.add-course-comment {
+  border: 0;
+  border-radius: 25px;
+  background-color: $main-color;
+  color: white;
+  padding: 0 20px;
+  font-weight: 700;
+  margin-right: 50px;
+
+  &:hover {
+    background-color: red;
+  }
+}
