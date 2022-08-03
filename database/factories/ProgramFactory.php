@@ -16,6 +16,7 @@ class ProgramFactory extends Factory
     public function definition()
     {
         return [
+            'program_name' => $this->faker->name($gender = null),
             'type' => $this->faker->numberBetween($min = 1, $max = 3),
             'file' => $this->faker->imageUrl($width = 50, $height = 50),
             'status' => 1,

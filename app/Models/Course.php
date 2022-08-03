@@ -80,8 +80,8 @@ class Course extends Model
 
     public function getRatesAttribute()
     {
-        if($this->comments()->where('star', '>', 0)->comments()->count() >0) {
-            return round(($this->comments()->comments()->sum('star'))/($this->comments()->where('star', '>', 0)->comments()->count()));
+        if ($this->comments()->where('star', '>', 0)->comments()->count() > 0) {
+            return round(($this->comments()->comments()->sum('star')) / ($this->comments()->where('star', '>', 0)->comments()->count()));
         } else {
             return 0;
         }
@@ -134,7 +134,6 @@ class Course extends Model
         $minute = (($time - $second) / config('course.change_time')) % config('course.change_time');
         $hour = ($time - $second - $minute * config('course.change_time')) / (config('course.change_time') * config('course.change_time'));
         return round(($hour * config('course.times') + $minute * config('course.sec') + $second) / config('course.times'));
-
     }
 
     public function getPricesAttribute()

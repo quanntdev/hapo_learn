@@ -64,5 +64,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'canJoin' => \App\Http\Middleware\CanJoin::class,
         'canComment' => \App\Http\Middleware\CanComment::class,
+        'joinLesson' => \App\Http\Middleware\JoinLesson::class,
+        'joinProgram' => \App\Http\Middleware\JoinProgram::class,
+        'seeProfile' => \App\Http\Middleware\SeeProfile::class,
+        'seeLesson' => \App\Http\Middleware\SeeLesson::class,
     ];
 }

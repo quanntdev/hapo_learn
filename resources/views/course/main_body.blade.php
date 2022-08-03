@@ -40,22 +40,58 @@
             <div class="list-lesson">
                 @foreach ($lessons as $key => $lesson)
                 <div class="lesson-items">
-                    <div class="number-lesson">{{ $key+1 }}.</div>
+                    <div class="number-lesson">{{ $key+1 + ( (isset($data['page']) ? $data['page'] : 1) -1) * config('course.lesson_paginate') }}.</div>
                     <div class="name-lesson">
                         <div class="content">
                              {{ $lesson->name_lesson }}
                         </div>
                     </div>
                     <div class="link-lesson">
-                        @if ($course->isJoined || $course->isFinished)
-                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}"> {{ __('course-detail.link_lesson') }} </a>
+                        @if($key + ( (isset($data['page']) ? $data['page'] : 1) -1) * config('course.lesson_paginate') == 0 )
+                            @if (($course->isJoined || $course->isFinished) && $lesson->IsFinishLesson == false)
+                            <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn-start-learn"> {{ __('course-detail.link_lesson') }} </a>
+                            @elseif ($lesson->IsFinishLesson)
+                            <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn btn-success"> complete </a>
+                            @else
+                            <div class="cant-learn"> {{ __('course-detail.link_lesson') }} </div>
+                            @endif
+                        @elseif ($key + ( (isset($data['page']) ? $data['page'] : 1) -1) * config('course.lesson_paginate') > 0 && $key + ( (isset($data['page']) ? $data['page'] : 1) -1) * config('course.lesson_paginate') < config('course.lesson_paginate') )
+                            @if (($course->isJoined || $course->isFinished) && $lesson->IsFinishLesson == false && ($lessons[$key + ( (isset($data['page']) ? $data['page'] : 1) -1) * config('course.lesson_paginate') - 1]->IsFinishLesson == true))
+                            <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn-start-learn"> {{ __('course-detail.link_lesson') }} </a>
+                            @elseif ($lesson->IsFinishLesson)
+                            <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn btn-success"> complete </a>
+                            @else
+                            <div class="cant-learn"> {{ __('course-detail.link_lesson') }} </div>
+                            @endif
                         @else
-                        <div class="cant-learn"> {{ __('course-detail.link_lesson') }} </div>
+                            @if (isset($data['learned']))
+                                @if ($key == 0)
+                                    @if ($lesson->IsFinishLesson == false)
+                                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn-start-learn"> {{ __('course-detail.link_lesson') }} </a>
+                                    @else
+                                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn btn-success"> complete </a>
+                                    @endif
+                                @elseif ($key > 0)
+                                    @if ($lesson->IsFinishLesson == false && ($lessons[$key- 1]->IsFinishLesson == true))
+                                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn-start-learn"> {{ __('course-detail.link_lesson') }} </a>
+                                    @elseif ($lesson->IsFinishLesson)
+                                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn btn-success"> complete </a>
+                                    @else
+                                        <div class="cant-learn"> {{ __('course-detail.link_lesson') }} </div>
+                                    @endif
+                                @endif
+                            @else
+                                <div class="cant-learn"> {{ __('course-detail.link_lesson') }} </div>
+                            @endif
                         @endif
                     </div>
                 </div>
                 @endforeach
+                @if (  ((isset($data['page']) && $data['page'] == 1) || empty($data['page']) ) && $lessons[config('course.lesson_paginate') - 1 ]->IsFinishLesson == true)
+                {{ $lessons->appends(request()->query())->appends(['learned' => 'true'])->links() }}
+                @else
                 {{ $lessons->appends(request()->query())->links() }}
+                @endif
                 <div class="clear"></div>
             </div>
         </div>
@@ -65,7 +101,7 @@
                 @foreach ($teachers as $key => $teacher)
                 <div class="list-teacher">
                     <div class="group-avatar">
-                        <img class="avatar" src="{{ $teacher->avatar }}" alt="">
+                        <img class="avatar" src="{{ $teacher->checkAvatar }}" alt="">
                         <div class="info">
                             <div class="name">{{ $teacher->name }}</div>
                             <div class="year">{{ $teacher->created_at->diffForHumans(null, true)." ".__('course-detail.teacher') }}</div>
@@ -164,7 +200,7 @@
                         @endif
                         <div class="user">
                             <div class="avatar">
-                                <img src=" {{ $comment->user->avatar }} " alt="">
+                                <img src=" {{ $comment->user->checkAvatar }} " alt="">
                             </div>
                             <div class="name">
                                 {{ $comment->user->name }}
@@ -256,7 +292,7 @@
                                      @endif
                                     <div class="user">
                                         <div class="avatar">
-                                            <img src=" {{ $reply->user->avatar }} " alt="">
+                                            <img src=" {{ $reply->user->checkAvatar }} " alt="">
                                         </div>
                                         <div class="name">
                                             {{ $reply->user->name }}

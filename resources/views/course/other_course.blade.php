@@ -6,7 +6,7 @@
         @foreach ($otherCourses as $key => $otherCourse)
         <div class="course-items">
             <div class="number">{{ $key + 1 }}.</div>
-            <div class="content"><a href="{{ $otherCourse->slug_course }}">{{ $otherCourse->course_name }}</a></div>
+            <div class="content"><a href="{{ route('course.show', [$otherCourse->slug_course]) }}">{{ $otherCourse->course_name }}</a></div>
         </div>
         @endforeach
     </div>
