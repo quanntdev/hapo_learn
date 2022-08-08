@@ -60,10 +60,10 @@ class Lesson extends Model
         })->exists();
     }
 
-    public function scopeUpdateFinishLesson($query, $valueProgramsFinish, $valueCountPrograms, $idLesson)
+    public static function UpdateFinishLesson($valueProgramsFinish, $valueCountPrograms, $id)
     {
         if ($valueProgramsFinish == $valueCountPrograms) {
-            $lesson = Lesson::find($idLesson);
+            $lesson = Lesson::find($id);
             $lesson->users()->updateExistingPivot(auth()->user()->id, ['status' => config('program.finish_lesson')]);
         }
     }
