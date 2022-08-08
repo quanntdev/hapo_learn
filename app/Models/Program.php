@@ -81,7 +81,7 @@ class Program extends Model
         })->count();
     }
 
-    public function scopeGetCountUserPrograms($query, $programs)
+    public function scopeCountFinishedPrograms($query, $programs)
     {
         $count = 0;
         foreach ($programs as $program) {
