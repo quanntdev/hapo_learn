@@ -67,4 +67,18 @@ class Lesson extends Model
             $lesson->users()->updateExistingPivot(auth()->user()->id, ['status' => config('program.finish_lesson')]);
         }
     }
+
+    public function getProgressAttribute()
+    {
+        $programs = $this->programs()->count();
+
+        $count = 0;
+        foreach ($this->programs()->get() as $program) {
+            $program = $program->countJoinedPrograms;
+            $count += $program;
+        }
+
+
+        return round(($count / $programs) * 100);
+    }
 }
