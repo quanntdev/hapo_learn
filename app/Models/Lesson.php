@@ -70,18 +70,14 @@ class Lesson extends Model
 
     public function getProgressAttribute()
     {
-        $programs = $this->programs()->count();
+        $programs = $this->programs()->get();
+        $programs_id = $this->programs()->pluck('id')->toArray();
+        $count = UserProgram::where('user_id', auth()->id())->whereIn('program_id', $programs_id)->count();
 
-        $count = 0;
-        foreach ($this->programs()->get() as $program) {
-            $program = $program->countJoinedPrograms;
-            $count += $program;
-        }
-
-        if($programs == 0) {
+        if ($count == 0) {
             return 0;
         } else {
-            return round(($count / $programs) * 100);
+            return round(($count / $programs->count()) * 100);
         }
     }
 }
