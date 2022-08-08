@@ -78,7 +78,10 @@ class Lesson extends Model
             $count += $program;
         }
 
-
-        return round(($count / $programs) * 100);
+        if($programs == 0) {
+            return 0;
+        } else {
+            return round(($count / $programs) * 100);
+        }
     }
 }
