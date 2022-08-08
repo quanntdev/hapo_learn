@@ -42,10 +42,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'canComment'], function () {
         Route::resource('/comments', CommentController::class)->only(['store']);
     });
-    Route::group(['middleware' => 'joinLesson'], function () {
+    Route::group(['middleware' => 'canLearnLesson'], function () {
         Route::resource('user-lesson', UserLessonController::class)->only(['store']);
     });
-    Route::group(['middleware' => 'joinProgram'], function () {
+    Route::group(['middleware' => 'canLearnProgram'], function () {
         Route::resource('user-program', UserProgramController::class)->only(['store']);
     });
     Route::resource('/course-users', UserCourseController::class)->only(['update']);

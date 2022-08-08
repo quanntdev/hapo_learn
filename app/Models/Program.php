@@ -30,24 +30,34 @@ class Program extends Model
     public function getTypeProgramAttribute()
     {
         $programsValue = $this->type;
-        if ($programsValue == config('program.value_doc')) {
-            return __('lesson.type_doc');
-        } elseif ($programsValue == config('program.value_pdf')) {
-            return __('lesson.type_pdf');
-        } elseif ($programsValue == config('program.value_video')) {
-            return __('lesson.type_video');
+
+        switch ($programsValue) {
+            case config('program.value_doc'):
+                return __('lesson.type_doc');
+                break;
+            case config('program.value_pdf'):
+                return __('lesson.type_pdf');
+                break;
+            case config('program.value_video'):
+                return __('lesson.type_video');
+                break;
         }
     }
 
     public function getPictureProgramAttribute()
     {
         $programsValue = $this->type;
-        if ($programsValue == config('program.value_doc')) {
-            return config('program.pic_doc');
-        } elseif ($programsValue == config('program.value_pdf')) {
-            return config('program.pic_pdf');
-        } elseif ($programsValue == config('program.value_video')) {
-            return config('program.pic_video');
+
+        switch ($programsValue) {
+            case config('program.value_doc'):
+                return config('program.pic_doc');
+                break;
+            case config('program.value_pdf'):
+                return config('program.pic_pdf');
+                break;
+            case config('program.value_video'):
+                return config('program.pic_video');
+                break;
         }
     }
 
