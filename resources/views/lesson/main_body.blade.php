@@ -51,11 +51,11 @@
                     </div>
                     <div class="middle">
                         <div class="bar-container">
-                          <div class="bar-status" style="width: {{ ($lesson->programs->count() > 0 ? $countUserPrograms / $lesson->programs->count() : 0) * 100 }}%"></div>
+                          <div class="bar-status" style="width: {{ $lesson->Progress }}%"></div>
                         </div>
                     </div>
                     <div class="side right">
-                        <div> {{ ($lesson->programs->count() > 0 ? $countUserPrograms / $lesson->programs->count() : 0) * 100 }} %</div>
+                        {{ $lesson->Progress }} %
                     </div>
                     <div class="clear"></div>
                 </div>
