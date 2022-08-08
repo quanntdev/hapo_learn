@@ -6,7 +6,7 @@ use App\Models\Program;
 use Closure;
 use Illuminate\Http\Request;
 
-class JoinProgram
+class LearnProgram
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class JoinProgram
     public function handle(Request $request, Closure $next)
     {
         $program = Program::find($request['program_id']);
-        if ($program->isJoinedPrograms) {
+        if ($program->isLearnPrograms) {
             return redirect('home');
         }
         return $next($request);

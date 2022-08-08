@@ -29,9 +29,9 @@ class Program extends Model
 
     public function getTypeProgramAttribute()
     {
-        $programsValue = $this->type;
+        $programsType = $this->type;
 
-        switch ($programsValue) {
+        switch ($programsType) {
             case config('program.value_doc'):
                 return __('lesson.type_doc');
                 break;
@@ -41,14 +41,17 @@ class Program extends Model
             case config('program.value_video'):
                 return __('lesson.type_video');
                 break;
+            default:
+                return __('lesson.type_doc');
+                break;
         }
     }
 
     public function getPictureProgramAttribute()
     {
-        $programsValue = $this->type;
+        $programsType = $this->type;
 
-        switch ($programsValue) {
+        switch ($programsType) {
             case config('program.value_doc'):
                 return config('program.pic_doc');
                 break;
@@ -58,10 +61,13 @@ class Program extends Model
             case config('program.value_video'):
                 return config('program.pic_video');
                 break;
+            default:
+                return config('program.pic_doc');
+                break;
         }
     }
 
-    public function getIsJoinedProgramsAttribute()
+    public function getIsLearnProgramsAttribute()
     {
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id());
