@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Services\UpdateService;
 
 class Program extends Model
 {
@@ -90,5 +91,11 @@ class Program extends Model
         }
 
         return $count;
+    }
+
+    public static function updateFinishPrograms($programs, $id)
+    {
+        $countFinishedPrograms = Program::CountFinishedPrograms($programs);
+        UpdateService::updateFinishPrograms($countFinishedPrograms, $programs->count(), $id);
     }
 }
