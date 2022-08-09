@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Services\UpdateService;
 
 class Program extends Model
 {
@@ -28,42 +27,34 @@ class Program extends Model
         return $this->belongsToMany(User::class, 'user_program', 'program_id', 'user_id');
     }
 
-    public function getTypeProgramAttribute()
+    public function getProgramTypeAttribute()
     {
         $programsType = $this->type;
 
         switch ($programsType) {
             case config('program.value_doc'):
-                return __('lesson.type_doc');
+                return [
+                    'picture' => config('program.pic_doc'),
+                    'type' => __('lesson.type_doc'),
+                ];
                 break;
             case config('program.value_pdf'):
-                return __('lesson.type_pdf');
+                return [
+                    'picture' => config('program.pic_pdf'),
+                    'type' => __('lesson.type_pdf'),
+                ];
                 break;
             case config('program.value_video'):
-                return __('lesson.type_video');
+                return [
+                    'picture' => config('program.pic_video'),
+                    'type' => __('lesson.type_video'),
+                ];
                 break;
             default:
-                return __('lesson.type_doc');
-                break;
-        }
-    }
-
-    public function getPictureProgramAttribute()
-    {
-        $programsType = $this->type;
-
-        switch ($programsType) {
-            case config('program.value_doc'):
-                return config('program.pic_doc');
-                break;
-            case config('program.value_pdf'):
-                return config('program.pic_pdf');
-                break;
-            case config('program.value_video'):
-                return config('program.pic_video');
-                break;
-            default:
-                return config('program.pic_doc');
+                return [
+                    'picture' => config('program.pic_doc'),
+                    'type' => __('lesson.type_doc'),
+                ];
                 break;
         }
     }
@@ -75,7 +66,7 @@ class Program extends Model
         })->exists();
     }
 
-    public function getCountJoinedProgramsAttribute()
+    public function getLearnedProgramsAttribute()
     {
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id());
@@ -86,7 +77,7 @@ class Program extends Model
     {
         $count = 0;
         foreach ($programs as $program) {
-            $program = $program->countJoinedPrograms;
+            $program = $program->countLearendPrograms;
             $count += $program;
         }
 
