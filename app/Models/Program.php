@@ -92,10 +92,4 @@ class Program extends Model
 
         return $count;
     }
-
-    public static function updateFinishPrograms($programs, $id)
-    {
-        $countFinishedPrograms = Program::CountFinishedPrograms($programs);
-        UpdateService::updateFinishPrograms($countFinishedPrograms, $programs->count(), $id);
-    }
 }
