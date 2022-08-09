@@ -62,10 +62,10 @@
                 @foreach ($lesson->programs as $key => $program)
                 <div class="programs-items">
                     <div class="image">
-                        <img src="{{ asset('images/'.$program->pictureProgram.'.png') }}" alt="">
+                        <img src="{{ asset('images/'.$program->programType['picture'].'.png') }}" alt="">
                     </div>
                     <div class="type">
-                        {{ $program->typeProgram }}
+                        {{ $program->programType['type'] }}
                     </div>
                     <div class="name">
                         {{ $program->program_name }}

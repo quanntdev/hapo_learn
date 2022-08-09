@@ -8,7 +8,7 @@ use App\Models\Program;
 /**
  * Class UpdateFinishProgramsService.
  */
-class UpdateService
+class UpdateFinishProgramsService
 {
     public static function updateFinishPrograms($lesson)
     {
