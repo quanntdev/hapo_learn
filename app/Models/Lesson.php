@@ -60,14 +60,6 @@ class Lesson extends Model
         })->exists();
     }
 
-    public static function UpdateFinishLesson($valueProgramsFinish, $valueCountPrograms, $id)
-    {
-        if ($valueProgramsFinish == $valueCountPrograms) {
-            $lesson = Lesson::find($id);
-            $lesson->users()->updateExistingPivot(auth()->user()->id, ['status' => config('program.finish_lesson')]);
-        }
-    }
-
     public function getProgressAttribute()
     {
         $programs = $this->programs()->get();

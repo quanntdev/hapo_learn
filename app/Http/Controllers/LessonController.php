@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Program;
 use App\Models\User;
+use App\Services\UpdateService;
 
 class LessonController extends Controller
 {
@@ -16,7 +17,7 @@ class LessonController extends Controller
         $otherCourses = Course::inRandomOrder()->take(config('course.other_course_on_detail'))->get();
         $tags = $lesson->course->tags;
         $countFinishedPrograms = Program::CountFinishedPrograms($lesson->programs);
-        Lesson::UpdateFinishLesson($countFinishedPrograms, $lesson->programs->count(), $lesson->id);
+        UpdateService::updateFinishPrograms($countFinishedPrograms, $lesson->programs->count(), $lesson->id);
         return view('lesson.show', compact('lesson', 'otherCourses', 'tags'));
     }
 }
