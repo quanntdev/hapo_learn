@@ -6,6 +6,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Services\UserService;
+use Illuminate\Contracts\Cache\Store;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -73,28 +76,27 @@ class User extends Authenticatable
         return $query->where('role', config('roles.teacher'));
     }
 
-    public function scopeUpAvatar($query, $avatar, $id)
-    {
+    // public function scopeUpAvatar($query, $avatar, $id)
+    // {
 
-        $oldAvatar = $this->find($id)->avatar;
-        if ($oldAvatar != null) {
-            unlink(public_path('public/profile/' . $oldAvatar));
-        }
+    //     $oldAvatar = $this->find($id)->avatar;
+    //     if ($oldAvatar != null) {
+    //         Storage::delete('public/profile/' . $oldAvatar);
+    //     }
 
-        $get_image = $avatar;
-        $path =   'public/profile/';
-        $get_name_image = $get_image->getClientOriginalName();
-        $name_image = current(explode('.',$get_name_image));
-        $new_image =  $name_image.rand(0,999).'.'.$get_image->getClientOriginalExtension();
-        $get_image->move($path,$new_image);
+    //     $get_image = $avatar;
+    //     $get_name_image = $get_image->getClientOriginalName();
+    //     $name_image = current(explode('.',$get_name_image));
+    //     $new_image =  $name_image.rand(0,999).'.'.$get_image->getClientOriginalExtension();
+    //     $path = $get_image->storeAs('public/profile', $new_image);
 
-        $data = [
-            'avatar' => $new_image,
-        ];
+    //     $data = [
+    //         'avatar' => $new_image,
+    //     ];
 
-        $user = User::find($id);
-        $user->update($data);
-    }
+    //     $user = User::find($id);
+    //     $user->update($data);
+    // }
 
     public function getCheckAvatarAttribute()
     {

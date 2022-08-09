@@ -11,7 +11,7 @@
                 <input type="hidden" name="user_id" value="{{ $user->id }}">
             <div class="group-avatar">
                 <div class="avatar">
-                    <img src="{{ $user->checkAvatar }}" id="img-preview" alt="">
+                    <img src="{{ asset( $user->avatar ) }}" id="img-preview" alt="">
                 </div>
                 <div class="upload-avatar">
                     <input type="file" name="avatar" id="file" class="inputfile" accept=".png, .jpeg, .PNG, .jpg" />

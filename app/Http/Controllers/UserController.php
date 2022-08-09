@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateUserProfileRequest;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
@@ -70,6 +71,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    protected $updateImage;
+
+    public function __construct()
+    {
+        $this->updateImage = new UserService();
+
+    }
     public function update(UpdateUserProfileRequest $request, $id)
     {
         $data = [
@@ -84,7 +93,7 @@ class UserController extends Controller
         $user->update($data);
 
         if($request['avatar'] != null) {
-            User::UpAvatar($request['avatar'], $id);
+            $this->updateImage->handleUploadImage($request['avatar'], $id);
         }
 
         return redirect()->back()->with('success', __('user.update_success'));
