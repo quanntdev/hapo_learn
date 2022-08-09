@@ -46,7 +46,7 @@ class Lesson extends Model
         return $query;
     }
 
-    public function IsJoinedLesson()
+    public function IsJoined()
     {
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id());

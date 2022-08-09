@@ -18,7 +18,7 @@ class JoinLesson
     public function handle(Request $request, Closure $next)
     {
         $lesson = Lesson::find($request['lesson_id']);
-        if ($lesson->isJoinedLesson()) {
+        if ($lesson->isJoined()) {
             return redirect('home');
         }
         return $next($request);
