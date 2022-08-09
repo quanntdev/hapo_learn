@@ -72,7 +72,7 @@
                     </div>
                     <div class="link">
                         @if ($lesson->IsJoinedLesson)
-                            @if (!$program->IsLearnedPrograms())
+                            @if (!$program->isLearnedPrograms())
                                 <form action="{{ route('user-program.store') }}" method="POST">
                                      @csrf
                                     <input type="hidden" name="program_id" value="{{ $program->id }}">

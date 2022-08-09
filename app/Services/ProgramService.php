@@ -13,7 +13,7 @@ class ProgramService
 {
     public static function updateProgramsStatus($lesson)
     {
-        $countFinishedPrograms = UserProgram::CountFinishedPrograms($lesson->programs);
+        $countFinishedPrograms = UserProgram::FinishedPrograms($lesson->programs)->count();
         $countPrograms = $lesson->programs->count();
 
         if ($countFinishedPrograms == $countPrograms) {
