@@ -46,14 +46,14 @@ class Lesson extends Model
         return $query;
     }
 
-    public function getIsJoinedLessonAttribute()
+    public function IsJoinedLesson()
     {
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id());
         })->exists();
     }
 
-    public function getIsFinishLessonAttribute()
+    public function IsFinished()
     {
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id())->where('user_lesson.status', '=', config('program.finish_lesson'));
@@ -63,7 +63,7 @@ class Lesson extends Model
     public function getProgressAttribute()
     {
         $programsId = $this->programs->pluck('id')->toArray();
-        $count = UserProgram::where('user_id', auth()->id())->whereIn('program_id', $programsId)->count();
+        $count = UserProgram::countFinished($programsId)->count();
 
         return ($count == 0) ? 0 : round(($count / $this->programs()->count()) * 100);
     }

@@ -9,14 +9,14 @@
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade @if (!session('success')) show active  @endif " id="descriptions-tab-pane" role="tabpanel" aria-labelledby="descriptions-tab" tabindex="0">
-            @if (!$lesson->IsJoinedLesson)
+            @if (!$lesson->IsJoinedLesson())
             <form action="{{ route('user-lesson.store') }}" class="start-learn-lesson" method="POST">
                 @csrf
                 <input type="hidden" name="lesson_id" value="{{ $lesson->id }}">
                 <button type="submit">Start Learn Lesson</button>
                 <div class="clear"></div>
             </form>
-            @elseif($lesson->IsFinishLesson)
+            @elseif($lesson->IsFinished())
             <div class="btn btn-danger btn-lesson-learned">You have finish this lesson</div>
                 <div class="clear"></div>
             @else
@@ -71,8 +71,8 @@
                         {{ $program->program_name }}
                     </div>
                     <div class="link">
-                        @if ($lesson->IsJoinedLesson)
-                            @if (!$program->isLearnedPrograms())
+                        @if ($lesson->IsJoinedLesson())
+                            @if (!$program->isLearned())
                                 <form action="{{ route('user-program.store') }}" method="POST">
                                      @csrf
                                     <input type="hidden" name="program_id" value="{{ $program->id }}">

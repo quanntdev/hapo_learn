@@ -53,7 +53,7 @@ class Program extends Model
         }
     }
 
-    public function isLearnedPrograms()
+    public function isLearned()
     {
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id());
