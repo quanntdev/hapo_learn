@@ -7,7 +7,7 @@ use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Program;
 use App\Models\User;
-use App\Services\UpdateFinishProgramsService;
+use App\Services\ProgramService;
 
 class LessonController extends Controller
 {
@@ -15,7 +15,7 @@ class LessonController extends Controller
 
     public function __construct()
     {
-        $this->programsService = new UpdateFinishProgramsService();
+        $this->programsService = new ProgramService();
 
     }
 
