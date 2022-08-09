@@ -6,6 +6,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Services\UserService;
+use Illuminate\Contracts\Cache\Store;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -71,5 +74,37 @@ class User extends Authenticatable
     public function scopeTeachers($query)
     {
         return $query->where('role', config('roles.teacher'));
+    }
+
+    // public function scopeUpAvatar($query, $avatar, $id)
+    // {
+
+    //     $oldAvatar = $this->find($id)->avatar;
+    //     if ($oldAvatar != null) {
+    //         Storage::delete('public/profile/' . $oldAvatar);
+    //     }
+
+    //     $get_image = $avatar;
+    //     $get_name_image = $get_image->getClientOriginalName();
+    //     $name_image = current(explode('.',$get_name_image));
+    //     $new_image =  $name_image.rand(0,999).'.'.$get_image->getClientOriginalExtension();
+    //     $path = $get_image->storeAs('public/profile', $new_image);
+
+    //     $data = [
+    //         'avatar' => $new_image,
+    //     ];
+
+    //     $user = User::find($id);
+    //     $user->update($data);
+    // }
+
+    public function getCheckAvatarAttribute()
+    {
+        $avatar = $this->avatar;
+        if ($avatar == null) {
+            return asset('images/guest-user.png');
+        } else {
+            return asset('public/profile/' . $avatar);
+        }
     }
 }
