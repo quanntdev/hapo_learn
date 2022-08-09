@@ -3,16 +3,20 @@
 namespace App\Services;
 
 use App\Models\Lesson;
+use App\Models\Program;
 
 /**
  * Class UpdateFinishProgramsService.
  */
 class UpdateService
 {
-    public static function updateFinishPrograms($valueProgramsFinish, $valueCountPrograms, $id)
+    public static function updateFinishPrograms($lesson)
     {
-        if ($valueProgramsFinish == $valueCountPrograms) {
-            $lesson = Lesson::find($id);
+        $countFinishedPrograms = Program::CountFinishedPrograms($lesson->programs);
+        $countPrograms = $lesson->programs->count();
+
+        if ($countFinishedPrograms == $countPrograms) {
+            $lesson = Lesson::find($lesson->id);
             $lesson->users()->updateExistingPivot(auth()->user()->id, ['status' => config('program.finish_lesson')]);
         }
     }
