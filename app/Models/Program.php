@@ -32,12 +32,6 @@ class Program extends Model
         $programsType = $this->type;
 
         switch ($programsType) {
-            case config('program.value_doc'):
-                return [
-                    'picture' => config('program.pic_doc'),
-                    'type' => __('lesson.type_doc'),
-                ];
-                break;
             case config('program.value_pdf'):
                 return [
                     'picture' => config('program.pic_pdf'),
@@ -77,7 +71,7 @@ class Program extends Model
     {
         $count = 0;
         foreach ($programs as $program) {
-            $program = $program->countLearendPrograms;
+            $program = $program->LearnedPrograms;
             $count += $program;
         }
 
