@@ -53,17 +53,18 @@ class Program extends Model
         }
     }
 
-    public function getIsLearnedProgramsAttribute()
+    public function IsLearnedPrograms()
     {
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id());
         })->exists();
     }
 
-    public function getLearnedProgramsAttribute()
+    public function LearnedPrograms()
     {
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id());
         })->count();
     }
+
 }
