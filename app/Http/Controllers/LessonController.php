@@ -24,7 +24,7 @@ class LessonController extends Controller
         $lesson = Lesson::with('users', 'course', 'programs')->where('slug_lesson', $slug)->firstOrFail();
         $otherCourses = Course::inRandomOrder()->take(config('course.other_course_on_detail'))->get();
         $tags = $lesson->course->tags;
-        $this->programsService->updateFinishPrograms($lesson);
+        $this->programsService->updateProgramsStatus($lesson);
         return view('lesson.show', compact('lesson', 'otherCourses', 'tags'));
     }
 }

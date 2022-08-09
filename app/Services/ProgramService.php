@@ -4,15 +4,16 @@ namespace App\Services;
 
 use App\Models\Lesson;
 use App\Models\Program;
+use App\Models\UserProgram;
 
 /**
  * Class UpdateFinishProgramsService.
  */
 class ProgramService
 {
-    public static function updateFinishPrograms($lesson)
+    public static function updateProgramsStatus($lesson)
     {
-        $countFinishedPrograms = Program::CountFinishedPrograms($lesson->programs);
+        $countFinishedPrograms = UserProgram::CountFinishedPrograms($lesson->programs);
         $countPrograms = $lesson->programs->count();
 
         if ($countFinishedPrograms == $countPrograms) {

@@ -18,7 +18,7 @@ class LearnProgram
     public function handle(Request $request, Closure $next)
     {
         $program = Program::find($request['program_id']);
-        if ($program->isLearnPrograms) {
+        if ($program->isLearnedPrograms) {
             return redirect('home');
         }
         return $next($request);

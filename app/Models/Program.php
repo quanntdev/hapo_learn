@@ -53,7 +53,7 @@ class Program extends Model
         }
     }
 
-    public function getIsLearnProgramsAttribute()
+    public function getIsLearnedProgramsAttribute()
     {
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id());
@@ -65,16 +65,5 @@ class Program extends Model
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id());
         })->count();
-    }
-
-    public function scopeCountFinishedPrograms($query, $programs)
-    {
-        $count = 0;
-        foreach ($programs as $program) {
-            $program = $program->LearnedPrograms;
-            $count += $program;
-        }
-
-        return $count;
     }
 }
