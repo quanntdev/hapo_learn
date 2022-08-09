@@ -16,7 +16,6 @@ class LessonController extends Controller
     public function __construct()
     {
         $this->programsService = new ProgramService();
-
     }
 
     public function show($slug)

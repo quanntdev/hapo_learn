@@ -16,8 +16,8 @@ class UserProgram extends Model
         'program_id',
     ];
 
-    public function scopeCountFinishedPrograms($query, $programs)
+    public function scopeFinishedPrograms($query, $programs)
     {
-        return $query->where('user_id', auth()->id())->whereIn('program_id', $programs->pluck('id')->toArray())->count();
+        return $query->where('user_id', auth()->id())->whereIn('program_id', $programs->pluck('id')->toArray());
     }
 }
