@@ -24,6 +24,39 @@ class Program extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_lesson', 'lesson_id', 'user_id');
+        return $this->belongsToMany(User::class, 'user_program', 'program_id', 'user_id');
+    }
+
+    public function getProgramTypeAttribute()
+    {
+        $programsType = $this->type;
+
+        switch ($programsType) {
+            case config('program.value_pdf'):
+                return [
+                    'picture' => config('program.pic_pdf'),
+                    'type' => __('lesson.type_pdf'),
+                ];
+                break;
+            case config('program.value_video'):
+                return [
+                    'picture' => config('program.pic_video'),
+                    'type' => __('lesson.type_video'),
+                ];
+                break;
+            default:
+                return [
+                    'picture' => config('program.pic_doc'),
+                    'type' => __('lesson.type_doc'),
+                ];
+                break;
+        }
+    }
+
+    public function isLearned()
+    {
+        return $this->users()->whereExists(function ($query) {
+            $query->where('user_id', auth()->id());
+        })->exists();
     }
 }
