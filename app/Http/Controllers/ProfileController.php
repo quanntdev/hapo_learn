@@ -7,20 +7,20 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UpdateUserProfileRequest;
 use App\Services\UpdateAvatarService;
 
-class UserController extends Controller
+class ProfileController extends Controller
 {
-    public function show($id)
-    {
-        $user = User::find($id);
-        $course = $user->courses()->get();
-        return view('user.show', compact('user', 'course'));
-    }
-
     protected $updateImage;
 
     public function __construct()
     {
         $this->updateImage = new UpdateAvatarService();
+    }
+
+    public function index()
+    {
+        $user = User::find(auth()->id());
+        $course = $user->courses()->get();
+        return view('profile.index', compact('user', 'course'));
     }
 
     public function update(UpdateUserProfileRequest $request, $id)
@@ -33,8 +33,8 @@ class UserController extends Controller
             'date_of_birth' => $request['date_of_birth'],
         ];
 
-        $user = User::find($id);
-        $user->update($data);
+        $user = User::find(auth()->id());
+        $user->update($request->all());
 
         if ($request['avatar'] != null) {
             $this->updateImage->handleUploadImage($request['avatar'], $id);

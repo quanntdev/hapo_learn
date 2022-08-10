@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 /**
  * Class UpdateAvatarService.
@@ -14,7 +15,8 @@ class UpdateAvatarService
     {
         $getNameImage = $avatar->getClientOriginalName();
         $nameImage = current(explode('.', $getNameImage));
-        $nameImage = $nameImage . rand(0, 999) . '.' . $avatar->getClientOriginalExtension();
+        $accessToken = Str::random(40);
+        $nameImage = $nameImage . $accessToken . '.' . $avatar->getClientOriginalExtension();
         $avatar->storeAs(config('user.avatar_path'), $nameImage);
 
         $data = [
