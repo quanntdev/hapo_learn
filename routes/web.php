@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\UserLessonController;
 use App\Http\Controllers\UserProgramController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::group(['middleware' => 'canLearnProgram'], function () {
         Route::resource('user-program', UserProgramController::class)->only(['store']);
+    });
+    Route::group(['middleware' => 'canSeeProfile'], function () {
+        Route::resource('profile', UserController::class)->only(['show', 'update']);
     });
     Route::resource('/course-users', UserCourseController::class)->only(['update']);
     Route::resource('/comments', CommentController::class)->only(['update']);

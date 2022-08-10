@@ -46,14 +46,14 @@ class Lesson extends Model
         return $query;
     }
 
-    public function IsJoined()
+    public function isJoined()
     {
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id());
         })->exists();
     }
 
-    public function IsFinished()
+    public function isFinished()
     {
         return $this->users()->whereExists(function ($query) {
             $query->where('user_id', auth()->id())->where('user_lesson.status', '=', config('program.finish_lesson'));
