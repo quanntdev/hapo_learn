@@ -31,20 +31,7 @@
                       </ul>
                       <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade @if (!session('success')) show active  @endif " id="descriptions-tab-pane" role="tabpanel" aria-labelledby="descriptions-tab" tabindex="0">
-                            @if (!$lesson->IsJoined())
-                            <form action="{{ route('user-lesson.store') }}" class="start-learn-lesson" method="POST">
-                                @csrf
-                                <input type="hidden" name="lesson_id" value="{{ $lesson->id }}">
-                                <button type="submit">Start Learn Lesson</button>
-                                <div class="clear"></div>
-                            </form>
-                            @elseif($lesson->IsFinished())
-                            <div class="btn btn-danger btn-lesson-learned">You have finish this lesson</div>
-                                <div class="clear"></div>
-                            @else
-                                <div class="btn btn-success btn-lesson-learned">You have learn this lesson</div>
-                                <div class="clear"></div>
-                            @endif
+                            @include('lesson.learn-lesson')
                             <div class="descriptons-item">
                                 <div class="title">
                                     {{ __('lesson.description_lesson') }}
@@ -92,21 +79,7 @@
                                     <div class="name">
                                         {{ $program->program_name }}
                                     </div>
-                                    <div class="link">
-                                        @if ($lesson->IsJoined())
-                                            @if (!$program->isLearned())
-                                                <form action="{{ route('user-program.store') }}" method="POST">
-                                                     @csrf
-                                                    <input type="hidden" name="program_id" value="{{ $program->id }}">
-                                                    <button class="button-link">preview</button>
-                                                </form>
-                                            @else
-                                                <div class="have-join btn btn-success">
-                                                    Complete
-                                                </div>
-                                            @endif
-                                        @endif
-                                    </div>
+                                    @include('lesson.learn-program')
                                 </div>
                                 @endforeach
                             </div>

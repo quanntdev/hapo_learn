@@ -20,9 +20,4 @@ class UserProgram extends Model
     {
         return $query->where('user_id', auth()->id())->whereIn('program_id', $programs->pluck('id')->toArray());
     }
-
-    public function scopeCountFinished($query, $id)
-    {
-        return $query->where('user_id', auth()->id())->whereIn('program_id', $id);
-    }
 }
