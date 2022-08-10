@@ -44,7 +44,7 @@
                                     <button class="btn btn-search"
                                             type="submit" name="submit">{{ __('course.input_placeholder') }}</button>
                                 </form>
-                                @include('components.join-course-form')
+                                @include('components.course.join-course-form')
                             </div>
                             <div class="list-lesson">
                                 @foreach ($lessons as $key => $lesson)
@@ -55,7 +55,7 @@
                                              {{ $lesson->name_lesson }}
                                         </div>
                                     </div>
-                                    @include('components.link-lesson')
+                                    @include('components.course.link-lesson')
                                 </div>
                                 @endforeach
                                 {{ $lessons->appends(request()->query())->links() }}
@@ -444,7 +444,7 @@
                         </form>
                     @endif
                 </div>
-                @include('course.other_course')
+                @include('components.course.other-course')
             </div>
         </div>
     </div>
