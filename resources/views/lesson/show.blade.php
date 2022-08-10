@@ -31,7 +31,7 @@
                       </ul>
                       <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade @if (!session('success')) show active  @endif " id="descriptions-tab-pane" role="tabpanel" aria-labelledby="descriptions-tab" tabindex="0">
-                            @include('components.learn-lesson')
+                            @include('components.lesson.learn-lesson-form')
                             <div class="descriptons-item">
                                 <div class="title">
                                     {{ __('lesson.description_lesson') }}
@@ -79,7 +79,7 @@
                                     <div class="name">
                                         {{ $program->program_name }}
                                     </div>
-                                    @include('components.learn-program')
+                                    @include('components.lesson.learn-program-form')
                                 </div>
                                 @endforeach
                             </div>
@@ -170,7 +170,7 @@
                         </form>
                     @endif
                 </div>
-                @include('course.other_course')
+                @include('components.course.other-course')
             </div>
         </div>
     </div>
