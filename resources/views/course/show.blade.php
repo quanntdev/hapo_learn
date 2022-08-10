@@ -44,19 +44,7 @@
                                     <button class="btn btn-search"
                                             type="submit" name="submit">{{ __('course.input_placeholder') }}</button>
                                 </form>
-                                <form action="{{ route('course-users.store') }}" method="POST">
-                                    @csrf
-                                    @if (!$course->isJoined)
-                                        <input type="hidden" name="course_id" value="{{ $course->id }}">
-                                        <button class="add-course" type="submit">{{ __('course-detail.add_course') }}</button>
-                                    @elseif (!$course->isFinished)
-                                        <div class="btn btn-success text-light"> {{__('course-detail.on_learn')}} </div>
-                                    @elseif ($course->isFinished)
-                                        <div class="btn btn-danger text-light"> {{__('course-detail.finish_learn')}} </div>
-                                    @else
-                                        <a href="{{ route('login') }}" class="login-course">{{ __('course-detail.must_login_learn') }}</a>
-                                    @endif
-                                </form>
+                                @include('course.join-course-button')
                             </div>
                             <div class="list-lesson">
                                 @foreach ($lessons as $key => $lesson)
@@ -67,15 +55,7 @@
                                              {{ $lesson->name_lesson }}
                                         </div>
                                     </div>
-                                    <div class="link-lesson">
-                                        @if (($course->isJoined || $course->isFinished) && !$lesson->IsFinished())
-                                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn-start-learn"> {{ __('course-detail.link_lesson') }} </a>
-                                        @elseif ($lesson->IsFinished() )
-                                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn btn-success"> complete </a>
-                                        @else
-                                        <div class="cant-learn"> {{ __('course-detail.link_lesson') }} </div>
-                                        @endif
-                                    </div>
+                                    @include('course.link-lesson')
                                 </div>
                                 @endforeach
                                 {{ $lessons->appends(request()->query())->links() }}

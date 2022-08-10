@@ -63,7 +63,7 @@ class Lesson extends Model
     public function getProgressAttribute()
     {
         $programsId = $this->programs->pluck('id')->toArray();
-        $count = UserProgram::countFinished($programsId)->count();
+        $count = UserProgram::finishedPrograms($this->programs)->count();
 
         return ($count == 0) ? 0 : round(($count / $this->programs()->count()) * 100);
     }
