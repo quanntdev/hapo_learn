@@ -58,8 +58,11 @@
                                     @include('components.course.link-lesson')
                                 </div>
                                 @endforeach
+                                @if (((isset($data['page']) && $data['page'] > 0) || empty($data['page'])) && $lessons[$lessons->count() - 1 ]->IsFinished())
+                                {{ $lessons->appends(request()->query())->appends(['learned' => 'true'])->links() }}
+                                @else
                                 {{ $lessons->appends(request()->query())->links() }}
-                                <div class="clear"></div>
+                                @endif
                             </div>
                         </div>
                         <div class="tab-pane fade" id="teacher-tab-pane" role="tabpanel" aria-labelledby="teacher-tab" tabindex="0">
