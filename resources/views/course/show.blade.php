@@ -11,11 +11,22 @@
         </ol>
     </nav>
 </div>
-
+@if (session('join'))
+    <div class="toast toast-profile" role="alert" aria-live="assertive" aria-atomic="true" id="toast">
+        <div class="toast-header">
+            <strong class="me-auto">HapoLearn</strong>
+            <small>Now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="getElementById('toast').classList.toggle('none')"></button>
+        </div>
+        <div class="toast-body text-success">
+            {{ session('join') }}
+        </div>
+    </div>
+@endif
 <div class="course-detail-body">
     <div class="course-detail-container">
-        <div class="row ">
-            <div class="col-8 mt-4">
+        <div class="row">
+            <div class="col-8 mt-4 body-show-course">
                 <div class="course-image">
                     <img src="{{ $course->image }}" alt="">
                 </div>
@@ -49,7 +60,7 @@
                             <div class="list-lesson">
                                 @foreach ($lessons as $key => $lesson)
                                 <div class="lesson-items">
-                                    <div class="number-lesson">{{ $key+1 }}.</div>
+                                    <div class="number-lesson">{{ (isset($data['page'])) ? $key + ($data['page'] - 1) * config('course.lesson_paginate') + 1 : $key + 1 }}.</div>
                                     <div class="name-lesson">
                                         <div class="content">
                                              {{ $lesson->name_lesson }}
@@ -57,6 +68,7 @@
                                     </div>
                                     @include('components.course.link-lesson')
                                 </div>
+                                <div class="clear"></div>
                                 @endforeach
                                 @if (((isset($data['page']) && $data['page'] > 0) || empty($data['page'])) && $lessons[$lessons->count() - 1 ]->IsFinished())
                                 {{ $lessons->appends(request()->query())->appends(['learned' => 'true'])->links() }}
@@ -71,7 +83,7 @@
                                 @foreach ($teachers as $key => $teacher)
                                 <div class="list-teacher">
                                     <div class="group-avatar">
-                                        <img class="avatar" src="{{ $teacher->avatar }}" alt="">
+                                        <img class="avatar" src="{{ $teacher->CheckAvatar }}" alt="">
                                         <div class="info">
                                             <div class="name">{{ $teacher->name }}</div>
                                             <div class="year">{{ $teacher->created_at->diffForHumans(null, true)." ".__('course-detail.teacher') }}</div>
@@ -170,7 +182,7 @@
                                         @endif
                                         <div class="user">
                                             <div class="avatar">
-                                                <img src=" {{ asset($comment->user->avatar) }} " alt="">
+                                                <img src=" {{ asset($comment->user->CheckAvatar) }} " alt="">
                                             </div>
                                             <div class="name">
                                                 {{ $comment->user->name }}
@@ -227,11 +239,11 @@
                                         @if (auth()->user())
                                         <div class="accordion-item button-reply-items">
                                             <h2 class="accordion-header" id="flush-heading{{$comment->id}}">
-                                              <button class="accordion-button collapsed button-reply" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$comment->id}}" aria-expanded="false" aria-controls="flush-collapse{{$comment->id}}">
+                                              <button class="accordion-button collapsed button-reply" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$comment->id}}" aria-expanded="false" aria-controls="flush-collapse{{$comment->id}}" onclick="getElementById('replys{{$comment->id}}').classList.toggle('block')">
                                                 {{ __('course-detail.add_your_reply') }}
                                               </button>
                                             </h2>
-                                            <div id="flush-collapse{{$comment->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$comment->id}}" data-bs-parent="#accordionFlushExample">
+                                            <div id="replys{{$comment->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$comment->id}}" data-bs-parent="#accordionFlushExample">
                                               <div class="accordion-body">
                                                 <div class="form-comment form-reply">
                                                     <form action="{{ route('comments.store') }}" method="POST">
@@ -262,7 +274,7 @@
                                                      @endif
                                                     <div class="user">
                                                         <div class="avatar">
-                                                            <img src=" {{ $reply->user->avatar }} " alt="">
+                                                            <img src=" {{ $reply->user->checkAvatar }} " alt="">
                                                         </div>
                                                         <div class="name">
                                                             {{ $reply->user->name }}
@@ -310,7 +322,9 @@
                                     <div class="title">
                                         {{ __('course-detail.your_review') }}
                                     </div>
-                                    @if (auth()->user() && $course->isJoined)
+                                    @if ($course->isCommented && auth()->user() && $course->isJoined)
+                                        <div class="btn btn-danger">{{ __('You have already rated this course') }}</div>
+                                    @elseif (auth()->user() && $course->isJoined)
                                     <div class="form-comment">
                                         <div class="title">
                                             {{ __('course-detail.message') }}

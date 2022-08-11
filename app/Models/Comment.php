@@ -30,7 +30,7 @@ class Comment extends Model
 
     public function scopeMain($query)
     {
-        return $query->limit(config('course.home_comment_number'));
+        return $query->whereNull('parent_id')->whereNotNull('star')->limit(config('course.home_comment_number'));
     }
 
     public function scopeComments($query)

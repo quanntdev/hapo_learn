@@ -43,7 +43,7 @@
 
       .banner-startlearn-link {
         padding:10px 20px;
-        width: 200px ;
+        width: 350px ;
       }
     }
   }
@@ -53,5 +53,11 @@
       font-size: 18px;
       width: auto ;
     }
+  }
+}
+
+@media (max-width:800px) and (min-width:377px) {
+  .banner-startlearn {
+    margin-top: 200px;
   }
 }

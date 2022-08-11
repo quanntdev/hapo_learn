@@ -13,13 +13,13 @@ class UserCourseController extends Controller
     {
         $course = Course::find($request['course_id']);
         $course->users()->attach(auth()->user()->id, ['status' => config('course.onstatus')]);
-        return redirect()->back();
+        return redirect()->back()->with('join', __('success.course_enroll_success'));
     }
 
     public function update(StoreCourseUserRequest $request, $id)
     {
         $course = Course::find($request['course_id']);
         $course->users()->updateExistingPivot(auth()->user()->id, ['status' => config('course.end_course')]);
-        return redirect()->back();
+        return redirect()->back()->with('join', __('success.course_finish_success'));
     }
 }

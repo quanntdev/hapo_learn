@@ -174,3 +174,65 @@
 .upload-avatar {
   text-align: center;
 }
+
+@media (max-width: 800px) {
+  .row-profile {
+    display: block !important;
+  }
+
+  .info-user-haver {
+    display: flex;
+  }
+
+  .profile-first-info {
+    width: 100% !important;
+
+    .group-avatar-2 {
+      width: 100% !important;
+    }
+  }
+
+  .profile-body {
+    width: 100% !important;
+
+    .profile-list-course {
+      margin-top: 10px;
+    }
+  }
+}
+
+@media (max-width: 376px) {
+  .info-user-haver {
+    display: block !important;
+  }
+
+  .group-avatar {
+    .avatar {
+      width: 100% !important;
+      height: 350px !important;
+
+      img {
+        width: 100%;
+        height: 350px;
+      }
+    }
+  }
+
+  .profile-templete {
+    margin-top: 100px !important;
+  }
+
+  .inputfile + label {
+    margin-left: 0 !important;
+  }
+
+  .edit-profile {
+    .row-edit-profile {
+      display: block !important;
+    }
+
+    .col-edit-profile {
+      width: 100% !important;
+    }
+  }
+}

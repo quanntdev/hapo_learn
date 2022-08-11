@@ -109,3 +109,49 @@
 .login-form {
   margin-bottom: 100px;
 }
+
+.card-confirm {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.toast {
+  margin-top: 130px;
+  position: fixed;
+  right:30px;
+  display: block !important;
+  z-index: 1000 !important;
+}
+
+.toast-profile {
+  margin-top: 0 !important;
+}
+
+.gruop-register {
+  width: 100% !important;
+  display: flex;
+  justify-items: center;
+}
+
+@media (max-width: 800px){
+  .gruop-login-btn {
+    display: block !important;
+
+    .btn-signIn {
+      display: flex !important;
+      justify-content: center !important;
+    }
+  }
+
+  .Google-signin {
+    button {
+      padding: 12px 50px !important;
+    }
+  }
+
+  .create-account {
+    a {
+      padding: 12px 50px !important;
+    }
+  }
+}

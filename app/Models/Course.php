@@ -64,6 +64,13 @@ class Course extends Model
         })->exists();
     }
 
+    public function getIsCommentedAttribute()
+    {
+        return $this->comments()->whereExists(function ($query) {
+            $query->whereNull('parent_id')->where('user_id', auth()->id());
+        })->exists();
+    }
+
     public function getIsFinishedAttribute()
     {
         return $this->users()->whereExists(function ($query) {

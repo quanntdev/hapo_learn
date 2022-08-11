@@ -1,9 +1,3 @@
-@if (session('success'))
-<div class="alert alert-success alert-dismissible in succes-login">
-   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-   <strong>{{ session('success') }}</strong>
-</div>
-@endif
 <div class="messenger-box" id="mesBox">
    <div class="logo-mes">
       <img src="{{ asset('images/avatar-mes.png') }}" alt="">
@@ -29,13 +23,13 @@
          @foreach ($courses as $course)
             <div class="items">
                <div class="img-items">
-                  <a href=""><img src="{{ $course->image }}" alt=""></a>
+                  <img src="{{ $course->image }}" alt="">
                </div>
                <div class="content-items">
                   <p class="title">{{ $course->course_name }}</p>
                   <p class="content">{{ $course->description }}</p>
                   <p class="btn-link">
-                     <a href="#" >Take This Course</a>
+                     <a href="{{ route('course.show', [$course->slug_course]) }}" >Take This Course</a>
                   </p>
                </div>
             </div>
@@ -51,21 +45,21 @@
          @foreach ($otherCourse as $courseOther)
             <div class="items">
                <div class="img-items">
-                  <a href=""><img src="{{ $courseOther->image }}" alt=""></a>
+                  <img src="{{ $courseOther->image }}" alt="">
                </div>
                <div class="content-items">
                   <p class="title">{{ $courseOther->course_name }}</p>
                   <p class="content">{{ $courseOther->description }}</p>
 
                   <p class="btn-link">
-                     <a href="#" >Take This Course</a>
+                     <a href="{{ route('course.show', [$courseOther->slug_course]) }}" >Take This Course</a>
                   </p>
                </div>
             </div>
          @endforeach
       </div>
       <div class="view-more-title">
-         <a href="">View All Our Courses <i class="fa-solid fa-arrow-right"></i></a>
+         <a href="{{ route('course.index') }}">View All Our Courses <i class="fa-solid fa-arrow-right"></i></a>
       </div>
    </div>
    @include('layouts.why_hapo')

@@ -40,6 +40,6 @@ class ProfileController extends Controller
             $this->updateImage->handleUploadImage($request['avatar'], $id);
         }
 
-        return redirect()->back()->with('success', __('user.update_success'));
+        return redirect()->back()->with('success', __('success.update_success'));
     }
 }

@@ -16,7 +16,7 @@
 <div class="course-detail-body">
     <div class="course-detail-container">
         <div class="row ">
-            <div class="col-8 mt-4">
+            <div class="col-8 mt-4 body-show-course">
                 <div class="course-image">
                     <img src="{{ $lesson->course->image }}" alt="">
                 </div>
