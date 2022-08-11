@@ -29,6 +29,7 @@ class UpdateUserProfileRequest extends FormRequest
             'phone' => 'required|min:10',
             'address' => 'required',
             'about_me' => 'required',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
@@ -42,6 +43,7 @@ class UpdateUserProfileRequest extends FormRequest
             'phone.min' => __('login.phone_min'),
             'address.required' => __('login.address_required'),
             'about_me.required' => __('login.about_me_required'),
+            'avatar.image' => __('login.avatar_image'),
         ];
     }
 }

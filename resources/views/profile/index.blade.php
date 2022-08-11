@@ -8,20 +8,25 @@
             <form action="{{ route('profile.update', [auth()->id()])}}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
-                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <div class="group-avatar">
                 <div class="avatar">
-                    <img src="{{ asset( $user->avatar ) }}" id="img-preview" alt="">
+                    <img src="{{ asset( auth()->user()->avatar ) }}" id="img-preview" alt="">
                 </div>
                 <div class="upload-avatar">
-                    <input type="file" name="avatar" id="file" class="inputfile" accept=".png, .jpeg, .PNG, .jpg" />
+                    <input type="file" name="avatar" id="file" class="inputfile" accept=".png, .jpeg, .PNG, .jpg, .gif, .svg" />
                     <label for="file"><i class="fa-solid fa-camera"></i></label>
+                    @error('avatar')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="name">
-                    {{$user->name}}
+                    {{auth()->user()->name}}
                 </div>
                 <div class="email">
-                    {{$user->email}}
+                    {{auth()->user()->email}}
                 </div>
             </div>
             <div class="group-avatar-2">
@@ -30,8 +35,8 @@
                         <img src="{{ asset('images/d-o-b.png') }}" alt="">
                     </div>
                     <p>
-                        @if ($user->date_of_birth)
-                            {{date('d-m-Y', strtotime($user->date_of_birth));}}
+                        @if (auth()->user()->date_of_birth)
+                            {{date('d-m-Y', strtotime(auth()->user()->date_of_birth));}}
                         @else
                             <span>Chưa cập nhật</span>
                         @endif
@@ -42,8 +47,8 @@
                         <img src="{{ asset('images/call.png') }}" alt="">
                     </div>
                     <p>
-                        @if ($user->phone)
-                            {{$user->phone}}
+                        @if (auth()->user()->phone)
+                            {{auth()->user()->phone}}
                         @else
                             <span>Chưa cập nhật</span>
                         @endif
@@ -54,15 +59,15 @@
                         <img src="{{ asset('images/home.png') }}" alt="">
                     </div>
                     <p>
-                        @if ($user->address)
-                            {{$user->address}}
+                        @if (auth()->user()->address)
+                            {{auth()->user()->address}}
                         @else
                             <span>Chưa cập nhật</span>
                         @endif
                     </p>
                 </div>
                 <div class="description">
-                    {{$user->about_me}}
+                    {{auth()->user()->about_me}}
                 </div>
             </div>
         </div>
@@ -111,7 +116,7 @@
                                         class="form-control"
                                         placeholder="Your Name"
                                         name="name"
-                                        value="{{$user->name}}">
+                                        value="{{auth()->user()->name}}">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -124,7 +129,7 @@
                                         class="form-control"
                                         placeholder="dd/mm/yyyy"
                                         name="date_of_birth"
-                                        value="{{$user->date_of_birth}}">
+                                        value="{{auth()->user()->date_of_birth}}">
                                 @error('date_of_birth')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -137,7 +142,7 @@
                                         class="form-control"
                                         placeholder="Address"
                                         name="address"
-                                        value="{{$user->address}}">
+                                        value="{{auth()->user()->address}}">
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -152,7 +157,7 @@
                                         class="form-control"
                                         placeholder="Email"
                                         name="email"
-                                        value="{{$user->email}}"
+                                        value="{{auth()->user()->email}}"
                                         disabled>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -166,7 +171,7 @@
                                         class="form-control"
                                         placeholder="Your Phone Number"
                                         name="phone"
-                                        value="{{$user->phone}}">
+                                        value="{{auth()->user()->phone}}">
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -180,7 +185,7 @@
                                     placeholder="Write something here"
                                     id="floatingTextarea"
                                     rows="5"
-                                    name="about_me">{{$user->about_me}}</textarea>
+                                    name="about_me">{{auth()->user()->about_me}}</textarea>
                                 @error('about_me')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

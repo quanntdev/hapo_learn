@@ -18,26 +18,17 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $user = User::find(auth()->id());
-        $course = $user->courses()->get();
-        return view('profile.index', compact('user', 'course'));
+        $course = auth()->user()->courses;
+        return view('profile.index', compact('course'));
     }
 
     public function update(UpdateUserProfileRequest $request, $id)
     {
-        $data = [
-            'name' => $request['name'],
-            'phone' => $request['phone'],
-            'address' => $request['address'],
-            'about_me' => $request['about_me'],
-            'date_of_birth' => $request['date_of_birth'],
-        ];
-
-        $user = User::find(auth()->id());
-        $user->update($request->all());
+        $data = $request->except('avatar');
+        auth()->user()->update($data);
 
         if ($request['avatar'] != null) {
-            $this->updateImage->handleUploadImage($request['avatar'], $id);
+            $this->updateImage->UpdateAvatarService($request['avatar'], $id);
         }
 
         return redirect()->back()->with('success', __('user.update_success'));

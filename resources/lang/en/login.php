@@ -14,4 +14,5 @@ return [
     'phone_min' => 'Phonenumber min : 10',
     'address_required' => 'Address cannot be blank',
     'about_me_required' => 'About me cannot be blank',
+    'avatar_image' => 'Avatar must be an image (jpeg, png, bmp, gif, svg)',
 ];
