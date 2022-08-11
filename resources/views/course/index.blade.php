@@ -126,11 +126,11 @@
             @foreach ($courses as $key => $course)
                 <div class="item float-start">
                     <div class="course-content">
-                        <div class="row">
-                            <div class="col-2">
+                        <div class="row course-content-body">
+                            <div class="col-2 course-image">
                                 <img src="{{ $course->image }}" alt="" class="img-course">
                             </div>
-                            <div class="col-10">
+                            <div class="col-10 course-description">
                                 <div class="title">
                                     {{ $course->course_name }}
                                 </div>

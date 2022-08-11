@@ -4,7 +4,7 @@
          Become a member of our growing community!
       </p>
       <p class="banner-startlearn-link">
-         <a href="">Start Learning Now!</a>
+         <a href="{{ route('course.index') }}">Start Learning Now!</a>
       </p>
    </div>
 </div>

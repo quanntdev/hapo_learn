@@ -1,72 +1,85 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if (session('success'))
+    <div class="toast toast-profile" role="alert" aria-live="assertive" aria-atomic="true" id="toast">
+        <div class="toast-header">
+            <strong class="me-auto">HapoLearn</strong>
+            <small>Now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="getElementById('toast').classList.toggle('none')"></button>
+        </div>
+        <div class="toast-body text-success">
+            {{ session('success') }}
+        </div>
+    </div>
+@endif
 <div class="container profile-templete">
-    <div class="row">
+    <div class="row row-profile">
         <div class="col-3 profile-first-info">
             <form action="{{ route('profile.update', [auth()->id()])}}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <input type="hidden" name="user_id" value="{{ $user->id }}">
-            <div class="group-avatar">
-                <div class="avatar">
-                    <img src="{{ asset( $user->avatar ) }}" id="img-preview" alt="">
-                </div>
-                <div class="upload-avatar">
-                    <input type="file" name="avatar" id="file" class="inputfile" accept=".png, .jpeg, .PNG, .jpg" />
-                    <label for="file"><i class="fa-solid fa-camera"></i></label>
-                </div>
-                <div class="name">
-                    {{$user->name}}
-                </div>
-                <div class="email">
-                    {{$user->email}}
-                </div>
-            </div>
-            <div class="group-avatar-2">
-                <div class="item">
-                    <div class="span-birth-image">
-                        <img src="{{ asset('images/d-o-b.png') }}" alt="">
+            <div class="info-user-haver">
+                <div class="group-avatar">
+                    <div class="avatar">
+                        <img src="{{ $user->checkAvatar }}" id="img-preview" alt="">
                     </div>
-                    <p>
-                        @if ($user->date_of_birth)
-                            {{date('d-m-Y', strtotime($user->date_of_birth));}}
-                        @else
-                            <span>Chưa cập nhật</span>
-                        @endif
-                    </p>
-                </div>
-                <div class="item">
-                    <div class="span-birth-image">
-                        <img src="{{ asset('images/call.png') }}" alt="">
+                    <div class="upload-avatar">
+                        <input type="file" name="avatar" id="file" class="inputfile" accept=".png, .jpeg, .PNG, .jpg" />
+                        <label for="file"><i class="fa-solid fa-camera"></i></label>
                     </div>
-                    <p>
-                        @if ($user->phone)
-                            {{$user->phone}}
-                        @else
-                            <span>Chưa cập nhật</span>
-                        @endif
-                    </p>
-                </div>
-                <div class="item">
-                    <div class="span-birth-image">
-                        <img src="{{ asset('images/home.png') }}" alt="">
+                    <div class="name">
+                        {{$user->name}}
                     </div>
-                    <p>
-                        @if ($user->address)
-                            {{$user->address}}
-                        @else
-                            <span>Chưa cập nhật</span>
-                        @endif
-                    </p>
+                    <div class="email">
+                        {{$user->email}}
+                    </div>
                 </div>
-                <div class="description">
-                    {{$user->about_me}}
+                <div class="group-avatar-2">
+                    <div class="item">
+                        <div class="span-birth-image">
+                            <img src="{{ asset('images/d-o-b.png') }}" alt="">
+                        </div>
+                        <p>
+                            @if ($user->date_of_birth)
+                                {{date('d-m-Y', strtotime($user->date_of_birth));}}
+                            @else
+                                <span>Chưa cập nhật</span>
+                            @endif
+                        </p>
+                    </div>
+                    <div class="item">
+                        <div class="span-birth-image">
+                            <img src="{{ asset('images/call.png') }}" alt="">
+                        </div>
+                        <p>
+                            @if ($user->phone)
+                                {{$user->phone}}
+                            @else
+                                <span>Chưa cập nhật</span>
+                            @endif
+                        </p>
+                    </div>
+                    <div class="item">
+                        <div class="span-birth-image">
+                            <img src="{{ asset('images/home.png') }}" alt="">
+                        </div>
+                        <p>
+                            @if ($user->address)
+                                {{$user->address}}
+                            @else
+                                <span>Chưa cập nhật</span>
+                            @endif
+                        </p>
+                    </div>
+                    <div class="description">
+                        {{$user->about_me}}
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-9">
+        <div class="col-9 profile-body">
             <div class="profile-list-course">
                 <div class="title">
                     My course
@@ -104,7 +117,7 @@
                 <div class="line"></div>
                 <div class="line"></div>
                     <div class="row row-edit-profile">
-                        <div class="col-6">
+                        <div class="col-6 col-edit-profile">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Name : </label>
                                 <input  type="text"
@@ -145,7 +158,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 col-edit-profile">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Email : </label>
                                 <input  type="text"
@@ -191,6 +204,9 @@
                     </div>
                     <div class="button-save">
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Do you want to update?')">Save</button>
+                    </div>
+                    <div class="button-save">
+                        <a href="{{ route('change-password.index') }}" class="btn btn-success me-2">Change password</a>
                     </div>
                     <div class="clear"></div>
                 </form>

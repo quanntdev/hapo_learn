@@ -7,8 +7,9 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\RegisterFormRequest;
+use App\Http\Requests\VerificationRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\RegisterMailler;
 
 class RegisterController extends Controller
 {
@@ -53,10 +54,10 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function register(RegisterFormRequest $request)
+    public function register(VerificationRequest $request)
     {
-        $user = $this->create($request->all());
-        auth()->login($user);
-        return redirect('home')->with('success', __('register.register_success').$user->name);
+            $user = $this->create($request->all());
+            auth()->login($user);
+            return redirect('home')->with('success', __('register.register_success').$user->name);
     }
 }

@@ -669,3 +669,77 @@
     background-color: red;
   }
 }
+
+@media (max-width: 800px){
+  .body-show-course {
+    width: 100% !important;
+  }
+
+  .pagination {
+    margin-top: 40px;
+  }
+
+  .info-course {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  .link-lesson {
+    width: 13% !important;
+  }
+}
+
+@media (max-width: 376px) {
+  .course-lesson {
+    .view-tab {
+      margin-left: 3px !important
+    }
+  }
+
+  .tab-content {
+    .gruop-search {
+      display: block !important;
+
+      .search-icon {
+        display: none;
+      }
+    }
+  }
+
+  .add-course {
+    padding: 10px 20px !important;
+  }
+
+  .btn-join-course {
+    margin-top: 20px;
+  }
+
+  .course-lesson {
+    padding: 5px !important;
+  }
+
+  .link-lesson {
+    width: 30% !important;
+  }
+
+  .view-vote {
+    display: block !important;
+
+    .all-star-vote {
+      width: 100% !important;
+    }
+
+    .see-star-vote {
+      width: 100% !important;
+      margin-left: 0 !important;
+    }
+  }
+
+  .form-vote {
+    display: block !important;
+  }
+
+  .course-detail {
+    margin-top: 70px;
+  }
+}
