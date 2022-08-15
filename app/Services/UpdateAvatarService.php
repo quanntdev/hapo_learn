@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
  */
 class UpdateAvatarService
 {
-    public static function UpdateAvatarService($avatar, $id)
+    public function UpdateAvatarService($avatar, $id)
     {
         $getNameImage = $avatar->getClientOriginalName();
         $nameImage = current(explode('.', $getNameImage));

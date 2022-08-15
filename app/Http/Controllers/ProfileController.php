@@ -9,11 +9,11 @@ use App\Services\UpdateAvatarService;
 
 class ProfileController extends Controller
 {
-    protected $updateImage;
+    protected $updateAvatarService;
 
     public function __construct()
     {
-        $this->updateImage = new UpdateAvatarService();
+        $this->updateAvatarService = new UpdateAvatarService();
     }
 
     public function index()
@@ -27,8 +27,8 @@ class ProfileController extends Controller
         $data = $request->except('avatar');
         auth()->user()->update($data);
 
-        if ($request['avatar'] != null) {
-            $this->updateImage->UpdateAvatarService($request['avatar'], $id);
+        if ($request->hasFile('avatar')) {
+            $this->updateAvatarService->UpdateAvatarService($request['avatar'], $id);
         }
 
         return redirect()->back()->with('success', __('user.update_success'));
