@@ -24,13 +24,17 @@ class ProfileController extends Controller
 
     public function update(UpdateUserProfileRequest $request, $id)
     {
-        $data = $request->except('avatar');
-        auth()->user()->update($data);
+        if (auth()->id() != $id) {
+            return redirect()->back()->with('error', __('auth.not_user'));
+        } else {
+            $data = $request->except('avatar');
+            auth()->user()->update($data);
 
-        if ($request->hasFile('avatar')) {
-            $this->updateAvatarService->UpdateAvatarService($request['avatar'], $id);
+            if ($request->hasFile('avatar')) {
+                $this->updateAvatarService->UpdateAvatarService($request['avatar'], $id);
+            }
+
+            return redirect()->back()->with('success', __('user.update_success'));
         }
-
-        return redirect()->back()->with('success', __('user.update_success'));
     }
 }
