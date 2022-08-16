@@ -23,27 +23,53 @@
         </div>
     </div>
 @endif
+@if (session('success_lesson'))
+    <div class="toast toast-profile" role="alert" aria-live="assertive" aria-atomic="true" id="toast">
+        <div class="toast-header">
+            <strong class="me-auto">HapoLearn</strong>
+            <small>Now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="getElementById('toast').classList.toggle('none')"></button>
+        </div>
+        <div class="toast-body text-success">
+            {{ session('success_lesson') }}
+        </div>
+    </div>
+@endif
+@if( $errors->any())
+<div class="toast toast-profile" role="alert" aria-live="assertive" aria-atomic="true" id="toast">
+    <div class="toast-header">
+        <strong class="me-auto">HapoLearn</strong>
+        <small>Now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="getElementById('toast').classList.toggle('none')"></button>
+    </div>
+    <div class="toast-body text-danger">
+        @foreach ($errors->all() as $error)
+            {{ $error }}<br>
+        @endforeach
+    </div>
+</div>
+@endif
 <div class="course-detail-body">
     <div class="course-detail-container">
         <div class="row">
             <div class="col-8 mt-4 body-show-course">
                 <div class="course-image">
-                    <img src="{{ $course->image }}" alt="">
+                    <img src="{{ asset($course->image) }}" alt="">
                 </div>
                 <div class="course-lesson">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link view-tab @if (empty(session('success'))) active  @endif" id="lesson-tab" data-bs-toggle="tab" data-bs-target="#lesson-tab-pane" type="button" role="tab" aria-controls="lesson-tab-pane" aria-selected="true">{{ __('course-detail.lessons') }}</button>
+                            <button class="nav-link view-tab @if (empty(session('success')) && empty($error)) active  @endif" id="lesson-tab" data-bs-toggle="tab" data-bs-target="#lesson-tab-pane" type="button" role="tab" aria-controls="lesson-tab-pane" aria-selected="true">{{ __('course-detail.lessons') }}</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link view-tab" id="teacher-tab" data-bs-toggle="tab" data-bs-target="#teacher-tab-pane" type="button" role="tab" aria-controls="teacher-tab-pane" aria-selected="false">{{ __('course-detail.teacher') }}</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link view-tab @if (session('success')) active  @endif" id="review-tab" data-bs-toggle="tab" data-bs-target="#review-tab-pane" type="button" role="tab" aria-controls="review-tab-pane" aria-selected="false">{{ __('course-detail.reviews') }}</button>
+                            <button class="nav-link view-tab @if (session('success')) active  @elseif(isset($error)) active @endif) " id="review-tab" data-bs-toggle="tab" data-bs-target="#review-tab-pane" type="button" role="tab" aria-controls="review-tab-pane" aria-selected="false">{{ __('course-detail.reviews') }}</button>
                         </li>
                       </ul>
                       <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade @if (empty(session('success'))) show active  @endif" id="lesson-tab-pane" role="tabpanel" aria-labelledby="lesson-tab" tabindex="0">
+                        <div class="tab-pane fade @if (empty(session('success')) && empty($error)) show active  @endif" id="lesson-tab-pane" role="tabpanel" aria-labelledby="lesson-tab" tabindex="0">
                             <div class="gruop-search">
                                 <form role="search" method="GET" action="{{ route('course.show', [$course->slug_course]), }}">
                                     <input type="text"
@@ -55,7 +81,32 @@
                                     <button class="btn btn-search"
                                             type="submit" name="submit">{{ __('course.input_placeholder') }}</button>
                                 </form>
+                                @can('view', auth()->user())
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    {{ __('Create Lesson') }}
+                                  </button>
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" style="max-width: 900px">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">{{ __('Create Lesson') }}</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                          @include('components.course.create-lesson')
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                @endcan
+
+                                @cannot ('view', auth()->user())
                                 @include('components.course.join-course-form')
+                                @endcannot
                             </div>
                             <div class="list-lesson">
                                 @foreach ($lessons as $key => $lesson)
@@ -64,16 +115,57 @@
                                     <div class="name-lesson">
                                         <div class="content">
                                              {{ $lesson->name_lesson }}
+                                             @can('view', auth()->user())
+                                             @if ($lesson->status == config('course.onstatus'))
+                                                <a class="text-success">( Active )</a>
+                                            @else
+                                                <a class="text-danger">( NotActive )</a>
+                                            @endif
+                                            @endcan
                                         </div>
                                     </div>
+                                    @cannot ('view', auth()->user())
                                     @include('components.course.link-lesson')
+                                    @endcannot
+                                    @can ('view', auth()->user())
+                                    <div class="d-flex">
+                                        <a href="{{ route('lessons.show', [$lesson->slug_lesson]) }}" class="btn btn-success"> {{ __('View') }} </a>
+                                             <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal{{$lesson->id}}">
+                                                Edit
+                                        </button>
+                                        <div class="modal fade" id="exampleModal{{$lesson->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$lesson->id}}" aria-hidden="true">
+                                            <div class="modal-dialog" style="max-width: 900px">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">{{ __('Edit Lesson :') . $lesson->name_lesson }}</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                <div class="modal-body">
+                                                    @include('components.lesson.edit-lesson-form')
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form action="{{route('lessons.destroy',[$lesson->id])}}" method ="POST">
+                                        @method('DELETE')
+                                          @csrf
+                                          <button class="btn btn-danger ms-2" onclick="return confirm('Do you want to delete this Lesson')">Delete</button>
+                                      </form>
+                                    </div>
+                                    @endcan
                                 </div>
                                 <div class="clear"></div>
                                 @endforeach
-                                @if (((isset($data['page']) && $data['page'] > 0) || empty($data['page'])) && $lessons[$lessons->count() - 1 ]->IsFinished())
-                                {{ $lessons->appends(request()->query())->appends(['learned' => 'true'])->links() }}
-                                @else
-                                {{ $lessons->appends(request()->query())->links() }}
+                                @if ($lessons->count() > 0)
+                                    @if (((isset($data['page']) && $data['page'] > 0) || empty($data['page'])) && $lessons[$lessons->count() - 1 ]->IsFinished())
+                                        {{ $lessons->appends(request()->query())->appends(['learned' => 'true'])->links() }}
+                                    @else
+                                        {{ $lessons->appends(request()->query())->links() }}
+                                    @endif
                                 @endif
                             </div>
                         </div>
@@ -96,7 +188,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="tab-pane fade @if (session('success')) show active  @endif" id="review-tab-pane" role="tabpanel" aria-labelledby="review-tab" tabindex="0">
+                        <div class="tab-pane fade @if (session('success')) show active  @elseif(isset($error)) show active @endif" id="review-tab-pane" role="tabpanel" aria-labelledby="review-tab" tabindex="0">
                             <div class="main-reviews">
                                 <div class="title">
                                     {{ $comments->count() }} {{ __('course-detail.reviews') }}
@@ -236,6 +328,15 @@
                                                 </form>
                                             </div>
                                         </div>
+                                        @if ($comment->user->id ==auth ()->id())
+                                        <div class="box-delete">
+                                            <form action="{{route('comments.destroy',[$comment->id])}}" method ="POST">
+                                      @method('DELETE')
+                                        @csrf
+                                        <button class="edit-button" onclick="return confirm('Do you want to delete this Comment')"><i class="fa-solid fa-trash-can"></i></button>
+                                    </form>
+                                        </div>
+                                        @endif
                                         @if (auth()->user())
                                         <div class="accordion-item button-reply-items">
                                             <h2 class="accordion-header" id="flush-heading{{$comment->id}}">
@@ -268,13 +369,13 @@
                                             @foreach ($replys as $key => $reply)
                                                 @if($reply->parent_id == $comment->id)
                                                 <div class="user-review">
-                                                    @if ($reply->user->id ==auth()->id())
+                                                    @if ($reply->user->id == auth()->id())
                                                         <button class="edit-button" onclick="getElementById('reply{{$reply->id}}').classList.toggle('none'); getElementById('editReply{{$reply->id}}').classList.toggle('block')"><i class="fa-solid fa-pen-to-square"></i></button>
                                                         <div class="clear"></div>
                                                      @endif
                                                     <div class="user">
                                                         <div class="avatar">
-                                                            <img src=" {{ $reply->user->checkAvatar }} " alt="">
+                                                            <img src=" {{ asset($reply->user->checkAvatar) }} " alt="">
                                                         </div>
                                                         <div class="name">
                                                             {{ $reply->user->name }}
@@ -312,6 +413,17 @@
                                                         {{ $reply->comment }}
                                                     </div>
                                                 </div>
+                                                @if ($reply->parent_id == $comment->id)
+                                                @if ($reply->user->id == auth()->id())
+                                        <div class="box-delete me-1">
+                                            <form action="{{route('comments.destroy',[$reply->id])}}" method ="POST">
+                                      @method('DELETE')
+                                        @csrf
+                                        <button class="edit-button me-4" onclick="return confirm('Do you want to delete this Comment')"><i class="fa-solid fa-trash-can"></i></button>
+                                    </form>
+                                        </div>
+                                        @endif
+                                        @endif
                                                 @endif
                                             @endforeach
                                         </div>
@@ -329,13 +441,14 @@
                                         <div class="title">
                                             {{ __('course-detail.message') }}
                                         </div>
+                                        @cannot('view', auth()->user())
                                         <form action="{{ route('comments.store') }}" method="POST">
                                             @csrf
                                             <div class="form-floating">
                                                 <textarea class="form-control comment-input" placeholder="Leave a comment here" id="floatingTextarea" rows="10" name="comment"></textarea>
                                                 <label for="floatingTextarea">Comments</label>
                                                 @error('comment')
-                                                    <span class="invalid-feedback" role="alert">
+                                                    <span class="invalid-feedback d-block" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
@@ -363,6 +476,7 @@
                                             </div>
                                             <div class="clear"></div>
                                         </form>
+                                        @endcannot
                                     </div>
                                     @elseif (auth()->user() && !$course->isJoined)
                                     <form action="{{ route('course-users.store') }}" method="POST">
@@ -423,7 +537,7 @@
                             {{ __('course-detail.time') }}
                         </div>
                         <div class="content">
-                             {{ $course->times }} {{ __('course-detail.time_value') }}
+                            : {{ $course->times }} {{ __('course-detail.time_value') }}
                         </div>
                     </div>
                     <div class="line"></div>
@@ -449,17 +563,19 @@
                             {{ __('course-detail.price') }}
                         </div>
                         <div class="content">
-                            {{ $course->prices }}
+                            : {{ $course->prices }}
                         </div>
                     </div>
+                    @cannot ('view', auth()->user())
                     @if ($course->isnotFinished)
-                        <form action="{{ route('course-users.update',[$course->id]) }}" method="POST" class="form-end-course">
-                            @method('PUT')
-                            @csrf
-                            <input type="hidden" name="course_id" value="{{ $course->id }}">
-                            <button class="button-end-course" type="submit">{{ __('course-detail.end_course') }}</button>
-                        </form>
-                    @endif
+                    <form action="{{ route('course-users.update',[$course->id]) }}" method="POST" class="form-end-course">
+                        @method('PUT')
+                        @csrf
+                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                        <button class="button-end-course" onclick="return confirm('Do you want to finish this?')" type="submit">{{ __('course-detail.end_course') }}</button>
+                    </form>
+                @endif
+                    @endcannot
                 </div>
                 @include('components.course.other-course')
             </div>

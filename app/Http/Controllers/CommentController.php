@@ -29,4 +29,10 @@ class CommentController extends Controller
         $comment->update($request->all());
         return redirect()->back()->with('success', __('comment.comment_success'));
     }
+
+    public function destroy(Comment $comment)
+    {
+        $comment->delete();
+        return redirect()->back()->with('success', __('comment.comment_success'));
+    }
 }

@@ -23,7 +23,7 @@
          @foreach ($courses as $course)
             <div class="items">
                <div class="img-items">
-                  <img src="{{ $course->image }}" alt="">
+                  <img src="{{ asset($course->image) }}" alt="">
                </div>
                <div class="content-items">
                   <p class="title">{{ $course->course_name }}</p>
@@ -45,7 +45,7 @@
          @foreach ($otherCourse as $courseOther)
             <div class="items">
                <div class="img-items">
-                  <img src="{{ $courseOther->image }}" alt="">
+                  <img src="{{ asset($courseOther->image) }}" alt="">
                </div>
                <div class="content-items">
                   <p class="title">{{ $courseOther->course_name }}</p>

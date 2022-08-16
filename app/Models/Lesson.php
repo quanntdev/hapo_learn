@@ -14,7 +14,7 @@ class Lesson extends Model
         'course_id',
         'name_lesson',
         'slug_lesson',
-        'video',
+        'requirement',
         'content',
         'time_lesson',
         'time_up',
@@ -62,9 +62,8 @@ class Lesson extends Model
 
     public function getProgressAttribute()
     {
-        $programsId = $this->programs->pluck('id')->toArray();
         $count = UserProgram::finishedPrograms($this->programs)->count();
 
-        return ($count == 0) ? 0 : round(($count / $this->programs()->count()) * 100);
+        return ($count == 0) ? 0 : round(($count / $this->programs()->where('status', config('course.onstatus'))->count()) * 100);
     }
 }

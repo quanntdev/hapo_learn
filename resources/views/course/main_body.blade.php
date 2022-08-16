@@ -166,7 +166,7 @@
                         @endif
                         <div class="user">
                             <div class="avatar">
-                                <img src=" {{ $comment->user->avatar }} " alt="">
+                                <img src=" {{ asset($comment->user->avatar) }} " alt="">
                             </div>
                             <div class="name">
                                 {{ $comment->user->name }}
@@ -258,7 +258,7 @@
                                      @endif
                                     <div class="user">
                                         <div class="avatar">
-                                            <img src=" {{ $reply->user->avatar }} " alt="">
+                                            <img src=" {{ asset($reply->user->avatar) }} " alt="">
                                         </div>
                                         <div class="name">
                                             {{ $reply->user->name }}

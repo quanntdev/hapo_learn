@@ -32,6 +32,12 @@
   }
 }
 
+.img-on-edit {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 @media (max-width:376px ) {
   .banner-startlearn {
     height: 182px ;

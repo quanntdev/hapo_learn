@@ -90,7 +90,7 @@
                     @foreach ($course as $course)
                     <div class="item">
                         <a href=" {{ route('course.show', [$course->slug_course]) }} ">
-                            <img src="{{$course->image}}" alt="">
+                            <img src="{{asset($course->image)}}" alt="">
                             <div class="name">
                                 {{$course->course_name}}
                             </div>

@@ -15,7 +15,7 @@
          </div>
          <div class="user-feed">
             <div class="avatar">
-               <img src="{{ $comment->user->checkAvatar }}" alt="">
+               <img src="{{ asset($comment->user->checkAvatar) }}" alt="">
             </div>
             <div class="info">
                <div class="name">

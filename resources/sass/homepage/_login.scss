@@ -115,12 +115,18 @@
   margin-bottom: 40px;
 }
 
+.toast-login {
+   margin-top: 0 !important;
+   top: 130px
+}
+
 .toast {
   margin-top: 130px;
   position: fixed;
   right:30px;
   display: block !important;
   z-index: 1000 !important;
+  background-color: white !important;
 }
 
 .toast-profile {

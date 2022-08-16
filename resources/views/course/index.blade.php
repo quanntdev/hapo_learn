@@ -128,7 +128,7 @@
                     <div class="course-content">
                         <div class="row course-content-body">
                             <div class="col-2 course-image">
-                                <img src="{{ $course->image }}" alt="" class="img-course">
+                                <img src="{{ asset($course->image) }}" alt="" class="img-course">
                             </div>
                             <div class="col-10 course-description">
                                 <div class="title">

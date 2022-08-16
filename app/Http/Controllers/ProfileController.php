@@ -25,14 +25,6 @@ class ProfileController extends Controller
 
     public function update(UpdateUserProfileRequest $request, $id)
     {
-        $data = [
-            'name' => $request['name'],
-            'phone' => $request['phone'],
-            'address' => $request['address'],
-            'about_me' => $request['about_me'],
-            'date_of_birth' => $request['date_of_birth'],
-        ];
-
         $user = User::find(auth()->id());
         $user->update($request->all());
 

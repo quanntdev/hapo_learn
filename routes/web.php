@@ -15,6 +15,10 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProgramController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +37,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index']);
 
 Route::resource('course', CourseController::class)->only([
-    'index', 'show'
+    'index', 'show', 'create', 'store', 'edit', 'update', 'destroy'
 ]);
 
 Route::get('/redirects', function () {
@@ -44,6 +48,7 @@ Route::get('reset-password', [ResetPasswordController::class, 'reset'])->name('r
 
 Route::resource('/confirmed', SendMailController::class)->only(['store', 'reset']);
 
+Route::resource('/admin', AdminController::class)->only(['index']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'canJoin'], function () {
@@ -61,8 +66,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'seeLesson'], function () {
         Route::resource('lessons', LessonController::class)->only(['show']);
     });
+    Route::group(['middleware' => 'admin'], function() {
+        Route::resource('/tags', TagController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+        Route::resource('/lessons', LessonController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+        Route::resource('/programs', ProgramController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    });
+    Route::group(['middleware' => 'teacher'], function() {
+        Route::resource('course', CourseController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+        Route::resource('/tags', TagController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+        Route::resource('/lessons', LessonController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+        Route::resource('/programs', ProgramController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    });
     Route::resource('profile', ProfileController::class)->only(['index', 'update']);
     Route::resource('/course-users', UserCourseController::class)->only(['update']);
-    Route::resource('/comments', CommentController::class)->only(['update']);
+    Route::resource('/comments', CommentController::class)->only(['update', 'destroy']);
     Route::resource('/change-password', ChangePasswordController::class)->only(['index', 'store']);
+    Route::resource('/users', UserController::class)->only(['index', 'update', 'show']);
 });

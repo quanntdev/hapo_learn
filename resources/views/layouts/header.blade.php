@@ -7,7 +7,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onclick="getElementById('mobieHeader').classList.toggle('show')">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse nav-show navbar-collapse" id="mobieHeader">
+            <div class="collapse nav-show navbar-collapse header-main" id="mobieHeader">
                 <ul class="navbar-nav bg-white nav-mobie mr-auto w-100">
                     <li class="nav-item active @if(url()->current() == url('/')) on-active @endif">
                         <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>

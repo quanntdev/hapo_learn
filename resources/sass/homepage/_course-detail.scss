@@ -641,6 +641,7 @@
   float: right;
   background-color: white;
   transform:translateY(30px);
+  border: 0;
 }
 
 .none {
@@ -668,6 +669,10 @@
   &:hover {
     background-color: red;
   }
+}
+
+.box-delete {
+  transform: translateY(-80px);
 }
 
 @media (max-width: 800px){
@@ -741,5 +746,25 @@
 
   .course-detail {
     margin-top: 70px;
+  }
+
+  .list-teacher {
+    .group-avatar {
+      display: block !important;
+      text-align: center;
+
+      .avatar {
+        width: 50% !important;
+        height: 150px !important;
+      }
+    }
+  }
+
+  .type {
+    display: none;
+  }
+
+  .name {
+    margin-left: 15px;
   }
 }

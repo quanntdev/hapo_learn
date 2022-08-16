@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'password' => Hash::make(12345678),
             'role' => $this->faker->randomDigit(1, 2),
-            'avatar' => $this->faker->imageUrl($width = 50, $height = 50),
+            'avatar' => $this->faker->imageUrl($width = 100, $height = 100),
             'date_of_birth' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
             'address' => $this->faker->streetAddress(),
             'phone' => $this->faker->e164PhoneNumber(),

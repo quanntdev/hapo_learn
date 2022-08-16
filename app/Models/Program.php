@@ -11,6 +11,7 @@ class Program extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'program_name',
         'lesson_id',
         'type',
         'file',

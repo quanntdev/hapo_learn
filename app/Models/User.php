@@ -83,4 +83,34 @@ class User extends Authenticatable
             return asset($avatar);
         }
     }
+
+    public function getRolesAttribute()
+    {
+        $roles = $this->role;
+        switch ($roles) {
+            case config('roles.normal_user'):
+                return [
+                    'roles' => __('roles.normal_user'),
+                    'color' => __('roles.color_normal_user'),
+                ];
+                break;
+            case config('roles.teacher'):
+                return [
+                    'roles' => __('roles.teacher'),
+                    'color' => __('roles.color_teacher'),
+                ];
+                break;
+            default:
+                return [
+                    'roles' => __('roles.admin'),
+                    'color' => __('roles.color_admin'),
+                ];
+                break;
+        }
+    }
+
+    public function getTimeCreateAttribute()
+    {
+        return $this->created_at->format('d/m/Y');
+    }
 }

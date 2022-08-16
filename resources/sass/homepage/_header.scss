@@ -1,30 +1,3 @@
-.navbar-nav {
-  justify-content: flex-end;
-  z-index: 10000 !important;
-
-  li {
-    margin-left: 20px;
-    padding: 1px 20px;
-
-    a {
-      font-style: normal;
-      font-weight: 700;
-      font-size: 14px;
-      line-height: 19px;
-      text-transform: uppercase;
-    }
-
-    &:hover {
-      background-color: $main-color ;
-      border-radius: 17px;
-    }
-
-    &:hover a {
-      color: white !important;
-    }
-  }
-}
-
 .height-nav {
   height: 120px ;
 }
@@ -44,12 +17,41 @@
   margin: 0 auto;
 }
 
-.on-active {
-  background-color: $main-color ;
-  border-radius: 17px;
+.header-main {
+  .on-active {
+    background-color: $main-color ;
+    border-radius: 17px;
 
-  a {
-    color: white !important;
+    a {
+      color: white !important;
+    }
+  }
+
+  .navbar-nav {
+    justify-content: flex-end;
+    z-index: 10000 !important;
+
+    li {
+      margin-left: 20px;
+      padding: 1px 20px;
+
+      a {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 19px;
+        text-transform: uppercase;
+      }
+
+      &:hover {
+        background-color: $main-color ;
+        border-radius: 17px;
+      }
+
+      &:hover a {
+        color: white !important;
+      }
+    }
   }
 }
 
@@ -167,4 +169,14 @@
 
 .show {
   display: block !important;
+}
+
+.admin-header {
+  .nav-link {
+    color: white !important;
+  }
+}
+
+.navbar-brand {
+  color: white;
 }

@@ -4,12 +4,12 @@
             <form action="{{ route('user-program.store') }}" method="POST">
                  @csrf
                 <input type="hidden" name="program_id" value="{{ $program->id }}">
-                <button class="button-link">preview</button>
+                <button class="button-link" type="submit" onclick="openLink('{{$program->file}}')">preview</button>
             </form>
         @else
-            <div class="have-join btn btn-success">
+            <a href="" class="have-join btn btn-success">
                 Complete
-            </div>
+            </a>
         @endif
     @endif
 </div>

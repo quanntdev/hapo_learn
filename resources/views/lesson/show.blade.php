@@ -12,26 +12,53 @@
         </ol>
     </nav>
 </div>
-
+@if (session('success'))
+    <div class="toast toast-profile" role="alert" aria-live="assertive" aria-atomic="true" id="toast">
+        <div class="toast-header">
+            <strong class="me-auto">HapoLearn</strong>
+            <small>Now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="getElementById('toast').classList.toggle('none')"></button>
+        </div>
+        <div class="toast-body text-success">
+            {{ session('success') }}
+        </div>
+    </div>
+@endif
+@if( $errors->any())
+<div class="toast toast-profile" role="alert" aria-live="assertive" aria-atomic="true" id="toast">
+    <div class="toast-header">
+        <strong class="me-auto">HapoLearn</strong>
+        <small>Now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="getElementById('toast').classList.toggle('none')"></button>
+    </div>
+    <div class="toast-body text-danger">
+        @foreach ($errors->all() as $error)
+            {{ $error }}<br>
+        @endforeach
+    </div>
+</div>
+@endif
 <div class="course-detail-body">
     <div class="course-detail-container">
         <div class="row ">
             <div class="col-8 mt-4 body-show-course">
                 <div class="course-image">
-                    <img src="{{ $lesson->course->image }}" alt="">
+                    <img src="{{ asset($lesson->course->image) }}" alt="">
                 </div>
                 <div class="course-lesson">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link view-tab  @if (!session('success')) active  @endif" id="descriptions-tab" data-bs-toggle="tab" data-bs-target="#descriptions-tab-pane" type="button" role="tab" aria-controls="descriptions-tab-pane" aria-selected="true">{{ __('course-detail.lessons') }}</button>
+                            <button class="nav-link view-tab  @if (!(session('success') || $errors->any())) active  @endif" id="descriptions-tab" data-bs-toggle="tab" data-bs-target="#descriptions-tab-pane" type="button" role="tab" aria-controls="descriptions-tab-pane" aria-selected="true">{{ __('course-detail.lessons') }}</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link view-tab @if (session('success')) active  @endif"  id="documents-tab" data-bs-toggle="tab" data-bs-target="#documents-tab-pane" type="button" role="tab" aria-controls="documents-tab-pane" aria-selected="false">{{ __('course-detail.programs') }}</button>
+                            <button class="nav-link view-tab @if (session('success') || $errors->any()) active  @endif"  id="documents-tab" data-bs-toggle="tab" data-bs-target="#documents-tab-pane" type="button" role="tab" aria-controls="documents-tab-pane" aria-selected="false">{{ __('course-detail.programs') }}</button>
                         </li>
                       </ul>
                       <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade @if (!session('success')) show active  @endif " id="descriptions-tab-pane" role="tabpanel" aria-labelledby="descriptions-tab" tabindex="0">
-                            @include('components.lesson.learn-lesson-form')
+                        <div class="tab-pane fade @if (!(session('success') || $errors->any())) show active  @endif " id="descriptions-tab-pane" role="tabpanel" aria-labelledby="descriptions-tab" tabindex="0">
+                            @cannot('view', auth()->user())
+                                @include('components.lesson.learn-lesson-form')
+                            @endcannot
                             <div class="descriptons-item">
                                 <div class="title">
                                     {{ __('lesson.description_lesson') }}
@@ -45,15 +72,37 @@
                                     {{ __('lesson.requirements') }}
                                 </div>
                                 <div class="content">
-                                    {{ $lesson->requirements }}
+                                    {{ $lesson->requirement }}
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade @if (session('success')) show active  @endif" id="documents-tab-pane" role="tabpanel" aria-labelledby="documents-tab" tabindex="0">
+                        <div class="tab-pane fade @if (session('success') || $errors->any()) show active  @endif" id="documents-tab-pane" role="tabpanel" aria-labelledby="documents-tab" tabindex="0">
                             <div class="programs">
                                 <div class="title">
                                     Programs
                                 </div>
+                                @can('view', auth()->user())
+                                    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Create a new program
+                                    </button>
+                                    <div class="clear"></div>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" style="max-width: 900px">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Create Programs') }}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                            <div class="modal-body">
+                                                @include('components.lesson.create-programs')
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endcan
                                 <div class="level-finish">
                                     <div class="side">
                                         <div>Your Level</div>
@@ -68,7 +117,7 @@
                                     </div>
                                     <div class="clear"></div>
                                 </div>
-                                @foreach ($lesson->programs as $key => $program)
+                                @foreach ($programs as $key => $program)
                                 <div class="programs-items">
                                     <div class="image">
                                         <img src="{{ asset('images/'.$program->programType['picture'].'.png') }}" alt="">
@@ -77,9 +126,47 @@
                                         {{ $program->programType['type'] }}
                                     </div>
                                     <div class="name">
-                                        {{ $program->program_name }}
+                                       <a  @if ($lesson->IsJoined()) href="{{ $program->file }}" @endif target="_blank" class="text-body">{{ $program->program_name }}</a>
+                                        @can('view', auth()->user())
+                                             @if ($program->status == config('course.onstatus'))
+                                                <a class="text-success">( Active )</a>
+                                            @else
+                                                <a class="text-danger">( NotActive )</a>
+                                            @endif
+                                            @endcan
                                     </div>
-                                    @include('components.lesson.learn-program-form')
+                                    @cannot('view', auth()->user())
+                                        @include('components.lesson.learn-program-form')
+                                    @endcannot
+                                    @can('view', auth()->user())
+                                        <div class="action d-flex">
+                                            <button type="button" class="btn btn-warning float-end" data-bs-toggle="modal" data-bs-target="#exampleModal{{$program->id}}">
+                                                Edit
+                                            </button>
+                                            <div class="clear"></div>
+                                            <div class="modal fade" id="exampleModal{{$program->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$program->id}}" aria-hidden="true">
+                                                <div class="modal-dialog" style="max-width: 900px">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">{{ __('Create Programs') }}</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                    <div class="modal-body">
+                                                        @include('components.lesson.edit-programs')
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <form action="{{ route('programs.destroy', $program->id) }}" method="POST" class="ms-2">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                                            </form>
+                                        </div>
+                                    @endcan
                                 </div>
                                 @endforeach
                             </div>

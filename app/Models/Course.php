@@ -49,19 +49,23 @@ class Course extends Model
 
     public function scopeMain($query)
     {
-        return $query->limit(config('course.home_course_number'))->orderBy('id', config('course.high_to_low'));
+        return $query->limit(config('course.home_course_number'))->orderBy('id', config('course.high_to_low'))->where('status', config('course.onstatus'));
     }
 
     public function scopeOther($query)
     {
-        return $query->inRandomOrder()->take(config('course.other_course_order'));
+        return $query->inRandomOrder()->take(config('course.other_course_order'))->where('status', config('course.onstatus'));
     }
 
     public function getIsJoinedAttribute()
     {
-        return $this->users()->whereExists(function ($query) {
-            $query->where('user_id', auth()->id());
-        })->exists();
+        if(auth()->user() && auth()->user()->role == config('roles.admin')) {
+            return true;
+        } else {
+            return $this->users()->whereExists(function ($query) {
+                $query->where('user_id', auth()->id());
+            })->exists();
+        }
     }
 
     public function getIsCommentedAttribute()
@@ -131,7 +135,7 @@ class Course extends Model
 
     public function getLessonsAttribute()
     {
-        return $this->lessons()->count();
+        return $this->lessons()->where('status', config('course.onstatus'))->count();
     }
 
     public function getTimesAttribute()
@@ -145,7 +149,7 @@ class Course extends Model
 
     public function getPricesAttribute()
     {
-        return $this->price == 0 ? ': ' . __('course-detail.free') : ': ' . $this->price . __('course-detail.price_value');
+        return $this->price == 0 ?  __('course-detail.free') :  $this->price . __('course-detail.price_value');
     }
 
     public function scopeFilter($query, $data)
