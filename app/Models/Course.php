@@ -145,7 +145,7 @@ class Course extends Model
 
     public function getPricesAttribute()
     {
-        return $this->price == 0 ? ': ' . __('course-detail.free') : ': ' . $this->price . __('course-detail.price_value');
+        return $this->price == 0 ?  __('course-detail.free') :  $this->price . __('course-detail.price_value');
     }
 
     public function scopeFilter($query, $data)

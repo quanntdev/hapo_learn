@@ -12,6 +12,8 @@ require('./home_script');
 
 require('./avatar_upload');
 
+require('./chang_slug');
+
 window.Vue = require('vue').default;
 
 /**
