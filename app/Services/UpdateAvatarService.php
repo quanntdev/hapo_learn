@@ -15,7 +15,7 @@ class UpdateAvatarService
     {
         $getNameImage = $avatar->getClientOriginalName();
         $nameImage = current(explode('.', $getNameImage));
-        $accessToken = Str::random(40);
+        $accessToken = now()->timestamp;
         $nameImage = $nameImage . $accessToken . '.' . $avatar->getClientOriginalExtension();
         $avatar->storeAs(config('user.avatar_path'), $nameImage);
 
