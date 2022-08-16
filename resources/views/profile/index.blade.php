@@ -8,14 +8,13 @@
             <form action="{{ route('profile.update', [auth()->id()])}}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
-                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <div class="group-avatar">
                 <div class="avatar">
                     <img src="{{ asset( auth()->user()->avatar ) }}" id="img-preview" alt="">
                 </div>
                 <div class="upload-avatar">
-                    <input type="file" name="avatar" id="file" class="inputfile" accept=".png, .jpeg, .PNG, .jpg, .gif, .svg" />
-                    <label for="file"><i class="fa-solid fa-camera"></i></label>
+                    <input type="file" name="avatar" id="avatar" class="inputfile" accept= {{ config('user.avatar_accept') }} />
+                    <label for="avatar"><i class="fa-solid fa-camera"></i></label>
                     @error('avatar')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -35,11 +34,7 @@
                         <img src="{{ asset('images/d-o-b.png') }}" alt="">
                     </div>
                     <p>
-                        @if (auth()->user()->date_of_birth)
-                            {{date('d-m-Y', strtotime(auth()->user()->date_of_birth));}}
-                        @else
-                            <span>Chưa cập nhật</span>
-                        @endif
+                        {{ auth()->user()->dateOfBirthUpdated }}
                     </p>
                 </div>
                 <div class="item">
@@ -47,11 +42,7 @@
                         <img src="{{ asset('images/call.png') }}" alt="">
                     </div>
                     <p>
-                        @if (auth()->user()->phone)
-                            {{auth()->user()->phone}}
-                        @else
-                            <span>Chưa cập nhật</span>
-                        @endif
+                        {{ auth()->user()->phoneUpdated }}
                     </p>
                 </div>
                 <div class="item">
@@ -59,11 +50,7 @@
                         <img src="{{ asset('images/home.png') }}" alt="">
                     </div>
                     <p>
-                        @if (auth()->user()->address)
-                            {{auth()->user()->address}}
-                        @else
-                            <span>Chưa cập nhật</span>
-                        @endif
+                        {{ auth()->user()->addressUpdated }}
                     </p>
                 </div>
                 <div class="description">

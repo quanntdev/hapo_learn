@@ -72,4 +72,19 @@ class User extends Authenticatable
     {
         return $query->where('role', config('roles.teacher'));
     }
+
+    public function getDateOfBirthUpdatedAttribute()
+    {
+        return $this->attributes['date_of_birth'] ? date('d-m-Y', strtotime($this->attributes['date_of_birth'])) : config('user.not_update');
+    }
+
+    public function getPhoneUpdatedAttribute()
+    {
+        return $this->attributes['phone'] ? ($this->attributes['phone']) : config('user.not_update');
+    }
+
+    public function getAddressUpdatedAttribute()
+    {
+        return $this->attributes['address'] ? ($this->attributes['address']) : config('user.not_update');
+    }
 }
