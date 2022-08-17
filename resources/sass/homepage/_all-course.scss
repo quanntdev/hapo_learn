@@ -364,3 +364,65 @@
     border: 0;
   }
 }
+
+@media (max-width: 800px) {
+  .list-course {
+    .item {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 376px) {
+  .gruop-filter {
+    display: block !important;
+  }
+
+  .all-course-body {
+    .gruop-filter {
+      .gruop-search {
+        form {
+          margin-left: 0 !important;
+          margin-top: 10px;
+        }
+
+        .search-icon {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .box-filter {
+    .title {
+      display: none;
+    }
+  }
+
+  .course-content-body {
+    display: block;
+
+    .course-image {
+      width: 100% !important;
+
+      img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 0;
+      }
+    }
+
+    .course-description {
+      width: 100%;
+
+      .btn-learn {
+        transform: translateY(-10px);
+      }
+    }
+  }
+
+  .course-statics {
+    display: none;
+  }
+}

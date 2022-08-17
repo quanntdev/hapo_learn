@@ -7,7 +7,7 @@
             <div class="card card-login">
                 <div class="card-body">
                     <div class="card-body-title">Sign up to HapoLearn</div>
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('confirmed.store') }}">
                         @csrf
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label @error('username') is-invalid @enderror">Username</label>
@@ -47,8 +47,8 @@
                                 </span>
                             @enderror
                           </div>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="form-group">
+                            <div class="gruop-register">
                                 <button type="submit" class="btn btn-primary btn-login">
                                     {{ __('Sign Up') }}
                                 </button>

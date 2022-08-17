@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('success_reset'))
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="toast">
+    <div class="toast-header">
+      <strong class="me-auto">HapoLearn</strong>
+      <small>Now</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="getElementById('toast').classList.toggle('none')"></button>
+    </div>
+    <div class="toast-body">
+       {{ __('We have sent a new password to your email, please check your email') }}
+    </div>
+  </div>
+@endif
 <div class="container login-form ">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -34,15 +46,15 @@
                             @enderror
                           </div>
                         <div class="form-group row mb-0 mt-4">
-                            <div class="d-flex justify-content-between w-100">
-                                <div>
+                            <div class="d-flex justify-content-between w-100 gruop-login-btn">
+                                <div class="btn-signIn">
                                     <button type="submit" class="btn btn-login">
                                         {{ __('Sign in') }}
                                     </button>
                                 </div>
 
                                 @if (Route::has('password.request'))
-                                <div>
+                                <div class="btn-signIn">
                                     <a class="btn btn-link forgotpassword  float-start" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>

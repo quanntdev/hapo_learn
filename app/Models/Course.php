@@ -64,6 +64,13 @@ class Course extends Model
         })->exists();
     }
 
+    public function getIsCommentedAttribute()
+    {
+        return $this->comments()->whereExists(function ($query) {
+            $query->whereNull('parent_id')->where('user_id', auth()->id());
+        })->exists();
+    }
+
     public function getIsFinishedAttribute()
     {
         return $this->users()->whereExists(function ($query) {
@@ -138,7 +145,7 @@ class Course extends Model
 
     public function getPricesAttribute()
     {
-        return $this->price == 0 ? ': ' . __('course-detail.free') : ': ' . $this->price . __('course-detail.price_value');
+        return $this->price == 0 ?  __('course-detail.free') :  $this->price . __('course-detail.price_value');
     }
 
     public function scopeFilter($query, $data)

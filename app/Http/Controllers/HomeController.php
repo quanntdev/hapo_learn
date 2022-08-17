@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\Comment;
 use App\Models\Lesson;
 use App\Models\UserCourse;
+use Illuminate\Support\Facades\Gate;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,10 @@ class HomeController extends Controller
         $learners = UserCourse::learner();
         $comments = Comment::main()->get();
 
-        return view('home')->with(compact('courses', 'otherCourse', 'totalLesson', 'countCourse', 'learners', 'comments'));
+        if(Gate::allows('view', auth()->user())) {
+            return view('admin.index')->with(compact('courses', 'otherCourse', 'totalLesson', 'countCourse', 'learners', 'comments'));
+        } else {
+            return view('home')->with(compact('courses', 'otherCourse', 'totalLesson', 'countCourse', 'learners', 'comments'));
+        }
     }
 }

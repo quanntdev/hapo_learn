@@ -1,4 +1,4 @@
-<form action="{{ route('course-users.store') }}" method="POST">
+<form action="{{ route('course-users.store') }}" method="POST" class="btn-join-course">
     @csrf
     @if (!$course->isJoined)
         <input type="hidden" name="course_id" value="{{ $course->id }}">

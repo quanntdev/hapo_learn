@@ -103,7 +103,7 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 800px) and (min-width: 377px) {
   .feed-back-slogan {
     width: 80%;
   }
@@ -118,6 +118,7 @@
   .feed-back {
     .feed-back-slogan {
       font-size: 16px;
+      width: 95%;
     }
 
     .list-feedback {
@@ -125,6 +126,10 @@
       margin: 0 auto ;
       margin-top: 20px ;
       margin-bottom: 20px ;
+
+      .owl-nav {
+        display: none !important;
+      }
 
       .owl-dots {
         display: none;

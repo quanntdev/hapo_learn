@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'canComment' => \App\Http\Middleware\CanComment::class,
         'canLearnLesson' => \App\Http\Middleware\JoinLesson::class,
         'canLearnProgram' => \App\Http\Middleware\LearnProgram::class,
+        'seeLesson' => \App\Http\Middleware\SeeLesson::class,
     ];
 }

@@ -44,7 +44,7 @@ class LoginController extends Controller
     {
         $credentials = $request->only(['username', 'password']);
         if (auth()->attempt($credentials)) {
-            return redirect()->back()->with('success', __('login.login_success').auth()->user()->name);
+            return redirect()->back()->with('success_login', __('login.login_success').auth()->user()->name);
         }
         return redirect()->back()->with('error', __('login.login_error'));
     }

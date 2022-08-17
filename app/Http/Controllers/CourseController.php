@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Course;
-use App\Models\Comment;
 use App\Models\Lesson;
-use App\Models\CourseTag;
-use App\Models\CourseTeacher;
+use App\Models\Program;
+use App\Models\User;
+use App\Models\UserCourse;
+use App\Models\UserLesson;
+use App\Models\UserProgram;
+use App\Models\Comment;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Gate;
 
 class CourseController extends Controller
 {
@@ -18,6 +21,7 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request)
     {
         $data = $request->all();
@@ -26,7 +30,12 @@ class CourseController extends Controller
         $teachers = User::teachers()->get();
         $tags = Tag::all();
 
-        return view('course.index', compact('courses', 'teachers', 'tags', 'data'));
+        $user = auth()->user();
+        if(Gate::allows('view', $user)) {
+            return view('admin.course.index', compact('courses', 'teachers', 'tags'));
+        } else {
+            return view('course.index', compact('courses', 'teachers', 'tags', 'data'));
+        }
     }
 
     public function show($slug, Request $request)
@@ -42,5 +51,70 @@ class CourseController extends Controller
         $otherCourses = $course->inRandomOrder()->take(config('course.other_course_on_detail'))->get();
 
         return view('course.show', compact('course', 'tags', 'lessons', 'teachers', 'comments', 'replys', 'otherCourses', 'data'));
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view ('admin.course.create');
+        if(Gate::allows('view', auth()->user())) {
+            return view ('admin.course.create');
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }

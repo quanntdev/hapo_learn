@@ -13,4 +13,8 @@ return [
     'email_email' => 'Email must be valid',
     'email_unique' => 'Email is already taken',
     'register_success' => 'Welcome, you has successfully registered, ',
+    'confirm_required' => 'Confirmation code is required',
+    'confirm_min' => 'Confirmation code must be at least 6 characters',
+    'confirm_same' => 'Confirmation is not true , please check your email again',
+    'old_password_required' => 'Old password is required',
 ];

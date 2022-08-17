@@ -6,7 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmail;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -71,5 +72,45 @@ class User extends Authenticatable
     public function scopeTeachers($query)
     {
         return $query->where('role', config('roles.teacher'));
+    }
+
+    public function getCheckAvatarAttribute()
+    {
+        $avatar = $this->avatar;
+        if ($avatar == null) {
+            return asset('images/guest-user.png');
+        } else {
+            return asset($avatar);
+        }
+    }
+
+    public function getRolesAttribute()
+    {
+        $roles = $this->role;
+        switch ($roles) {
+            case config('roles.normal_user'):
+                return [
+                    'roles' => __('roles.normal_user'),
+                    'color' => __('roles.color_normal_user'),
+                ];
+                break;
+            case config('roles.teacher'):
+                return [
+                    'roles' => __('roles.teacher'),
+                    'color' => __('roles.color_teacher'),
+                ];
+                break;
+            default:
+                return [
+                    'roles' => __('roles.admin'),
+                    'color' => __('roles.color_admin'),
+                ];
+                break;
+        }
+    }
+
+    public function getTimeCreateAttribute()
+    {
+        return $this->created_at->format('d/m/Y');
     }
 }
