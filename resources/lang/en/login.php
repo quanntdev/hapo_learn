@@ -7,4 +7,12 @@ return [
     'username_min' => 'Username must be at least :min characters',
     'password_min' => 'Password must be at least :min characters',
     'login_success' => 'Login success! , welcome ',
+    'date_of_birth_required'=> 'Date of birth cannot be blank',
+    'name_min' => 'Name min : 6 ',
+    'name_required' => 'Name cannot be blank',
+    'phone_required' => 'Phone cannot be blank',
+    'phone_min' => 'Phonenumber min : 10',
+    'address_required' => 'Address cannot be blank',
+    'about_me_required' => 'About me cannot be blank',
+    'avatar_image' => 'Avatar must be an image (jpeg, png, bmp, gif, svg)',
 ];

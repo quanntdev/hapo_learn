@@ -10,6 +10,8 @@ require('./bootstrap');
 
 require('./home_script');
 
+require('./avatar_upload');
+
 window.Vue = require('vue').default;
 
 /**
